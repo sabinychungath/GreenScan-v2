@@ -837,6 +837,12 @@ class NatureTalks {
             tree: '🌳', oak: '🌳', pine: '🌲', apple: '🍎', leaf: '🍃', plant: '🌱',
             bark: '🌳', trunk: '🌳', branch: '🌿',
             
+            // Forests and landscapes
+            forest: '🌲', rainforest: '🌿', mountain: '⛰️',
+            
+            // Mushrooms and fungi
+            mushroom: '🍄', fungus: '🍄', fungi: '🍄',
+            
             // Flowers
             flower: '🌸', rose: '🌹', tulip: '🌷', sunflower: '🌻',
             bloom: '🌺', blossom: '🌸', petal: '🌸',
