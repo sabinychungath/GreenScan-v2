@@ -4,13 +4,13 @@ class NatureTalks {
         this.bindEvents();
         this.natureDatabase = this.createNatureDatabase();
         
-        // Clarifai API configuration
+        // Clarifai API configuration (now handled by serverless functions)
         this.clarifaiConfig = {
-            apiKey: '554a0303cb8c494f90827f35719591e9',
+            apiKey: '554a0303...', // Hidden - using serverless functions
             userId: 'clarifai',
             appId: 'main',
             modelId: 'general-image-recognition',
-            modelVersionId: 'aa7f35c01e0642fda5cf400f543e7c40', // Correct version ID
+            modelVersionId: 'aa7f35c01e0642fda5cf400f543e7c40',
             apiUrl: 'https://api.clarifai.com/v2/models/',
             // Alternative approach - try without version ID first
             useLatestVersion: true
