@@ -722,15 +722,15 @@ class NatureTalks {
                 category: 'mountain' 
             },
             
-            // RAINFOREST (very high priority)
+            // RAINFOREST (very high priority - specific ecosystems beat general trees)
             { 
-                terms: ['rainforest', 'jungle', 'tropical forest', 'dense forest', 'amazon'], 
+                terms: ['rainforest', 'jungle', 'tropical forest', 'dense forest', 'amazon', 'tropical'], 
                 category: 'rainforest' 
             },
             
-            // FOREST (high priority)
+            // FOREST (high priority - forest ecosystems beat individual trees)  
             { 
-                terms: ['forest', 'woods', 'woodland', 'forestry', 'grove', 'orchard'], 
+                terms: ['forest', 'woods', 'woodland', 'forestry'], 
                 category: 'forest' 
             },
             
@@ -751,12 +751,12 @@ class NatureTalks {
                     // Specific tree types
                     'oak', 'pine', 'maple', 'birch', 'apple', 'cherry', 'willow', 'elm', 
                     'cedar', 'fir', 'spruce', 'poplar', 'ash', 'beech', 'hickory', 'walnut',
-                    // Tree groupings
-                    'grove', 'orchard', 'forest', 'woods', 'woodland', 'forestry',
+                    // Tree groupings (individual trees, not forests)
+                    'grove', 'orchard',
                     // Plant-related that usually means trees
                     'deciduous', 'coniferous', 'evergreen', 'hardwood', 'softwood',
-                    // Nature terms often associated with trees
-                    'plant', 'vegetation', 'flora', 'growth', 'green', 'nature'
+                    // Plant-related terms for individual trees
+                    'plant', 'vegetation', 'flora'
                 ], 
                 category: 'tree' 
             },
