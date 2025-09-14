@@ -17,7 +17,7 @@ exports.handler = async (event, context) => {
     }
 
     try {
-        const CLARIFAI_API_KEY = process.env.CLARIFAI_API_KEY || 'YOUR_CLARIFAI_API_KEY_HERE';
+        const CLARIFAI_API_KEY = process.env.CLARIFAI_PAT || process.env.CLARIFAI_API_KEY || process.env.CLARIFAI_PERSONAL_ACCESS_TOKEN || 'YOUR_CLARIFAI_API_KEY_HERE';
         
         // Test Clarifai API key with a simple request
         const testUrl = 'https://api.clarifai.com/v2/users/me';
