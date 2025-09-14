@@ -6,10 +6,17 @@ const CLARIFAI_CONFIG = {
     userId: 'clarifai',
     appId: 'main',
     models: {
+        // Try landscape/travel model first for nature scenes
+        travel: {
+            id: 'travel-2.0',
+            version: null
+        },
+        // General model as backup
         general: {
-            id: 'general-image-recognition',
+            id: 'general-image-recognition', 
             version: 'aa7f35c01e0642fda5cf400f543e7c40'
         },
+        // Food model for plants/fruits
         food: {
             id: 'food-item-recognition',
             version: '1d5fd481e0cf4826aa72ec3ff049e044'
@@ -103,22 +110,43 @@ exports.handler = async (event, context) => {
         // Remove data URL prefix if present
         const base64Image = imageData.includes(',') ? imageData.split(',')[1] : imageData;
         
-        console.log('🧠 Smart model selection for specific nature detection...');
+        console.log('🧠 Smart model selection for nature/landscape detection...');
         
-        // Step 1: Always get general classification first
-        let generalResult = null;
+        // Step 1: Try travel/landscape model first for nature scenes
+        let bestResult = null;
         let allResults = {};
         
         try {
-            const generalInfo = CLARIFAI_CONFIG.models.general;
-            generalResult = await callClarifaiModel(base64Image, 'general', generalInfo);
-            allResults.general = generalResult;
+            const travelInfo = CLARIFAI_CONFIG.models.travel;
+            const travelResult = await callClarifaiModel(base64Image, 'travel', travelInfo);
+            allResults.travel = travelResult;
+            
+            if (travelResult && travelResult.success && travelResult.concepts.length > 0) {
+                bestResult = travelResult;
+                console.log('✅ Using travel/landscape model results');
+            }
         } catch (error) {
-            console.log(`⚠️ General model error:`, error.message);
+            console.log(`⚠️ Travel model error:`, error.message);
         }
 
-        if (!generalResult || !generalResult.success) {
-            console.log('⚠️ Clarifai API unavailable, sending fallback response');
+        // Step 2: Fallback to general model if travel model fails
+        if (!bestResult) {
+            try {
+                const generalInfo = CLARIFAI_CONFIG.models.general;
+                const generalResult = await callClarifaiModel(base64Image, 'general', generalInfo);
+                allResults.general = generalResult;
+                
+                if (generalResult && generalResult.success) {
+                    bestResult = generalResult;
+                    console.log('📋 Using general model as fallback');
+                }
+            } catch (error) {
+                console.log(`⚠️ General model error:`, error.message);
+            }
+        }
+
+        if (!bestResult || !bestResult.success) {
+            console.log('⚠️ All Clarifai models failed, sending fallback response');
             return {
                 statusCode: 200,
                 headers,
@@ -130,9 +158,9 @@ exports.handler = async (event, context) => {
             };
         }
 
-        let bestResult = generalResult;
-        const topConcepts = generalResult.concepts.slice(0, 3).map(c => c.name.toLowerCase());
-        console.log('🔍 General concepts:', topConcepts);
+        // Continue with the selected best result
+        const topConcepts = bestResult.concepts.slice(0, 3).map(c => c.name.toLowerCase());
+        console.log('🔍 Top concepts from', bestResult.modelKey + ':', topConcepts);
 
         // Step 2: Only try food model if we detect food/fruit with high confidence
         const foodKeywords = ['fruit', 'apple', 'orange', 'banana', 'food', 'vegetable', 'berry'];
