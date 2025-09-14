@@ -708,9 +708,39 @@ class NatureTalks {
         
         console.log('🔍 All terms for matching:', allTerms); // Debug log
         
-        // Define matching rules with priority - expanded tree detection
+        // Define matching rules with priority - expanded nature detection
         const matchingRules = [
-            // Trees (highest priority - expanded list for Clarifai terms)
+            // WATER BODIES (highest priority - most specific)
+            { 
+                terms: ['river', 'stream', 'creek', 'waterfall', 'rapids', 'water', 'flowing water', 'brook', 'tributary'], 
+                category: 'river' 
+            },
+            
+            // LANDSCAPES (very high priority - scenic environments)
+            { 
+                terms: ['mountain', 'mountains', 'peak', 'summit', 'hill', 'valley', 'canyon', 'cliff', 'ridge', 'panoramic', 'landscape', 'scenic', 'vista'], 
+                category: 'mountain' 
+            },
+            
+            // RAINFOREST (very high priority)
+            { 
+                terms: ['rainforest', 'jungle', 'tropical forest', 'dense forest', 'amazon'], 
+                category: 'rainforest' 
+            },
+            
+            // FOREST (high priority)
+            { 
+                terms: ['forest', 'woods', 'woodland', 'forestry', 'grove', 'orchard'], 
+                category: 'forest' 
+            },
+            
+            // MUSHROOMS (medium-high priority - specific organisms)
+            { 
+                terms: ['mushroom', 'fungi', 'fungus', 'toadstool', 'spore', 'mycorrhiza'], 
+                category: 'mushroom' 
+            },
+            
+            // Trees (medium priority - expanded list for Clarifai terms)
             { 
                 terms: [
                     // General tree terms
@@ -2452,9 +2482,44 @@ class NatureTalks {
 
     createNatureDatabase() {
         return {
+            river: {
+                emoji: '🏞️',
+                keywords: ['river', 'stream', 'creek', 'waterfall', 'rapids', 'water', 'flowing water', 'brook', 'tributary'],
+                introduction: 'I am a flowing river',
+                message: 'I provide fresh water for life, transport nutrients through ecosystems, and carve beautiful landscapes.',
+                plea: 'Please keep me clean and protect my watersheds from pollution!'
+            },
+            mountain: {
+                emoji: '⛰️',
+                keywords: ['mountain', 'mountains', 'peak', 'summit', 'hill', 'valley', 'canyon', 'cliff', 'ridge', 'panoramic', 'landscape', 'scenic', 'vista'],
+                introduction: 'I am a majestic mountain',
+                message: 'I provide fresh water from my peaks, create diverse ecosystems, and offer breathtaking views that inspire humanity.',
+                plea: 'Please protect me from mining damage and climate change effects!'
+            },
+            rainforest: {
+                emoji: '🌿',
+                keywords: ['rainforest', 'jungle', 'tropical forest', 'dense forest', 'amazon'],
+                introduction: 'I am a living rainforest',
+                message: 'I am the lungs of Earth, home to 80% of terrestrial biodiversity, and produce 20% of the world\'s oxygen.',
+                plea: 'Please save me from deforestation and support conservation efforts!'
+            },
+            forest: {
+                emoji: '🌲',
+                keywords: ['forest', 'woods', 'woodland', 'forestry', 'grove', 'orchard'],
+                introduction: 'I am a living forest',
+                message: 'I clean your air, store carbon, prevent erosion, and provide homes for countless wildlife.',
+                plea: 'Please protect me by supporting sustainable forestry and reforestation!'
+            },
+            mushroom: {
+                emoji: '🍄',
+                keywords: ['mushroom', 'fungus', 'fungi', 'toadstool', 'spore'],
+                introduction: 'I am a mushroom',
+                message: 'I decompose organic matter, create soil nutrients, and form networks that help forests communicate.',
+                plea: 'Please respect my role in the ecosystem and avoid picking wild mushrooms!'
+            },
             tree: {
                 emoji: '🌳',
-                keywords: ['tree', 'oak', 'pine', 'maple', 'birch', 'forest', 'wood'],
+                keywords: ['tree', 'oak', 'pine', 'maple', 'birch', 'wood'],
                 introduction: 'I am a mighty tree',
                 message: 'I give you oxygen to breathe, shade to rest under, and homes for countless creatures.',
                 plea: 'Please save me by not cutting down forests and planting more trees!'
