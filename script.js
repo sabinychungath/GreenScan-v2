@@ -305,7 +305,7 @@ class NatureTalks {
             console.log('🎯 Starting Clarifai classification via backend...');
             
             // Use backend proxy endpoint - no more CORS issues!
-            const response = await fetch('/api/classify-improved', {
+            const response = await fetch('/api/classify', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
