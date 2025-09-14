@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Comfortaa', cursive;
-    background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+    background: linear-gradient(135deg, #001d67 0%, #0087bd 50%, #7ebdd4 100%);
     min-height: 100vh;
     color: #333;
 }
@@ -22,6 +22,31 @@ header {
     text-align: center;
     margin-bottom: 30px;
     color: white;
+}
+
+.school-branding {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.school-logo {
+    height: 50px;
+    width: auto;
+    border-radius: 8px;
+}
+
+.exhibition-text {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #7ebdd4;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
 }
 
 .app-title {
@@ -88,7 +113,7 @@ header {
 }
 
 .btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #001d67 0%, #0087bd 100%);
     color: white;
     border: none;
     padding: 15px 30px;
@@ -142,7 +167,7 @@ header {
 
 .nature-avatar {
     font-size: 3rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #001d67 0%, #0087bd 100%);
     border-radius: 50%;
     width: 80px;
     height: 80px;
@@ -177,11 +202,11 @@ header {
 }
 
 .btn-speak {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    background: linear-gradient(135deg, #0087bd 0%, #7ebdd4 100%);
 }
 
 .btn-new {
-    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    background: linear-gradient(135deg, #0087bd 0%, #7ebdd4 100%);
 }
 
 .btn-quiz {
@@ -201,7 +226,7 @@ header {
 }
 
 .btn-save-voice {
-    background: linear-gradient(135deg, #2ed573 0%, #1e90ff 100%);
+    background: linear-gradient(135deg, #0087bd 0%, #7ebdd4 100%);
 }
 
 .btn-cancel-record {
@@ -316,7 +341,7 @@ header {
 
 /* Quiz Styles */
 .quiz-section {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #001d67 0%, #0087bd 100%);
     border-radius: 15px;
     padding: 25px;
     margin-top: 20px;
