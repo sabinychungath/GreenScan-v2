@@ -6,12 +6,7 @@ const CLARIFAI_CONFIG = {
     userId: 'clarifai',
     appId: 'main',
     models: {
-        // Try landscape/travel model first for nature scenes
-        travel: {
-            id: 'travel-2.0',
-            version: null
-        },
-        // General model as backup
+        // Use general model but with better concept filtering
         general: {
             id: 'general-image-recognition', 
             version: 'aa7f35c01e0642fda5cf400f543e7c40'
