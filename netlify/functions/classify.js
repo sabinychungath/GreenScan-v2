@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 
 // Clarifai API configuration
 const CLARIFAI_CONFIG = {
-    personalAccessToken: process.env.CLARIFAI_API_KEY || 'YOUR_CLARIFAI_API_KEY_HERE',
+    personalAccessToken: process.env.CLARIFAI_PAT || process.env.CLARIFAI_API_KEY || process.env.CLARIFAI_PERSONAL_ACCESS_TOKEN || 'YOUR_CLARIFAI_API_KEY_HERE',
     userId: 'clarifai',
     appId: 'main',
     models: {
