@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Icon Generator for NatureTalk</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        canvas { border: 1px solid #ddd; margin: 10px; }
+        .icon-container { display: inline-block; margin: 10px; text-align: center; }
+    </style>
+</head>
+<body>
+    <h1>NatureTalk PWA Icon Generator</h1>
+    <p>This will generate basic icons for your PWA. Right-click each icon to save.</p>
+    
+    <div id="icons"></div>
+
+    <script>
+        const sizes = [72, 96, 128, 144, 152, 192, 384, 512];
+        const iconsContainer = document.getElementById('icons');
+        
+        sizes.forEach(size => {
+            const container = document.createElement('div');
+            container.className = 'icon-container';
+            
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            
+            const ctx = canvas.getContext('2d');
+            
+            // Create gradient background
+            const gradient = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
+            gradient.addColorStop(0, '#4CAF50');
+            gradient.addColorStop(1, '#2E7D32');
+            
+            // Draw background
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, size, size);
+            
+            // Draw leaf icon
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = `${size * 0.6}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('🌿', size/2, size/2);
+            
+            const label = document.createElement('p');
+            label.textContent = `${size}x${size}`;
+            
+            container.appendChild(canvas);
+            container.appendChild(label);
+            iconsContainer.appendChild(container);
+            
+            // Convert to downloadable image
+            canvas.toBlob(blob => {
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `icon-${size}.png`;
+                link.textContent = `Download ${size}x${size}`;
+                link.style.display = 'block';
+                container.appendChild(link);
+            });
+        });
+    </script>
+</body>
+</html>

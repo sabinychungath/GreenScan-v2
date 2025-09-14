@@ -1,0 +1,37 @@
+{
+  "bee": {
+    "emoji": "🐝",
+    "name": "a busy bee",
+    "i_give": "pollination for crops and flowers",
+    "if_gone": "many foods disappear as pollination fails",
+    "save_me": "plant wildflowers and avoid pesticides"
+  },
+  "tree": {
+    "emoji": "🌳",
+    "name": "a mighty tree",
+    "i_give": "oxygen, shade, and homes for wildlife",
+    "if_gone": "carbon rises and animals lose habitat",
+    "save_me": "protect forests and plant more trees"
+  },
+  "river": {
+    "emoji": "💧",
+    "name": "a flowing river",
+    "i_give": "fresh water for people and wildlife",
+    "if_gone": "ecosystems collapse and communities lose water",
+    "save_me": "stop pollution and keep banks clean"
+  },
+  "plastic bottle": {
+    "emoji": "🧴",
+    "name": "a plastic bottle",
+    "i_give": "convenience—but I harm nature when littered",
+    "if_gone": "less plastic reaches oceans and wildlife",
+    "save_me": "use reusable bottles and recycle"
+  },
+  "default": {
+    "emoji": "🌍",
+    "name": "a part of nature",
+    "i_give": "balance in the ecosystem",
+    "if_gone": "the web of life weakens",
+    "save_me": "protect habitats and reduce pollution"
+  }
+}

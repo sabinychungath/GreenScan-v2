@@ -1,0 +1,19 @@
+[build]
+  functions = "netlify/functions"
+  publish = "."
+
+[build.environment]
+  NODE_VERSION = "18"
+
+[[redirects]]
+  from = "/api/classify"
+  to = "/.netlify/functions/classify"
+  status = 200
+
+[[redirects]]
+  from = "/api/health"
+  to = "/.netlify/functions/health"
+  status = 200
+
+[functions]
+  node_bundler = "esbuild"

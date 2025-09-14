@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Scan - AI Nature Communication App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- iOS PWA support -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="GreenScan">
+    <link rel="apple-touch-icon" href="icon-152.png">
+    
+    <!-- Theme color -->
+    <meta name="theme-color" content="#4CAF50">
+    <meta name="msapplication-TileColor" content="#4CAF50">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="app-title">🌿 Green Scan</h1>
+            <p class="app-subtitle">Let nature speak to you!</p>
+        </header>
+
+        <main class="main-content">
+            <div class="upload-section" id="uploadSection">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-content">
+                        <div class="camera-icon">📷</div>
+                        <h2>Capture or Upload Nature</h2>
+                        <p>Take a photo or upload an image of trees, animals, rivers, or any natural object</p>
+                        
+                        <div class="upload-buttons">
+                            <button class="btn btn-camera" id="cameraBtn">
+                                📸 Take Photo
+                            </button>
+                            <button class="btn btn-upload" id="uploadBtn">
+                                📁 Upload Image
+                            </button>
+                        </div>
+                        
+                        <input type="file" id="fileInput" accept="image/*" capture="environment" style="display: none;">
+                        <input type="file" id="uploadInput" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-section" id="resultSection" style="display: none;">
+                <div class="image-preview">
+                    <img id="previewImage" src="" alt="Captured nature image">
+                </div>
+                
+                <div class="nature-message" id="natureMessage">
+                    <div class="message-bubble">
+                        <div class="nature-avatar" id="natureAvatar">🌲</div>
+                        <div class="message-content">
+                            <h3 id="natureTitle">Analyzing...</h3>
+                            <p id="natureText">Please wait while I identify what you've captured...</p>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-speak" id="speakBtn">
+                            🔊 Make it Speak
+                        </button>
+                        <button class="btn btn-quiz" id="quizBtn" style="display: none;">
+                            🎮 Nature Quiz
+                        </button>
+                        <button class="btn btn-new" id="newPhotoBtn">
+                            📷 Take Another
+                        </button>
+                    </div>
+                    
+                    <div class="quiz-section" id="quizSection" style="display: none;">
+                        <div class="quiz-header">
+                            <h3>🎯 Nature Challenge</h3>
+                            <div class="score-display">Score: <span id="scoreValue">0</span></div>
+                        </div>
+                        <div class="question-container">
+                            <p class="quiz-question" id="quizQuestion"></p>
+                            <div class="quiz-options" id="quizOptions"></div>
+                            <div class="quiz-feedback" id="quizFeedback" style="display: none;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="loading" id="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Connecting with nature...</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+    <script src="script.js"></script>
+    
+    <!-- PWA Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('🔧 SW registered with scope: ', registration.scope);
+                    }, function(err) {
+                        console.log('❌ SW registration failed: ', err);
+                    });
+            });
+        }
+        
+        // Handle PWA install prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            console.log('💾 PWA install prompt available');
+        });
+        
+        // Optional: Add install button functionality
+        function installPWA() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('✅ User accepted PWA install');
+                    }
+                    deferredPrompt = null;
+                });
+            }
+        }
+    </script>
+</body>
+</html>
