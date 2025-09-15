@@ -1042,7 +1042,7 @@ class NatureTalks {
             'watermelon', 'cantaloupe', 'honeydew', 'casaba',
             'grape', 'fig', 'date', 'pomegranate', 'persimmon', 'olive'
         ];
-        for (const specificFruit of specificFruitsIntro) {
+        for (const specificFruit of specificFruits) {
             const hasSpecificFruit = allTerms.some(term => term.includes(specificFruit));
             if (hasSpecificFruit && bestMatch === 'fruit') {
                 console.log('🍎 FRUIT PRIORITY OVERRIDE:', specificFruit, 'beats generic fruit');
