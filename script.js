@@ -1071,6 +1071,21 @@ class NatureTalks {
             return 'river';
         }
         
+        // TREE PRIORITY OVERRIDES - Specific trees beat generic "tree"
+        const specificTrees = [
+            'oak', 'maple', 'birch', 'willow', 'elm', 'ash', 'beech', 'hickory', 'walnut', 
+            'poplar', 'sycamore', 'basswood', 'pine', 'spruce', 'fir', 'cedar', 'hemlock', 
+            'redwood', 'cypress', 'juniper', 'eucalyptus', 'acacia', 'teak', 'mahogany', 
+            'bamboo', 'baobab'
+        ];
+        for (const specificTree of specificTrees) {
+            const hasSpecificTree = allTerms.some(term => term.includes(specificTree));
+            if (hasSpecificTree && bestMatch === 'tree') {
+                console.log('🌳 TREE PRIORITY OVERRIDE:', specificTree, 'beats generic tree');
+                return specificTree;
+            }
+        }
+
         // FLOWER PRIORITY OVERRIDES - Specific flowers beat generic "flower"
         const specificFlowers = [
             'sunflower', 'lavender', 'orchid', 'rose', 'tulip', 'daisy', 'lily', 'lotus', 'iris',
@@ -1205,6 +1220,36 @@ class NatureTalks {
             if (hasSpecificSnake && bestMatch === 'snake') {
                 console.log('🐍 SPECIFIC SNAKE PRIORITY OVERRIDE:', specificSnake, 'beats generic snake');
                 return specificSnake;
+            }
+        }
+
+        // RIVER PRIORITY OVERRIDES - Specific rivers and water bodies beat generic "river"
+        const specificRivers = [
+            'amazon-river', 'nile-river', 'mississippi-river', 'colorado-river', 
+            'ganges-river', 'yangtze-river', 'danube-river', 'rhine-river'
+        ];
+        const specificWaterBodies = [
+            'rapids', 'waterfall', 'stream', 'pond', 'wetland', 'marsh', 'swamp',
+            'brook', 'creek', 'spring', 'estuary', 'delta'
+        ];
+        
+        // Check for specific rivers first
+        for (const specificRiver of specificRivers) {
+            const riverName = specificRiver.replace('-river', '');
+            const hasSpecificRiver = allTerms.some(term => 
+                term.includes(riverName) || term.includes(specificRiver));
+            if (hasSpecificRiver && (bestMatch === 'river' || bestMatch === 'water')) {
+                console.log('🏞️ RIVER PRIORITY OVERRIDE:', specificRiver, 'beats generic', bestMatch);
+                return specificRiver;
+            }
+        }
+        
+        // Check for specific water bodies
+        for (const specificWaterBody of specificWaterBodies) {
+            const hasSpecificWaterBody = allTerms.some(term => term.includes(specificWaterBody));
+            if (hasSpecificWaterBody && (bestMatch === 'river' || bestMatch === 'water')) {
+                console.log('🌊 WATER BODY PRIORITY OVERRIDE:', specificWaterBody, 'beats generic', bestMatch);
+                return specificWaterBody;
             }
         }
         
