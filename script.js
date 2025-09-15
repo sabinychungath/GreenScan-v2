@@ -854,6 +854,87 @@ class NatureTalks {
             { terms: ['mushroom', 'fungus', 'fungi', 'boletus', 'toadstool', 'edible agaric', 'spore', 'mycelium'], category: 'mushroom' },
             { terms: ['fish', 'salmon', 'trout'], category: 'fish' },
             
+            // Citrus fruits (most specific first)
+            { terms: ['orange', 'valencia orange', 'navel orange'], category: 'orange' },
+            { terms: ['lemon', 'meyer lemon', 'eureka lemon'], category: 'lemon' },
+            { terms: ['lime', 'key lime', 'persian lime'], category: 'lime' },
+            { terms: ['grapefruit', 'pink grapefruit', 'white grapefruit'], category: 'grapefruit' },
+            { terms: ['tangerine', 'mandarin', 'clementine'], category: 'tangerine' },
+            { terms: ['pomelo', 'shaddock'], category: 'pomelo' },
+            { terms: ['bergamot', 'earl grey citrus'], category: 'bergamot' },
+            { terms: ['yuzu', 'japanese citron'], category: 'yuzu' },
+            
+            // Stone fruits
+            { terms: ['peach', 'nectarine'], category: 'peach' },
+            { terms: ['plum', 'damson plum', 'greengage'], category: 'plum' },
+            { terms: ['apricot', 'armenian plum'], category: 'apricot' },
+            { terms: ['cherry', 'sweet cherry', 'sour cherry', 'bing cherry'], category: 'cherry' },
+            
+            // Pome fruits
+            { terms: ['apple', 'red apple', 'green apple', 'granny smith', 'gala apple'], category: 'apple' },
+            { terms: ['pear', 'bartlett pear', 'anjou pear', 'bosc pear'], category: 'pear' },
+            { terms: ['quince', 'japanese quince'], category: 'quince' },
+            
+            // Berries
+            { terms: ['strawberry', 'wild strawberry'], category: 'strawberry' },
+            { terms: ['blueberry', 'wild blueberry', 'huckleberry'], category: 'blueberry' },
+            { terms: ['raspberry', 'red raspberry', 'black raspberry'], category: 'raspberry' },
+            { terms: ['blackberry', 'dewberry', 'boysenberry'], category: 'blackberry' },
+            { terms: ['cranberry', 'bog cranberry'], category: 'cranberry' },
+            { terms: ['gooseberry', 'cape gooseberry'], category: 'gooseberry' },
+            { terms: ['elderberry', 'sambucus'], category: 'elderberry' },
+            { terms: ['mulberry', 'white mulberry', 'red mulberry'], category: 'mulberry' },
+            { terms: ['currant', 'red currant', 'black currant'], category: 'currant' },
+            
+            // Tropical fruits
+            { terms: ['banana', 'plantain', 'cavendish banana'], category: 'banana' },
+            { terms: ['mango', 'alphonso mango', 'tommy atkins'], category: 'mango' },
+            { terms: ['pineapple', 'ananas'], category: 'pineapple' },
+            { terms: ['papaya', 'pawpaw', 'carica papaya'], category: 'papaya' },
+            { terms: ['coconut', 'coconut palm'], category: 'coconut' },
+            { terms: ['avocado', 'alligator pear'], category: 'avocado' },
+            { terms: ['passion fruit', 'maracuja', 'granadilla'], category: 'passion-fruit' },
+            { terms: ['kiwi', 'kiwifruit', 'chinese gooseberry'], category: 'kiwi' },
+            { terms: ['guava', 'common guava', 'tropical guava'], category: 'guava' },
+            { terms: ['lychee', 'litchi', 'lichi'], category: 'lychee' },
+            { terms: ['rambutan', 'hairy lychee'], category: 'rambutan' },
+            { terms: ['dragon fruit', 'pitaya', 'pitahaya'], category: 'dragon-fruit' },
+            { terms: ['star fruit', 'carambola'], category: 'star-fruit' },
+            { terms: ['jackfruit', 'artocarpus'], category: 'jackfruit' },
+            { terms: ['durian', 'king of fruits'], category: 'durian' },
+            { terms: ['mangosteen', 'queen of fruits'], category: 'mangosteen' },
+            
+            // Melons
+            { terms: ['watermelon', 'citrullus'], category: 'watermelon' },
+            { terms: ['cantaloupe', 'muskmelon'], category: 'cantaloupe' },
+            { terms: ['honeydew', 'honeydew melon'], category: 'honeydew' },
+            { terms: ['casaba melon', 'casaba'], category: 'casaba' },
+            
+            // Other fruits
+            { terms: ['grape', 'wine grape', 'table grape'], category: 'grape' },
+            { terms: ['fig', 'fresh fig', 'mission fig'], category: 'fig' },
+            { terms: ['date', 'medjool date', 'deglet noor'], category: 'date' },
+            { terms: ['pomegranate', 'punica granatum'], category: 'pomegranate' },
+            { terms: ['persimmon', 'kaki', 'sharon fruit'], category: 'persimmon' },
+            { terms: ['olive', 'olive fruit', 'kalamata'], category: 'olive' },
+            
+            // Fruit trees
+            { terms: ['orange tree', 'citrus tree'], category: 'orange-tree' },
+            { terms: ['apple tree', 'orchard tree'], category: 'apple-tree' },
+            { terms: ['peach tree', 'stone fruit tree'], category: 'peach-tree' },
+            { terms: ['cherry tree', 'flowering cherry'], category: 'cherry-tree' },
+            { terms: ['mango tree', 'tropical fruit tree'], category: 'mango-tree' },
+            { terms: ['avocado tree', 'persea americana'], category: 'avocado-tree' },
+            { terms: ['lemon tree', 'citrus limon'], category: 'lemon-tree' },
+            { terms: ['banana tree', 'banana plant'], category: 'banana-tree' },
+            { terms: ['coconut tree', 'palm tree'], category: 'coconut-tree' },
+            { terms: ['fig tree', 'ficus carica'], category: 'fig-tree' },
+            { terms: ['olive tree', 'olea europaea'], category: 'olive-tree' },
+            { terms: ['pomegranate tree'], category: 'pomegranate-tree' },
+            
+            // Generic fruit terms (lower priority than specific types)
+            { terms: ['fruit', 'berry', 'citrus', 'tropical fruit'], category: 'fruit' },
+            
             // Specific snakes (most specific first)
             { terms: ['python', 'ball python', 'burmese python', 'reticulated python'], category: 'python' },
             { terms: ['cobra', 'king cobra', 'spitting cobra'], category: 'cobra' },
@@ -951,6 +1032,43 @@ class NatureTalks {
             }
         }
         
+        // FRUIT PRIORITY OVERRIDES - Specific fruits beat generic "fruit"
+        const specificFruits = [
+            'orange', 'lemon', 'lime', 'grapefruit', 'tangerine', 'pomelo', 'bergamot', 'yuzu',
+            'peach', 'plum', 'apricot', 'cherry', 'apple', 'pear', 'quince',
+            'strawberry', 'blueberry', 'raspberry', 'blackberry', 'cranberry', 'gooseberry', 'elderberry', 'mulberry', 'currant',
+            'banana', 'mango', 'pineapple', 'papaya', 'coconut', 'avocado', 'passion-fruit', 'kiwi', 'guava', 'lychee',
+            'rambutan', 'dragon-fruit', 'star-fruit', 'jackfruit', 'durian', 'mangosteen',
+            'watermelon', 'cantaloupe', 'honeydew', 'casaba',
+            'grape', 'fig', 'date', 'pomegranate', 'persimmon', 'olive'
+        ];
+        for (const specificFruit of specificFruits) {
+            const hasSpecificFruit = allTerms.some(term => term.includes(specificFruit));
+            if (hasSpecificFruit && bestMatch === 'fruit') {
+                console.log('🍎 FRUIT PRIORITY OVERRIDE:', specificFruit, 'beats generic fruit');
+                return specificFruit;
+            }
+        }
+        
+        // TREE PRIORITY OVERRIDES - Fruit trees beat generic "tree"
+        const fruitTrees = ['apple-tree', 'orange-tree', 'cherry-tree', 'mango-tree', 'coconut-tree', 'lemon-tree', 'peach-tree', 'fig-tree', 'olive-tree'];
+        for (const fruitTree of fruitTrees) {
+            const hasFruitTree = allTerms.some(term => 
+                term.includes('apple tree') || term.includes('orange tree') || term.includes('cherry tree') ||
+                term.includes('mango tree') || term.includes('coconut tree') || term.includes('lemon tree') ||
+                term.includes('peach tree') || term.includes('fig tree') || term.includes('olive tree') ||
+                term.includes('citrus tree') || term.includes('fruit tree') || term.includes('orchard')
+            );
+            if (hasFruitTree && bestMatch === 'tree') {
+                const detectedTree = fruitTrees.find(tree => {
+                    const treeName = tree.replace('-tree', '');
+                    return allTerms.some(term => term.includes(treeName + ' tree') || term.includes(treeName));
+                }) || 'apple-tree';
+                console.log('🌳 FRUIT TREE PRIORITY OVERRIDE:', detectedTree, 'beats generic tree');
+                return detectedTree;
+            }
+        }
+        
         // SNAKE PRIORITY OVERRIDES - Any snake detection beats other categories
         const hasSnakeInConcepts = allTerms.some(term => term.includes('snake') || term.includes('reptile'));
         if (hasSnakeInConcepts && (bestMatch === 'bear' || bestMatch === 'earth' || bestMatch === 'tree')) {
@@ -1033,6 +1151,37 @@ class NatureTalks {
             
             // Mushrooms and fungi
             mushroom: '🍄', fungus: '🍄', fungi: '🍄',
+            
+            // Citrus fruits
+            fruit: '🍎', orange: '🍊', lemon: '🍋', lime: '🟢', grapefruit: '🍊',
+            tangerine: '🍊', pomelo: '🍊', bergamot: '🍋', yuzu: '🟡',
+            
+            // Stone fruits
+            peach: '🍑', plum: '🟣', apricot: '🟠', cherry: '🍒',
+            
+            // Pome fruits
+            apple: '🍎', pear: '🍐', quince: '🍐',
+            
+            // Berries
+            strawberry: '🍓', blueberry: '🫐', raspberry: '🫐', blackberry: '🫐',
+            cranberry: '🔴', gooseberry: '🟢', elderberry: '🟣', mulberry: '🟣', currant: '🔴',
+            
+            // Tropical fruits
+            banana: '🍌', mango: '🥭', pineapple: '🍍', papaya: '🟠', coconut: '🥥',
+            avocado: '🥑', 'passion-fruit': '🟣', kiwi: '🥝', guava: '🟢', lychee: '⚪',
+            rambutan: '🔴', 'dragon-fruit': '🐉', 'star-fruit': '⭐', jackfruit: '🟡',
+            durian: '🟤', mangosteen: '🟣',
+            
+            // Melons
+            watermelon: '🍉', cantaloupe: '🍈', honeydew: '🍈', casaba: '🍈',
+            
+            // Other fruits
+            grape: '🍇', fig: '🟤', date: '🟤', pomegranate: '🔴', persimmon: '🟠', olive: '🫒',
+            
+            // Fruit trees
+            'orange-tree': '🌳', 'apple-tree': '🌳', 'peach-tree': '🌳', 'cherry-tree': '🌸',
+            'mango-tree': '🌳', 'avocado-tree': '🌳', 'lemon-tree': '🌳', 'banana-tree': '🌴',
+            'coconut-tree': '🌴', 'fig-tree': '🌳', 'olive-tree': '🌳', 'pomegranate-tree': '🌳',
             
             // Flowers
             flower: '🌸', rose: '🌹', tulip: '🌷', sunflower: '🌻', lavender: '💜',
@@ -1157,6 +1306,85 @@ class NatureTalks {
             leaf: 'I am a green leaf',
             bark: 'I am protective tree bark',
             plant: 'I am a growing plant',
+            
+            // Citrus fruits
+            fruit: 'I am a delicious fruit',
+            orange: 'I am a juicy orange',
+            lemon: 'I am a tart lemon',
+            lime: 'I am a zesty lime',
+            grapefruit: 'I am a tangy grapefruit',
+            tangerine: 'I am a sweet tangerine',
+            pomelo: 'I am a large pomelo',
+            bergamot: 'I am fragrant bergamot',
+            yuzu: 'I am exotic yuzu',
+            
+            // Stone fruits
+            peach: 'I am a soft peach',
+            plum: 'I am a sweet plum',
+            apricot: 'I am a golden apricot',
+            cherry: 'I am a bright cherry',
+            
+            // Pome fruits
+            apple: 'I am a crisp apple',
+            pear: 'I am a tender pear',
+            quince: 'I am an aromatic quince',
+            
+            // Berries
+            strawberry: 'I am a sweet strawberry',
+            blueberry: 'I am a tiny blueberry',
+            raspberry: 'I am a delicate raspberry',
+            blackberry: 'I am a wild blackberry',
+            cranberry: 'I am a tart cranberry',
+            gooseberry: 'I am a tangy gooseberry',
+            elderberry: 'I am a medicinal elderberry',
+            mulberry: 'I am a sweet mulberry',
+            currant: 'I am a small currant',
+            
+            // Tropical fruits
+            banana: 'I am a curved banana',
+            mango: 'I am a tropical mango',
+            pineapple: 'I am a spiky pineapple',
+            papaya: 'I am a smooth papaya',
+            coconut: 'I am a hard coconut',
+            avocado: 'I am a creamy avocado',
+            'passion-fruit': 'I am intense passion fruit',
+            kiwi: 'I am a fuzzy kiwi',
+            guava: 'I am a fragrant guava',
+            lychee: 'I am a delicate lychee',
+            rambutan: 'I am a spiky rambutan',
+            'dragon-fruit': 'I am exotic dragon fruit',
+            'star-fruit': 'I am a star-shaped carambola',
+            jackfruit: 'I am a massive jackfruit',
+            durian: 'I am the pungent durian',
+            mangosteen: 'I am the prized mangosteen',
+            
+            // Melons
+            watermelon: 'I am a refreshing watermelon',
+            cantaloupe: 'I am a sweet cantaloupe',
+            honeydew: 'I am a smooth honeydew',
+            casaba: 'I am a golden casaba melon',
+            
+            // Other fruits
+            grape: 'I am a clustered grape',
+            fig: 'I am a sweet fig',
+            date: 'I am a chewy date',
+            pomegranate: 'I am a seeded pomegranate',
+            persimmon: 'I am an autumn persimmon',
+            olive: 'I am a savory olive',
+            
+            // Fruit trees
+            'orange-tree': 'I am an orange tree',
+            'apple-tree': 'I am an apple tree',
+            'peach-tree': 'I am a peach tree',
+            'cherry-tree': 'I am a flowering cherry tree',
+            'mango-tree': 'I am a tropical mango tree',
+            'avocado-tree': 'I am an avocado tree',
+            'lemon-tree': 'I am a lemon tree',
+            'banana-tree': 'I am a banana plant',
+            'coconut-tree': 'I am a tall coconut palm',
+            'fig-tree': 'I am an ancient fig tree',
+            'olive-tree': 'I am a hardy olive tree',
+            'pomegranate-tree': 'I am a pomegranate tree',
             
             // Flowers
             flower: 'I am a beautiful flower',
@@ -1317,6 +1545,23 @@ class NatureTalks {
             }
         }
         
+        // Then try specific fruit matches
+        const specificFruits = [
+            'orange', 'lemon', 'lime', 'grapefruit', 'tangerine', 'pomelo', 'bergamot', 'yuzu',
+            'peach', 'plum', 'apricot', 'cherry', 'apple', 'pear', 'quince',
+            'strawberry', 'blueberry', 'raspberry', 'blackberry', 'cranberry', 'gooseberry', 'elderberry', 'mulberry', 'currant',
+            'banana', 'mango', 'pineapple', 'papaya', 'coconut', 'avocado', 'passion-fruit', 'kiwi', 'guava', 'lychee',
+            'rambutan', 'dragon-fruit', 'star-fruit', 'jackfruit', 'durian', 'mangosteen',
+            'watermelon', 'cantaloupe', 'honeydew', 'casaba',
+            'grape', 'fig', 'date', 'pomegranate', 'persimmon', 'olive'
+        ];
+        for (const specificFruit of specificFruits) {
+            if (lowerObjectName.includes(specificFruit) && introductions[specificFruit]) {
+                console.log(`🎯 Found specific fruit intro match: ${objectName} -> ${specificFruit} -> ${introductions[specificFruit]}`);
+                return introductions[specificFruit];
+            }
+        }
+        
         // Then try specific snake matches
         const specificSnakes = ['python', 'cobra', 'viper', 'rattlesnake', 'boa', 'anaconda', 'mamba', 'adder', 'copperhead', 'cottonmouth', 'kingsnake', 'garter', 'corn', 'milk', 'hognose'];
         for (const specificSnake of specificSnakes) {
@@ -1333,6 +1578,23 @@ class NatureTalks {
             if (lowerObjectName.includes(lowerKey) || lowerKey.includes(lowerObjectName)) {
                 console.log(`🎯 Found partial intro match: ${objectName} -> ${key} -> ${introductions[key]}`);
                 return introductions[key];
+            }
+        }
+        
+        // Then try specific fruit matches
+        const specificFruits = [
+            'orange', 'lemon', 'lime', 'grapefruit', 'tangerine', 'pomelo', 'bergamot', 'yuzu',
+            'peach', 'plum', 'apricot', 'cherry', 'apple', 'pear', 'quince',
+            'strawberry', 'blueberry', 'raspberry', 'blackberry', 'cranberry', 'gooseberry', 'elderberry', 'mulberry', 'currant',
+            'banana', 'mango', 'pineapple', 'papaya', 'coconut', 'avocado', 'passion-fruit', 'kiwi', 'guava', 'lychee',
+            'rambutan', 'dragon-fruit', 'star-fruit', 'jackfruit', 'durian', 'mangosteen',
+            'watermelon', 'cantaloupe', 'honeydew', 'casaba',
+            'grape', 'fig', 'date', 'pomegranate', 'persimmon', 'olive'
+        ];
+        for (const specificFruit of specificFruits) {
+            if (lowerObjectName.includes(specificFruit) && messages[specificFruit]) {
+                console.log(`🎯 Found specific fruit message match: ${objectName} -> ${specificFruit}`);
+                return messages[specificFruit];
             }
         }
         
@@ -1546,6 +1808,85 @@ class NatureTalks {
             sage: 'My purple flower spikes attract bees and butterflies while my leaves flavor food.',
             mint: 'I produce small flowers while spreading aggressively and refreshing everything around me.',
             thyme: 'I produce tiny flowers beloved by bees and my leaves have been used medicinally for millennia.',
+            
+            // Citrus fruits
+            fruit: 'I provide essential vitamins, minerals, and natural sugars that fuel your body.',
+            orange: 'I am packed with vitamin C and my oils in my peel have antibacterial properties.',
+            lemon: 'I contain powerful citric acid and vitamin C, helping preserve food and boost immunity.',
+            lime: 'I prevent scurvy and add zest to cuisine while my oils repel insects naturally.',
+            grapefruit: 'I boost metabolism and contain compounds that may help lower cholesterol.',
+            tangerine: 'I am easy to peel and rich in vitamin A, supporting healthy vision and skin.',
+            pomelo: 'I am the largest citrus fruit and contain lycopene, which supports heart health.',
+            bergamot: 'My oil flavors Earl Grey tea and has calming aromatherapy properties.',
+            yuzu: 'I combine citrus flavors in one fruit and am prized in Asian cuisine and medicine.',
+            
+            // Stone fruits
+            peach: 'I contain vitamins A and C, and my fuzzy skin protects my sweet, juicy flesh.',
+            plum: 'I provide antioxidants and fiber, and I can be dried into prunes for digestive health.',
+            apricot: 'I am rich in beta-carotene and support eye health with my orange pigments.',
+            cherry: 'I contain melatonin to help you sleep and anthocyanins that fight inflammation.',
+            
+            // Pome fruits
+            apple: 'I keep doctors away with my fiber, antioxidants, and natural compounds that support heart health.',
+            pear: 'I provide gentle fiber and natural sugars, making me easy to digest for all ages.',
+            quince: 'I am high in pectin and have been used for preserves and medicine for thousands of years.',
+            
+            // Berries
+            strawberry: 'I contain more vitamin C than oranges and my seeds are actually tiny fruits!',
+            blueberry: 'I am a superfood packed with antioxidants that support brain health and memory.',
+            raspberry: 'I provide fiber, vitamin C, and ketones that may boost metabolism.',
+            blackberry: 'I am rich in vitamins and my dark color comes from powerful antioxidants.',
+            cranberry: 'I prevent urinary tract infections and contain compounds that support bladder health.',
+            gooseberry: 'I am high in vitamin C and have been cultivated in Europe for over 700 years.',
+            elderberry: 'I boost immune systems and have been used medicinally for centuries.',
+            mulberry: 'I contain resveratrol like red wine and support heart and brain health.',
+            currant: 'I am tiny but mighty, packed with vitamin C and antioxidants in every berry.',
+            
+            // Tropical fruits
+            banana: 'I provide instant energy with natural sugars and potassium that prevents muscle cramps.',
+            mango: 'I am rich in vitamin A and enzymes that aid digestion, and I\'ve been cultivated for 4,000 years.',
+            pineapple: 'I contain bromelain, an enzyme that aids digestion and reduces inflammation.',
+            papaya: 'I produce papain, an enzyme that helps digest proteins and soothes stomachs.',
+            coconut: 'I provide hydrating water and healthy fats that support brain and heart function.',
+            avocado: 'I contain healthy monounsaturated fats and help your body absorb fat-soluble vitamins.',
+            'passion-fruit': 'I am packed with fiber, vitamins, and my seeds are edible and nutritious.',
+            kiwi: 'I contain more vitamin C than oranges and actinidin enzyme that aids protein digestion.',
+            guava: 'I have four times more vitamin C than oranges and natural antimicrobial properties.',
+            lychee: 'I provide vitamin C and copper, and my translucent flesh has been prized for 2,000 years.',
+            rambutan: 'I am related to lychee and my spiky exterior protects sweet, nutritious flesh.',
+            'dragon-fruit': 'I am low in calories but high in vitamin C, iron, and beneficial plant compounds.',
+            'star-fruit': 'I am mostly water but contain vitamin C and unique compounds that support kidney health.',
+            jackfruit: 'I am the largest tree fruit and my flesh can substitute for meat in texture and protein.',
+            durian: 'Despite my strong smell, I am rich in vitamin C, potassium, and healthy fats.',
+            mangosteen: 'I contain xanthones, powerful antioxidants that may have anti-inflammatory properties.',
+            
+            // Melons
+            watermelon: 'I am 92% water and contain lycopene, helping you stay hydrated and healthy.',
+            cantaloupe: 'I am rich in vitamin A and beta-carotene, supporting healthy vision and skin.',
+            honeydew: 'I provide vitamin C and potassium while being naturally low in calories.',
+            casaba: 'I have a mild, sweet flavor and provide vitamin C and potassium for heart health.',
+            
+            // Other fruits
+            grape: 'I contain resveratrol in my skin, which supports heart health and longevity.',
+            fig: 'I am rich in fiber, calcium, and potassium, and I\'ve been cultivated for 11,000 years.',
+            date: 'I provide natural sugars, fiber, and minerals, serving as nature\'s candy and energy source.',
+            pomegranate: 'I contain powerful antioxidants in my seeds that support heart and brain health.',
+            persimmon: 'I am rich in vitamins A and C, and my sweet flavor develops as I ripen.',
+            olive: 'I provide healthy monounsaturated fats and have been a Mediterranean staple for millennia.',
+            
+            // Fruit trees
+            'orange-tree': 'I produce vitamin-rich oranges and my blossoms create aromatic orange blossom honey.',
+            'apple-tree': 'I can live for 100 years, producing apples that have fed humans for thousands of years.',
+            'peach-tree': 'I originated in China and my beautiful blossoms symbolize spring and renewal.',
+            'cherry-tree': 'I produce both sweet fruit and spectacular spring blossoms that attract pollinators.',
+            'mango-tree': 'I can live for 300 years and am considered sacred in some cultures for my life-giving fruit.',
+            'avocado-tree': 'I produce nutrient-dense fruit and can live for 100+ years in the right climate.',
+            'lemon-tree': 'I provide year-round vitamin C and my fragrant blossoms perfume the air.',
+            'banana-tree': 'I am actually a large herb, not a tree, and I produce hands of potassium-rich bananas.',
+            'coconut-tree': 'I am the "tree of life," providing water, food, shelter, and countless other uses.',
+            'fig-tree': 'I am one of humanity\'s oldest cultivated plants and can live for hundreds of years.',
+            'olive-tree': 'I can live for 1,000+ years and my fruit provides the healthy oils of the Mediterranean diet.',
+            'pomegranate-tree': 'I produce antioxidant-rich fruit and have been symbols of fertility and prosperity.',
             
             // Water
             ocean: 'I produce most of Earth\'s oxygen and regulate the global climate.',
@@ -1947,6 +2288,23 @@ class NatureTalks {
             if (lowerObjectName.includes(specificFlower) && pleas[specificFlower]) {
                 console.log(`🎯 Found specific flower plea match: ${objectName} -> ${specificFlower}`);
                 return pleas[specificFlower];
+            }
+        }
+        
+        // Then try specific fruit matches
+        const specificFruits = [
+            'orange', 'lemon', 'lime', 'grapefruit', 'tangerine', 'pomelo', 'bergamot', 'yuzu',
+            'peach', 'plum', 'apricot', 'cherry', 'apple', 'pear', 'quince',
+            'strawberry', 'blueberry', 'raspberry', 'blackberry', 'cranberry', 'gooseberry', 'elderberry', 'mulberry', 'currant',
+            'banana', 'mango', 'pineapple', 'papaya', 'coconut', 'avocado', 'passion-fruit', 'kiwi', 'guava', 'lychee',
+            'rambutan', 'dragon-fruit', 'star-fruit', 'jackfruit', 'durian', 'mangosteen',
+            'watermelon', 'cantaloupe', 'honeydew', 'casaba',
+            'grape', 'fig', 'date', 'pomegranate', 'persimmon', 'olive'
+        ];
+        for (const specificFruit of specificFruits) {
+            if (lowerObjectName.includes(specificFruit) && pleas[specificFruit]) {
+                console.log(`🎯 Found specific fruit plea match: ${objectName} -> ${specificFruit}`);
+                return pleas[specificFruit];
             }
         }
         
@@ -3778,6 +4136,245 @@ class NatureTalks {
                 introduction: 'I am a lucky ladybug',
                 message: 'I protect your garden by eating harmful pests like aphids.',
                 plea: 'Please save me by avoiding pesticides and creating bug-friendly gardens!'
+            },
+            // Citrus fruits
+            orange: {
+                emoji: '🍊',
+                keywords: ['orange', 'valencia orange', 'navel orange'],
+                introduction: 'I am a juicy orange',
+                message: 'I am packed with vitamin C and my oils in my peel have antibacterial properties.',
+                plea: 'Please save me by supporting sustainable citrus farming and reducing food waste!'
+            },
+            lemon: {
+                emoji: '🍋',
+                keywords: ['lemon', 'meyer lemon', 'eureka lemon'],
+                introduction: 'I am a tart lemon',
+                message: 'I contain powerful citric acid and vitamin C, helping preserve food and boost immunity.',
+                plea: 'Please save me by supporting organic farming and water conservation!'
+            },
+            lime: {
+                emoji: '🟢',
+                keywords: ['lime', 'key lime', 'persian lime'],
+                introduction: 'I am a zesty lime',
+                message: 'I prevent scurvy and add zest to cuisine while my oils repel insects naturally.',
+                plea: 'Please save me by supporting sustainable agriculture and reducing pesticide use!'
+            },
+            grapefruit: {
+                emoji: '🍊',
+                keywords: ['grapefruit', 'pink grapefruit', 'white grapefruit'],
+                introduction: 'I am a tangy grapefruit',
+                message: 'I boost metabolism and contain compounds that may help lower cholesterol.',
+                plea: 'Please save me by supporting healthy diets and sustainable citrus production!'
+            },
+            tangerine: {
+                emoji: '🍊',
+                keywords: ['tangerine', 'mandarin', 'clementine'],
+                introduction: 'I am a sweet tangerine',
+                message: 'I am easy to peel and rich in vitamin A, supporting healthy vision and skin.',
+                plea: 'Please save me by choosing locally grown citrus when possible!'
+            },
+            // Stone fruits
+            peach: {
+                emoji: '🍑',
+                keywords: ['peach', 'nectarine'],
+                introduction: 'I am a soft peach',
+                message: 'I contain vitamins A and C, and my fuzzy skin protects my sweet, juicy flesh.',
+                plea: 'Please save me by supporting organic orchards and protecting pollinators!'
+            },
+            plum: {
+                emoji: '🟣',
+                keywords: ['plum', 'damson plum', 'greengage'],
+                introduction: 'I am a sweet plum',
+                message: 'I provide antioxidants and fiber, and I can be dried into prunes for digestive health.',
+                plea: 'Please save me by supporting diverse fruit varieties and heritage orchards!'
+            },
+            apricot: {
+                emoji: '🟠',
+                keywords: ['apricot', 'armenian plum'],
+                introduction: 'I am a golden apricot',
+                message: 'I am rich in beta-carotene and support eye health with my orange pigments.',
+                plea: 'Please save me by protecting fruit tree biodiversity and ancient varieties!'
+            },
+            cherry: {
+                emoji: '🍒',
+                keywords: ['cherry', 'sweet cherry', 'sour cherry', 'bing cherry'],
+                introduction: 'I am a bright cherry',
+                message: 'I contain melatonin to help you sleep and anthocyanins that fight inflammation.',
+                plea: 'Please save me by supporting pollinator-friendly farming and orchard preservation!'
+            },
+            // Pome fruits
+            apple: {
+                emoji: '🍎',
+                keywords: ['apple', 'red apple', 'green apple', 'granny smith', 'gala apple'],
+                introduction: 'I am a crisp apple',
+                message: 'I keep doctors away with my fiber, antioxidants, and natural compounds that support heart health.',
+                plea: 'Please save me by supporting local orchards and choosing diverse apple varieties!'
+            },
+            pear: {
+                emoji: '🍐',
+                keywords: ['pear', 'bartlett pear', 'anjou pear', 'bosc pear'],
+                introduction: 'I am a tender pear',
+                message: 'I provide gentle fiber and natural sugars, making me easy to digest for all ages.',
+                plea: 'Please save me by supporting sustainable fruit production and heirloom varieties!'
+            },
+            // Berries
+            strawberry: {
+                emoji: '🍓',
+                keywords: ['strawberry', 'wild strawberry'],
+                introduction: 'I am a sweet strawberry',
+                message: 'I contain more vitamin C than oranges and my seeds are actually tiny fruits!',
+                plea: 'Please save me by supporting organic berry farms and protecting wild strawberry patches!'
+            },
+            blueberry: {
+                emoji: '🫐',
+                keywords: ['blueberry', 'wild blueberry', 'huckleberry'],
+                introduction: 'I am a tiny blueberry',
+                message: 'I am a superfood packed with antioxidants that support brain health and memory.',
+                plea: 'Please save me by protecting natural blueberry habitats and supporting organic farming!'
+            },
+            raspberry: {
+                emoji: '🫐',
+                keywords: ['raspberry', 'red raspberry', 'black raspberry'],
+                introduction: 'I am a delicate raspberry',
+                message: 'I provide fiber, vitamin C, and ketones that may boost metabolism.',
+                plea: 'Please save me by supporting sustainable berry farming and protecting wild brambles!'
+            },
+            blackberry: {
+                emoji: '🫐',
+                keywords: ['blackberry', 'dewberry', 'boysenberry'],
+                introduction: 'I am a wild blackberry',
+                message: 'I am rich in vitamins and my dark color comes from powerful antioxidants.',
+                plea: 'Please save me by preserving natural hedgerows and supporting wildlife corridors!'
+            },
+            cranberry: {
+                emoji: '🔴',
+                keywords: ['cranberry', 'bog cranberry'],
+                introduction: 'I am a tart cranberry',
+                message: 'I prevent urinary tract infections and contain compounds that support bladder health.',
+                plea: 'Please save me by protecting wetland habitats and supporting sustainable bog management!'
+            },
+            // Tropical fruits
+            banana: {
+                emoji: '🍌',
+                keywords: ['banana', 'plantain', 'cavendish banana'],
+                introduction: 'I am a curved banana',
+                message: 'I provide instant energy with natural sugars and potassium that prevents muscle cramps.',
+                plea: 'Please save me by supporting fair trade farming and protecting tropical biodiversity!'
+            },
+            mango: {
+                emoji: '🥭',
+                keywords: ['mango', 'alphonso mango', 'tommy atkins'],
+                introduction: 'I am a tropical mango',
+                message: 'I am rich in vitamin A and enzymes that aid digestion, and I\'ve been cultivated for 4,000 years.',
+                plea: 'Please save me by supporting sustainable tropical agriculture and protecting mango forests!'
+            },
+            pineapple: {
+                emoji: '🍍',
+                keywords: ['pineapple', 'ananas'],
+                introduction: 'I am a spiky pineapple',
+                message: 'I contain bromelain, an enzyme that aids digestion and reduces inflammation.',
+                plea: 'Please save me by supporting responsible tropical farming and reducing food waste!'
+            },
+            papaya: {
+                emoji: '🟠',
+                keywords: ['papaya', 'pawpaw', 'carica papaya'],
+                introduction: 'I am a smooth papaya',
+                message: 'I produce papain, an enzyme that helps digest proteins and soothes stomachs.',
+                plea: 'Please save me by supporting sustainable tropical agriculture and protecting papaya diversity!'
+            },
+            coconut: {
+                emoji: '🥥',
+                keywords: ['coconut', 'coconut palm'],
+                introduction: 'I am a hard coconut',
+                message: 'I provide hydrating water and healthy fats that support brain and heart function.',
+                plea: 'Please save me by supporting coastal communities and protecting coconut palms from climate change!'
+            },
+            avocado: {
+                emoji: '🥑',
+                keywords: ['avocado', 'alligator pear'],
+                introduction: 'I am a creamy avocado',
+                message: 'I contain healthy monounsaturated fats and help your body absorb fat-soluble vitamins.',
+                plea: 'Please save me by supporting water-wise farming and responsible avocado production!'
+            },
+            kiwi: {
+                emoji: '🥝',
+                keywords: ['kiwi', 'kiwifruit', 'chinese gooseberry'],
+                introduction: 'I am a fuzzy kiwi',
+                message: 'I contain more vitamin C than oranges and actinidin enzyme that aids protein digestion.',
+                plea: 'Please save me by supporting sustainable fruit farming and protecting New Zealand ecosystems!'
+            },
+            // Melons
+            watermelon: {
+                emoji: '🍉',
+                keywords: ['watermelon', 'citrullus'],
+                introduction: 'I am a refreshing watermelon',
+                message: 'I am 92% water and contain lycopene, helping you stay hydrated and healthy.',
+                plea: 'Please save me by supporting water-efficient farming and protecting melon diversity!'
+            },
+            cantaloupe: {
+                emoji: '🍈',
+                keywords: ['cantaloupe', 'muskmelon'],
+                introduction: 'I am a sweet cantaloupe',
+                message: 'I am rich in vitamin A and beta-carotene, supporting healthy vision and skin.',
+                plea: 'Please save me by choosing locally grown melons and supporting sustainable farming!'
+            },
+            // Other fruits
+            grape: {
+                emoji: '🍇',
+                keywords: ['grape', 'wine grape', 'table grape'],
+                introduction: 'I am a clustered grape',
+                message: 'I contain resveratrol in my skin, which supports heart health and longevity.',
+                plea: 'Please save me by supporting sustainable viticulture and protecting grape biodiversity!'
+            },
+            fig: {
+                emoji: '🟤',
+                keywords: ['fig', 'fresh fig', 'mission fig'],
+                introduction: 'I am a sweet fig',
+                message: 'I am rich in fiber, calcium, and potassium, and I\'ve been cultivated for 11,000 years.',
+                plea: 'Please save me by preserving ancient fig varieties and supporting Mediterranean agriculture!'
+            },
+            pomegranate: {
+                emoji: '🔴',
+                keywords: ['pomegranate', 'punica granatum'],
+                introduction: 'I am a seeded pomegranate',
+                message: 'I contain powerful antioxidants in my seeds that support heart and brain health.',
+                plea: 'Please save me by supporting traditional fruit cultivation and protecting pomegranate diversity!'
+            },
+            // Fruit trees
+            'apple-tree': {
+                emoji: '🌳',
+                keywords: ['apple tree', 'orchard tree'],
+                introduction: 'I am an apple tree',
+                message: 'I can live for 100 years, producing apples that have fed humans for thousands of years.',
+                plea: 'Please save me by supporting orchard conservation and planting heritage fruit trees!'
+            },
+            'orange-tree': {
+                emoji: '🌳',
+                keywords: ['orange tree', 'citrus tree'],
+                introduction: 'I am an orange tree',
+                message: 'I produce vitamin-rich oranges and my blossoms create aromatic orange blossom honey.',
+                plea: 'Please save me by supporting sustainable citrus groves and protecting pollinator habitats!'
+            },
+            'cherry-tree': {
+                emoji: '🌸',
+                keywords: ['cherry tree', 'flowering cherry'],
+                introduction: 'I am a flowering cherry tree',
+                message: 'I produce both sweet fruit and spectacular spring blossoms that attract pollinators.',
+                plea: 'Please save me by protecting flowering trees and supporting urban forest conservation!'
+            },
+            'mango-tree': {
+                emoji: '🌳',
+                keywords: ['mango tree', 'tropical fruit tree'],
+                introduction: 'I am a tropical mango tree',
+                message: 'I can live for 300 years and am considered sacred in some cultures for my life-giving fruit.',
+                plea: 'Please save me by protecting tropical forests and supporting sustainable mango cultivation!'
+            },
+            'coconut-tree': {
+                emoji: '🌴',
+                keywords: ['coconut tree', 'palm tree'],
+                introduction: 'I am a tall coconut palm',
+                message: 'I am the "tree of life," providing water, food, shelter, and countless other uses.',
+                plea: 'Please save me by protecting coastal ecosystems and supporting island communities!'
             },
             ocean: {
                 emoji: '🌊',
