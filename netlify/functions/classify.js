@@ -55,7 +55,11 @@ async function callClarifaiModel(base64Image, modelKey, modelInfo) {
     if (response.ok) {
         const result = await response.json();
         if (result.outputs && result.outputs[0] && result.outputs[0].data && result.outputs[0].data.concepts) {
-            const concepts = result.outputs[0].data.concepts.filter(c => c.value > 0.3);
+            const concepts = result.outputs[0].data.concepts.filter(c => {
+                // Lower threshold for flowers to catch specific varieties
+                const isFlower = ['lavender', 'orchid', 'sunflower', 'rose', 'tulip', 'daisy', 'lily', 'lotus', 'iris', 'hibiscus', 'jasmine', 'magnolia', 'violet', 'gardenia', 'marigold', 'carnation', 'chrysanthemum', 'petunia', 'flower', 'bloom', 'blossom'].includes(c.name.toLowerCase());
+                return c.value > (isFlower ? 0.2 : 0.3);
+            });
             console.log(`✅ ${modelKey} found:`, concepts.slice(0, 3).map(c => `${c.name} (${(c.value * 100).toFixed(1)}%)`));
             return { modelKey, concepts, success: true };
         }
@@ -194,14 +198,23 @@ exports.handler = async (event, context) => {
             // Smart concept prioritization: prefer objects over locations/states
             console.log('📋 All available concepts:', bestResult.concepts.slice(0, 6).map(c => `${c.name} (${(c.value * 100).toFixed(1)}%)`));
             
-            // Smart specificity ranking
+            // Smart specificity ranking with enhanced flower detection
             const specificityRanking = {
-                'bamboo': 10, 'rose': 10, 'cat': 10, 'oak': 10, 'apple': 10, 'cherry': 10,
-                'rabbit': 10, 'eagle': 10, 'tulip': 10, 'pine': 10,
+                // Specific flowers - highest priority
+                'lavender': 18, 'orchid': 18, 'sunflower': 18, 'rose': 18, 'tulip': 18,
+                'daisy': 16, 'lily': 16, 'lotus': 16, 'iris': 16, 'hibiscus': 16,
+                'jasmine': 16, 'magnolia': 16, 'violet': 16, 'gardenia': 16,
+                'marigold': 14, 'carnation': 14, 'chrysanthemum': 14, 'petunia': 14,
+                
+                // Other specific nature objects
+                'bamboo': 10, 'cat': 10, 'oak': 10, 'apple': 10, 'cherry': 10,
+                'rabbit': 10, 'eagle': 10, 'pine': 10,
                 'parrot': 10, 'peacock': 10, 'parakeet': 10, 'owl': 10, 'hawk': 10,
                 'kangaroo': 10, 'koala': 10, 'elephant': 10, 'giraffe': 10,
                 'butterfly': 9, 'bee': 9, 'beetle': 9, 'dragonfly': 9,
                 'mushroom': 9, 'fish': 9, 'coral': 9,
+                
+                // Generic categories
                 'bird': 5, 'animal': 4, 'flower': 6, 'tree': 5, 'wildlife': 5,
                 'plant': 4, 'flora': 4, 'water': 4,
                 'nature': 1, 'outdoors': 1, 'travel': 1
@@ -209,8 +222,12 @@ exports.handler = async (event, context) => {
             
             // Find the concept with highest specificity score
             let bestSpecificityScore = 0;
-            for (let concept of bestResult.concepts.slice(0, 6)) {
-                if (concept.value > 0.85) {
+            for (let concept of bestResult.concepts.slice(0, 8)) {
+                // Lower confidence threshold for flowers to catch them
+                const isFlower = ['lavender', 'orchid', 'sunflower', 'rose', 'tulip', 'daisy', 'lily', 'lotus', 'iris', 'hibiscus', 'jasmine', 'magnolia', 'violet', 'gardenia', 'marigold', 'carnation', 'chrysanthemum', 'petunia', 'flower'].includes(concept.name.toLowerCase());
+                const confidenceThreshold = isFlower ? 0.3 : 0.85;
+                
+                if (concept.value > confidenceThreshold) {
                     const specificityScore = specificityRanking[concept.name.toLowerCase()] || 6;
                     
                     if (specificityScore > bestSpecificityScore || 
