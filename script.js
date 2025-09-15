@@ -3221,17 +3221,44 @@ class NatureTalks {
         return false;
     }
 
+    isGarbage(objectName) {
+        // Define garbage/pollution objects that should have environmental warnings
+        const garbageItems = [
+            'trash', 'garbage', 'litter', 'waste', 'plastic', 'pollution', 'contamination',
+            'toxic', 'oil spill', 'cigarette', 'bottle', 'can', 'bag', 'wrapper'
+        ];
+        
+        // Check if it matches known garbage items
+        const isGarbageItem = garbageItems.some(item => 
+            objectName.includes(item) || item.includes(objectName) ||
+            objectName === item
+        );
+        
+        if (isGarbageItem) {
+            console.log('🗑️ Garbage/pollution detected - adding strong environmental warnings:', objectName);
+            return true;
+        }
+        
+        return false;
+    }
+
     displayNatureMessage(natureData) {
         this.natureAvatar.textContent = natureData.emoji;
         this.natureTitle.textContent = `Hello! ${natureData.introduction}`;
         
-        // Check if this is a general object or animal/snake to exclude environmental warnings/pleas
+        // Check category types for different message formatting
         const isGeneral = this.isGeneralObject(natureData.detectedAs) || this.isGeneralObject(natureData.originalDetection);
         const isAnimalOrSnake = this.isAnimalOrSnake(natureData.detectedAs) || this.isAnimalOrSnake(natureData.originalDetection);
+        const isGarbage = this.isGarbage(natureData.detectedAs) || this.isGarbage(natureData.originalDetection);
         
         let fullMessage, spokenMessage;
         
-        if (isGeneral || isAnimalOrSnake) {
+        if (isGarbage) {
+            // For garbage/pollution objects, include strong environmental warnings
+            fullMessage = `${natureData.message}\n\n🧠 Did you know? ${natureData.explanation}\n\n⚠️ URGENT WARNING: I am destroying the environment and harming all life on Earth! My presence indicates serious environmental damage that requires immediate action.\n\n💚 ${natureData.plea}`;
+            spokenMessage = `${natureData.introduction}. ${natureData.message} Did you know? ${natureData.explanation} Urgent warning: I am destroying the environment and harming all life on Earth! ${natureData.plea}`;
+            console.log('🗑️ Garbage/pollution detected - adding strong environmental warnings');
+        } else if (isGeneral || isAnimalOrSnake) {
             // For general objects and animals/snakes, only include message and explanation (no consequences/plea)
             fullMessage = `${natureData.message}\n\n🧠 Did you know? ${natureData.explanation}`;
             spokenMessage = `${natureData.introduction}. ${natureData.message} Did you know? ${natureData.explanation}`;
@@ -5489,6 +5516,7 @@ class NatureTalks {
                 keywords: ['garbage', 'trash', 'litter', 'waste'],
                 introduction: 'I am garbage harming nature',
                 message: 'I pollute natural environments, harm wildlife, and destroy the beauty of pristine landscapes.',
+                explanation: 'Garbage and litter are major environmental threats that can persist in nature for decades or centuries. Plastic items can take 400-1000 years to decompose, while harming animals who mistake them for food.',
                 plea: 'Please STOP me by reducing waste, recycling properly, and never littering!'
             },
             plastic: {
@@ -5496,6 +5524,7 @@ class NatureTalks {
                 keywords: ['plastic', 'plastic bag', 'plastic bottle', 'microplastic'],
                 introduction: 'I am plastic waste',
                 message: 'I persist in the environment for hundreds of years, choking marine life and contaminating food chains.',
+                explanation: 'Plastic pollution is one of the most serious environmental threats. Single-use plastics break down into microplastics that contaminate our food chain, while larger pieces kill marine animals through ingestion and entanglement.',
                 plea: 'Please ELIMINATE me by reducing single-use plastics and supporting plastic-free alternatives!'
             },
             pollution: {
@@ -5503,6 +5532,7 @@ class NatureTalks {
                 keywords: ['pollution', 'contamination', 'toxic', 'oil spill'],
                 introduction: 'I am pollution',
                 message: 'I poison air, water, and soil, causing massive environmental damage and threatening all life.',
+                explanation: 'Pollution comes in many forms - chemical, plastic, air, water, noise, and light pollution. Each type disrupts natural systems and can cause irreversible damage to ecosystems and human health.',
                 plea: 'Please STOP me by supporting clean energy and strict environmental regulations!'
             },
             cigarette: {
