@@ -797,6 +797,25 @@ class NatureTalks {
             { terms: ['rabbit', 'bunny', 'hare', 'animal', 'mammal', 'wildlife'], category: 'bear' },
             { terms: ['mushroom', 'fungus', 'fungi', 'boletus', 'toadstool', 'edible agaric', 'spore', 'mycelium'], category: 'mushroom' },
             { terms: ['fish', 'salmon', 'trout'], category: 'fish' },
+            
+            // Specific snakes (most specific first)
+            { terms: ['python', 'ball python', 'burmese python', 'reticulated python'], category: 'python' },
+            { terms: ['cobra', 'king cobra', 'spitting cobra'], category: 'cobra' },
+            { terms: ['viper', 'pit viper', 'gaboon viper'], category: 'viper' },
+            { terms: ['rattlesnake', 'rattler', 'diamondback'], category: 'rattlesnake' },
+            { terms: ['boa', 'boa constrictor', 'rainbow boa'], category: 'boa' },
+            { terms: ['anaconda', 'green anaconda'], category: 'anaconda' },
+            { terms: ['mamba', 'black mamba', 'green mamba'], category: 'mamba' },
+            { terms: ['adder', 'puff adder', 'death adder'], category: 'adder' },
+            { terms: ['copperhead'], category: 'copperhead' },
+            { terms: ['cottonmouth', 'water moccasin'], category: 'cottonmouth' },
+            { terms: ['kingsnake', 'king snake'], category: 'kingsnake' },
+            { terms: ['garter snake', 'garter'], category: 'garter' },
+            { terms: ['corn snake', 'red rat snake'], category: 'corn' },
+            { terms: ['milk snake'], category: 'milk' },
+            { terms: ['hognose', 'hog nose snake'], category: 'hognose' },
+            // Generic snake terms (lower priority than specific types)
+            { terms: ['snake', 'serpent', 'reptile'], category: 'snake' },
             { terms: ['mountain', 'hill', 'peak', 'summit'], category: 'mountain' },
             { terms: ['rock', 'stone', 'cliff', 'boulder'], category: 'mountain' },
             { terms: ['sky', 'cloud', 'weather'], category: 'earth' },
@@ -868,6 +887,16 @@ class NatureTalks {
             }
         }
         
+        // SNAKE PRIORITY OVERRIDES - Specific snakes beat generic "snake"
+        const specificSnakes = ['python', 'cobra', 'viper', 'rattlesnake', 'boa', 'anaconda', 'mamba', 'adder', 'copperhead', 'cottonmouth', 'kingsnake', 'garter', 'corn', 'milk', 'hognose'];
+        for (const specificSnake of specificSnakes) {
+            const hasSpecificSnake = allTerms.some(term => term.includes(specificSnake));
+            if (hasSpecificSnake && (bestMatch === 'snake' || bestMatch === 'bear')) {
+                console.log('🐍 SNAKE PRIORITY OVERRIDE:', specificSnake, 'beats generic snake/animal');
+                return specificSnake;
+            }
+        }
+        
         if (bestMatch) {
             console.log('Final match:', bestMatch, 'with score:', bestScore);
             return bestMatch;
@@ -917,6 +946,12 @@ class NatureTalks {
             rabbit: '🐰', bunny: '🐰', hare: '🐰', bear: '🐻',
             bird: '🐦', eagle: '🦅', owl: '🦉', fish: '🐟',
             butterfly: '🦋', bee: '🐝', ladybug: '🐞', beetle: '🐞', animal: '🐾',
+            
+            // Snakes
+            snake: '🐍', python: '🐍', cobra: '🐍', viper: '🐍', rattlesnake: '🐍',
+            boa: '🐍', anaconda: '🐍', mamba: '🐍', adder: '🐍', copperhead: '🐍',
+            cottonmouth: '🐍', kingsnake: '🐍', garter: '🐍', corn: '🐍', 
+            milk: '🐍', hognose: '🐍', serpent: '🐍', reptile: '🐍',
             
             // Landscapes
             mountain: '⛰️', hill: '🏔️', rock: '🪨', stone: '🪨',
@@ -982,6 +1017,24 @@ class NatureTalks {
             bee: 'I am a busy bee',
             fish: 'I am a swimming fish',
             
+            // Snakes
+            snake: 'I am a fascinating snake',
+            python: 'I am a powerful python',
+            cobra: 'I am a majestic cobra',
+            viper: 'I am a stealthy viper',
+            rattlesnake: 'I am a rattlesnake',
+            boa: 'I am a strong boa constrictor',
+            anaconda: 'I am a massive anaconda',
+            mamba: 'I am a swift mamba',
+            adder: 'I am an adder',
+            copperhead: 'I am a copperhead',
+            cottonmouth: 'I am a cottonmouth',
+            kingsnake: 'I am a kingsnake',
+            garter: 'I am a harmless garter snake',
+            corn: 'I am a gentle corn snake',
+            milk: 'I am a peaceful milk snake',
+            hognose: 'I am a dramatic hognose snake',
+            
             // Landscapes
             mountain: 'I am a towering mountain',
             rock: 'I am ancient rock',
@@ -1025,6 +1078,15 @@ class NatureTalks {
             if (lowerObjectName.includes(specificFlower) && introductions[specificFlower]) {
                 console.log(`🎯 Found specific flower intro match: ${objectName} -> ${specificFlower} -> ${introductions[specificFlower]}`);
                 return introductions[specificFlower];
+            }
+        }
+        
+        // Then try specific snake matches
+        const specificSnakes = ['python', 'cobra', 'viper', 'rattlesnake', 'boa', 'anaconda', 'mamba', 'adder', 'copperhead', 'cottonmouth', 'kingsnake', 'garter', 'corn', 'milk', 'hognose'];
+        for (const specificSnake of specificSnakes) {
+            if (lowerObjectName.includes(specificSnake) && introductions[specificSnake]) {
+                console.log(`🎯 Found specific snake intro match: ${objectName} -> ${specificSnake} -> ${introductions[specificSnake]}`);
+                return introductions[specificSnake];
             }
         }
         
@@ -1210,6 +1272,24 @@ class NatureTalks {
             bee: 'I pollinate 1/3 of all the food you eat and create sweet honey.',
             fish: 'I keep aquatic ecosystems healthy and provide protein for many animals.',
             
+            // Snakes
+            snake: 'I control rodent populations and play a vital role in ecosystem balance.',
+            python: 'I am a powerful constrictor that helps control prey populations in my habitat.',
+            cobra: 'I am an important predator that keeps ecosystems balanced with my hunting skills.',
+            viper: 'I help control small mammal populations and am perfectly adapted to my environment.',
+            rattlesnake: 'I warn before I strike and help control rodent populations that damage crops.',
+            boa: 'I am a non-venomous constrictor that plays an important role in rainforest ecosystems.',
+            anaconda: 'I am one of the largest snakes and keep aquatic ecosystems balanced.',
+            mamba: 'I am a fast and efficient hunter that maintains balance in African ecosystems.',
+            adder: 'I hibernate through winter and emerge to help control small animal populations.',
+            copperhead: 'I help control rodent populations and prefer to hide rather than attack.',
+            cottonmouth: 'I live near water and help control fish and amphibian populations.',
+            kingsnake: 'I even eat other snakes, including venomous ones, keeping snake populations balanced.',
+            garter: 'I am harmless to humans and help control slug, worm, and small pest populations.',
+            corn: 'I am a gentle snake that helps farmers by controlling grain-eating rodents.',
+            milk: 'I am non-venomous and help control rodent populations around farms.',
+            hognose: 'I put on dramatic defensive displays but am harmless and help control pest populations.',
+            
             // Landscapes
             mountain: 'I create weather patterns, store fresh water in snow, and provide minerals.',
             rock: 'I form the foundation of mountains and store Earth\'s geological history.',
@@ -1252,6 +1332,15 @@ class NatureTalks {
             if (lowerObjectName.includes(specificFlower) && messages[specificFlower]) {
                 console.log(`🎯 Found specific flower message match: ${objectName} -> ${specificFlower}`);
                 return messages[specificFlower];
+            }
+        }
+        
+        // Then try specific snake matches
+        const specificSnakes = ['python', 'cobra', 'viper', 'rattlesnake', 'boa', 'anaconda', 'mamba', 'adder', 'copperhead', 'cottonmouth', 'kingsnake', 'garter', 'corn', 'milk', 'hognose'];
+        for (const specificSnake of specificSnakes) {
+            if (lowerObjectName.includes(specificSnake) && messages[specificSnake]) {
+                console.log(`🎯 Found specific snake message match: ${objectName} -> ${specificSnake}`);
+                return messages[specificSnake];
             }
         }
         
@@ -1485,6 +1574,24 @@ class NatureTalks {
             bee: 'Please save me by banning harmful pesticides and protecting wildflower meadows!',
             fish: 'Please save me by keeping waters clean and protecting watersheds!',
             
+            // Snakes - conservation and understanding
+            snake: 'Please save me by protecting my habitat and learning that I am not your enemy!',
+            python: 'Please save me by stopping illegal wildlife trade and protecting my natural habitat!',
+            cobra: 'Please save me by preserving my ecosystems and understanding my important role!',
+            viper: 'Please save me by protecting my habitat and respecting my space in nature!',
+            rattlesnake: 'Please save me by preserving natural areas and not killing me out of fear!',
+            boa: 'Please save me by stopping deforestation and illegal pet trade!',
+            anaconda: 'Please save me by protecting wetlands and stopping habitat destruction!',
+            mamba: 'Please save me by preserving African wilderness and understanding my ecological role!',
+            adder: 'Please save me by protecting natural meadows and not killing me when you see me!',
+            copperhead: 'Please save me by leaving me alone when you encounter me in nature!',
+            cottonmouth: 'Please save me by protecting wetlands and giving me space near water!',
+            kingsnake: 'Please save me by understanding I help control other snake populations!',
+            garter: 'Please save me by creating wildlife-friendly gardens and not using pesticides!',
+            corn: 'Please save me by appreciating my role in controlling farm pests!',
+            milk: 'Please save me by not killing me - I am harmless and help control rodents!',
+            hognose: 'Please save me by understanding my dramatic displays are just for show - I am harmless!',
+            
             // Landscapes
             mountain: 'Please save me by preventing mining and stopping erosion!',
             forest: 'Please save me by supporting forest conservation and sustainable living!',
@@ -1529,6 +1636,15 @@ class NatureTalks {
             if (lowerObjectName.includes(specificFlower) && pleas[specificFlower]) {
                 console.log(`🎯 Found specific flower plea match: ${objectName} -> ${specificFlower}`);
                 return pleas[specificFlower];
+            }
+        }
+        
+        // Then try specific snake matches
+        const specificSnakes = ['python', 'cobra', 'viper', 'rattlesnake', 'boa', 'anaconda', 'mamba', 'adder', 'copperhead', 'cottonmouth', 'kingsnake', 'garter', 'corn', 'milk', 'hognose'];
+        for (const specificSnake of specificSnakes) {
+            if (lowerObjectName.includes(specificSnake) && pleas[specificSnake]) {
+                console.log(`🎯 Found specific snake plea match: ${objectName} -> ${specificSnake}`);
+                return pleas[specificSnake];
             }
         }
         
@@ -3009,6 +3125,34 @@ class NatureTalks {
                 introduction: 'I am a powerful bear',
                 message: 'I help spread seeds through the forest and keep ecosystems balanced.',
                 plea: 'Please save me by protecting wilderness areas and securing your garbage!'
+            },
+            snake: {
+                emoji: '🐍',
+                keywords: ['snake', 'serpent', 'reptile'],
+                introduction: 'I am a fascinating snake',
+                message: 'I control rodent populations and play a vital role in ecosystem balance.',
+                plea: 'Please save me by protecting my habitat and learning that I am not your enemy!'
+            },
+            python: {
+                emoji: '🐍',
+                keywords: ['python', 'ball python', 'burmese python', 'reticulated python'],
+                introduction: 'I am a powerful python',
+                message: 'I am a constrictor that helps control prey populations in my habitat.',
+                plea: 'Please save me by stopping illegal wildlife trade and protecting my natural habitat!'
+            },
+            cobra: {
+                emoji: '🐍',
+                keywords: ['cobra', 'king cobra', 'spitting cobra'],
+                introduction: 'I am a majestic cobra',
+                message: 'I am an important predator that keeps ecosystems balanced with my hunting skills.',
+                plea: 'Please save me by preserving my ecosystems and understanding my important role!'
+            },
+            rattlesnake: {
+                emoji: '🐍',
+                keywords: ['rattlesnake', 'rattler', 'diamondback'],
+                introduction: 'I am a rattlesnake',
+                message: 'I warn before I strike and help control rodent populations that damage crops.',
+                plea: 'Please save me by preserving natural areas and not killing me out of fear!'
             },
             fish: {
                 emoji: '🐟',
