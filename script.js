@@ -5000,6 +5000,7 @@ class NatureTalks {
                 keywords: ['snake', 'serpent', 'reptile'],
                 introduction: 'I am a fascinating snake',
                 message: 'I control rodent populations and play a vital role in ecosystem balance.',
+                explanation: 'Snakes are fascinating reptiles that can unhinge their jaws to swallow prey larger than their head. We shed our entire skin as we grow and have incredible sensory abilities.',
                 plea: 'Please save me by protecting my habitat and learning that I am not your enemy!'
             },
             // Comprehensive Animal Database - Domestic animals
@@ -5189,6 +5190,7 @@ class NatureTalks {
                 keywords: ['rattlesnake', 'rattler', 'diamondback'],
                 introduction: 'I am a rattlesnake',
                 message: 'I warn before I strike and help control rodent populations that damage crops.',
+                explanation: 'Rattlesnakes are venomous pit vipers with a distinctive rattle made of keratin segments. We use heat-sensing organs to detect prey and our rattle to warn potential threats.',
                 plea: 'Please save me by preserving natural areas and not killing me out of fear!'
             },
             fish: {
