@@ -686,8 +686,8 @@ class NatureTalks {
         
         // Ensure we have a valid category
         if (!this.natureDatabase[matchedCategory]) {
-            console.log('🌸 FLOWER DEBUG - Category not found in database, using fallback');
-            matchedCategory = 'tree'; // Safe fallback
+            console.log('🌸 FLOWER DEBUG - Category not found in database, keeping original object name');
+            matchedCategory = originalObjectName; // Keep the actual detected object name
         }
         
         console.log('📂 Original object:', originalObjectName, '-> Matched category:', matchedCategory);
