@@ -761,7 +761,7 @@ class NatureTalks {
                     'trunk', 'bark', 'branch', 'branches', 'twig', 'stem', 'root', 'roots',
                     'leaf', 'leaves', 'foliage', 'canopy', 'crown',
                     // Specific tree types
-                    'oak', 'pine', 'maple', 'birch', 'apple', 'cherry', 'willow', 'elm', 
+                    'oak', 'pine', 'maple', 'birch', 'willow', 'elm', 
                     'cedar', 'fir', 'spruce', 'poplar', 'ash', 'beech', 'hickory', 'walnut',
                     // Tree groupings (individual trees, not forests)
                     'grove', 'orchard',
@@ -844,7 +844,7 @@ class NatureTalks {
             { terms: ['thyme flower', 'thymus'], category: 'thyme' },
             // Generic flower terms (lower priority than specific types)
             { terms: ['flower', 'bloom', 'petal', 'blossom', 'bouquet', 'floral'], category: 'flower' },
-            { terms: ['ocean', 'sea', 'reef', 'coral', 'marine'], category: 'ocean' },
+            { terms: ['ocean', 'sea', 'marine'], category: 'ocean' },
             { terms: ['water', 'river', 'stream', 'lake', 'pond'], category: 'river' },
             { terms: ['bird', 'eagle', 'sparrow', 'robin', 'owl', 'hawk'], category: 'bird' },
             { terms: ['butterfly', 'moth'], category: 'butterfly' },
@@ -934,6 +934,16 @@ class NatureTalks {
             
             // Generic fruit terms (lower priority than specific types)
             { terms: ['fruit', 'berry', 'citrus', 'tropical fruit'], category: 'fruit' },
+            
+            // Marine life and underwater ecosystems (specific first)
+            { terms: ['coral reef', 'reef', 'barrier reef', 'coral garden'], category: 'reef' },
+            { terms: ['coral', 'polyp', 'coral colony', 'hard coral', 'soft coral'], category: 'coral' },
+            
+            // Pollution and waste (very high priority - environmental threats)
+            { terms: ['garbage', 'trash', 'litter', 'waste'], category: 'trash' },
+            { terms: ['plastic', 'plastic bag', 'plastic bottle', 'microplastic'], category: 'plastic' },
+            { terms: ['oil spill', 'pollution', 'contamination', 'toxic'], category: 'pollution' },
+            { terms: ['cigarette', 'cigarette butt', 'smoking'], category: 'cigarette' },
             
             // Specific snakes (most specific first)
             { terms: ['python', 'ball python', 'burmese python', 'reticulated python'], category: 'python' },
@@ -1047,6 +1057,52 @@ class NatureTalks {
             if (hasSpecificFruit && bestMatch === 'fruit') {
                 console.log('🍎 FRUIT PRIORITY OVERRIDE:', specificFruit, 'beats generic fruit');
                 return specificFruit;
+            }
+        }
+        
+        // CORAL/REEF PRIORITY OVERRIDES - Specific coral/reef beats generic "ocean"
+        const coralReefTerms = ['coral', 'reef', 'coral reef', 'barrier reef'];
+        for (const coralTerm of coralReefTerms) {
+            const hasCoralReef = allTerms.some(term => term.includes(coralTerm));
+            if (hasCoralReef && bestMatch === 'ocean') {
+                if (allTerms.some(term => term.includes('reef'))) {
+                    console.log('🪸 CORAL REEF PRIORITY OVERRIDE: reef beats generic ocean');
+                    return 'reef';
+                } else if (allTerms.some(term => term.includes('coral'))) {
+                    console.log('🪸 CORAL PRIORITY OVERRIDE: coral beats generic ocean');
+                    return 'coral';
+                }
+            }
+        }
+        
+        // FISH PRIORITY OVERRIDES - Specific fish beats generic "ocean"
+        const fishTerms = ['fish', 'salmon', 'trout'];
+        for (const fishTerm of fishTerms) {
+            const hasFish = allTerms.some(term => term.includes(fishTerm));
+            if (hasFish && bestMatch === 'ocean') {
+                console.log('🐟 FISH PRIORITY OVERRIDE: fish beats generic ocean');
+                return 'fish';
+            }
+        }
+        
+        // POLLUTION PRIORITY OVERRIDES - Pollution/waste beats any natural environment  
+        const pollutionTerms = ['garbage', 'trash', 'litter', 'waste', 'plastic', 'pollution', 'cigarette', 'oil spill'];
+        for (const pollutionTerm of pollutionTerms) {
+            const hasPollution = allTerms.some(term => term.includes(pollutionTerm));
+            if (hasPollution && ['river', 'ocean', 'tree', 'forest', 'mountain', 'earth'].includes(bestMatch)) {
+                if (allTerms.some(term => term.includes('plastic'))) {
+                    console.log('🗑️ POLLUTION PRIORITY OVERRIDE: plastic beats natural environment');
+                    return 'plastic';
+                } else if (allTerms.some(term => term.includes('cigarette'))) {
+                    console.log('🚬 POLLUTION PRIORITY OVERRIDE: cigarette beats natural environment');
+                    return 'cigarette';
+                } else if (allTerms.some(term => term.includes('pollution') || term.includes('oil'))) {
+                    console.log('☠️ POLLUTION PRIORITY OVERRIDE: pollution beats natural environment');
+                    return 'pollution';
+                } else {
+                    console.log('🗑️ POLLUTION PRIORITY OVERRIDE: trash beats natural environment');
+                    return 'trash';
+                }
             }
         }
         
@@ -1302,7 +1358,7 @@ class NatureTalks {
             tree: 'I am a mighty tree',
             oak: 'I am a strong oak tree',
             pine: 'I am an evergreen pine tree',
-            apple: 'I am a fruitful apple tree',
+            apple: 'I am a crisp apple',
             leaf: 'I am a green leaf',
             bark: 'I am protective tree bark',
             plant: 'I am a growing plant',
@@ -1472,6 +1528,21 @@ class NatureTalks {
             butterfly: 'I am a delicate butterfly',
             bee: 'I am a busy bee',
             fish: 'I am a swimming fish',
+            
+            // Fungi
+            mushroom: 'I am a mushroom',
+            fungus: 'I am a fungus',
+            fungi: 'I am fungi',
+            toadstool: 'I am a toadstool',
+            
+            // Pollution and environmental threats
+            trash: 'I am garbage harming nature',
+            garbage: 'I am garbage harming nature',
+            waste: 'I am waste polluting the environment',
+            litter: 'I am litter destroying natural beauty',
+            plastic: 'I am plastic waste',
+            pollution: 'I am pollution',
+            cigarette: 'I am a cigarette butt',
             
             // Snakes
             snake: 'I am a fascinating snake',
@@ -4376,9 +4447,52 @@ class NatureTalks {
                 message: 'I am the "tree of life," providing water, food, shelter, and countless other uses.',
                 plea: 'Please save me by protecting coastal ecosystems and supporting island communities!'
             },
+            // Pollution and environmental threats
+            trash: {
+                emoji: '🗑️',
+                keywords: ['garbage', 'trash', 'litter', 'waste'],
+                introduction: 'I am garbage harming nature',
+                message: 'I pollute natural environments, harm wildlife, and destroy the beauty of pristine landscapes.',
+                plea: 'Please STOP me by reducing waste, recycling properly, and never littering!'
+            },
+            plastic: {
+                emoji: '♻️',
+                keywords: ['plastic', 'plastic bag', 'plastic bottle', 'microplastic'],
+                introduction: 'I am plastic waste',
+                message: 'I persist in the environment for hundreds of years, choking marine life and contaminating food chains.',
+                plea: 'Please ELIMINATE me by reducing single-use plastics and supporting plastic-free alternatives!'
+            },
+            pollution: {
+                emoji: '☠️',
+                keywords: ['pollution', 'contamination', 'toxic', 'oil spill'],
+                introduction: 'I am pollution',
+                message: 'I poison air, water, and soil, causing massive environmental damage and threatening all life.',
+                plea: 'Please STOP me by supporting clean energy and strict environmental regulations!'
+            },
+            cigarette: {
+                emoji: '🚬',
+                keywords: ['cigarette', 'cigarette butt', 'smoking'],
+                introduction: 'I am a cigarette butt',
+                message: 'I am the most littered item worldwide, leaching toxic chemicals into soil and water for years.',
+                plea: 'Please ELIMINATE me by quitting smoking and properly disposing of cigarette waste!'
+            },
+            coral: {
+                emoji: '🪸',
+                keywords: ['coral', 'polyp', 'coral colony', 'hard coral', 'soft coral'],
+                introduction: 'I am living coral',
+                message: 'I create beautiful underwater gardens and protect coastlines from waves and storms.',
+                plea: 'Please save me by reducing carbon emissions and using reef-safe sunscreen!'
+            },
+            reef: {
+                emoji: '🪸',
+                keywords: ['coral reef', 'reef', 'barrier reef', 'coral garden'],
+                introduction: 'I am a coral reef',
+                message: 'I support 25% of all marine life and protect coastlines from erosion and storms.',
+                plea: 'Please save me by fighting climate change and stopping ocean pollution!'
+            },
             ocean: {
                 emoji: '🌊',
-                keywords: ['ocean', 'sea', 'wave', 'beach', 'coral'],
+                keywords: ['ocean', 'sea', 'wave', 'beach', 'marine'],
                 introduction: 'I am the vast ocean',
                 message: 'I produce most of your oxygen and regulate Earth\'s climate.',
                 plea: 'Please save me by reducing plastic waste and stopping pollution!'
