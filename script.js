@@ -669,33 +669,33 @@ class NatureTalks {
         
         console.log('🎯 Generating message for:', objectName, 'confidence:', confidence, 'concepts:', identifiedObject.allConcepts);
         
-        // Ensure we always have a valid object name
-        let finalObjectName = objectName;
+        // Preserve the original object name for specific messages
+        let originalObjectName = objectName;
         if (!objectName || objectName === 'unknown' || objectName === '') {
-            finalObjectName = 'tree'; // Default fallback
+            originalObjectName = 'tree'; // Default fallback
         }
         
-        // More comprehensive mapping with better priority
-        let matchedCategory = this.findBestMatch(finalObjectName, identifiedObject.allConcepts || []);
+        // More comprehensive mapping with better priority for category
+        let matchedCategory = this.findBestMatch(originalObjectName, identifiedObject.allConcepts || []);
         
         // Ensure we have a valid category
         if (!this.natureDatabase[matchedCategory]) {
             matchedCategory = 'tree'; // Safe fallback
         }
         
-        console.log('📂 Matched category:', matchedCategory);
+        console.log('📂 Original object:', originalObjectName, '-> Matched category:', matchedCategory);
         
-        // Create completely custom message based on detected object
+        // Create completely custom message based on the ORIGINAL detected object name
         const dynamicMessage = {
-            emoji: this.getObjectEmoji(finalObjectName),
+            emoji: this.getObjectEmoji(originalObjectName),
             confidence: confidence,
             detectedAs: identifiedObject.name || 'nature object',
-            originalDetection: identifiedObject.name || finalObjectName,
-            introduction: this.generateSpecificIntroduction(finalObjectName),
-            message: this.generateSpecificMessage(finalObjectName),
-            explanation: this.generateEducationalExplanation(finalObjectName),
-            consequences: this.generateConsequences(finalObjectName),
-            plea: this.generateSpecificPlea(finalObjectName)
+            originalDetection: identifiedObject.name || originalObjectName,
+            introduction: this.generateSpecificIntroduction(originalObjectName),
+            message: this.generateSpecificMessage(originalObjectName),
+            explanation: this.generateEducationalExplanation(originalObjectName),
+            consequences: this.generateConsequences(originalObjectName),
+            plea: this.generateSpecificPlea(originalObjectName)
         };
         
         console.log('✅ Generated dynamic message:', dynamicMessage);
