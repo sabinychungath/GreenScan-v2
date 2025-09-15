@@ -697,17 +697,39 @@ class NatureTalks {
         console.log('🎯 Using category for content generation:', categoryToUse);
         
         // Create completely custom message based on the MATCHED CATEGORY
-        const dynamicMessage = {
-            emoji: this.getObjectEmoji(categoryToUse),
-            confidence: confidence,
-            detectedAs: identifiedObject.name || 'nature object',
-            originalDetection: identifiedObject.name || originalObjectName,
-            introduction: this.generateSpecificIntroduction(categoryToUse),
-            message: this.generateSpecificMessage(categoryToUse),
-            explanation: this.generateEducationalExplanation(categoryToUse),
-            consequences: this.generateConsequences(categoryToUse),
-            plea: this.generateSpecificPlea(categoryToUse)
-        };
+        // First check if we have a database entry for this category
+        const databaseEntry = this.natureDatabase[categoryToUse];
+        let dynamicMessage;
+        
+        if (databaseEntry) {
+            console.log('🗃️ Using database entry for:', categoryToUse);
+            // Use the database entry directly
+            dynamicMessage = {
+                emoji: databaseEntry.emoji || this.getObjectEmoji(categoryToUse),
+                confidence: confidence,
+                detectedAs: categoryToUse,
+                originalDetection: identifiedObject.name || originalObjectName,
+                introduction: databaseEntry.introduction || this.generateSpecificIntroduction(categoryToUse),
+                message: databaseEntry.message || this.generateSpecificMessage(categoryToUse),
+                explanation: databaseEntry.explanation || this.generateEducationalExplanation(categoryToUse),
+                consequences: databaseEntry.consequences || this.generateConsequences(categoryToUse),
+                plea: databaseEntry.plea || this.generateSpecificPlea(categoryToUse)
+            };
+        } else {
+            console.log('🔧 Using legacy generation for:', categoryToUse);
+            // Fall back to the legacy generation system
+            dynamicMessage = {
+                emoji: this.getObjectEmoji(categoryToUse),
+                confidence: confidence,
+                detectedAs: identifiedObject.name || 'nature object',
+                originalDetection: identifiedObject.name || originalObjectName,
+                introduction: this.generateSpecificIntroduction(categoryToUse),
+                message: this.generateSpecificMessage(categoryToUse),
+                explanation: this.generateEducationalExplanation(categoryToUse),
+                consequences: this.generateConsequences(categoryToUse),
+                plea: this.generateSpecificPlea(categoryToUse)
+            };
+        }
         
         console.log('✅ Generated dynamic message:', dynamicMessage);
         
