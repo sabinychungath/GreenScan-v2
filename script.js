@@ -760,127 +760,132 @@ class NatureTalks {
         return emojiMap[objectName] || '🌍';
     }
 
-    getObjectEmoji(objectName) {
-                    // Tree parts
-                    'trunk', 'bark', 'branch', 'branches', 'twig', 'stem', 'root', 'roots',
-                    'leaf', 'leaves', 'foliage', 'canopy', 'crown',
-                    // Specific tree types
-                    'oak', 'pine', 'maple', 'birch', 'willow', 'elm', 
-                    'cedar', 'fir', 'spruce', 'poplar', 'ash', 'beech', 'hickory', 'walnut',
-                    // Tree groupings (individual trees, not forests)
-                    'grove', 'orchard',
-                    // Plant-related that usually means trees
-                    'deciduous', 'coniferous', 'evergreen', 'hardwood', 'softwood',
-                    // Plant-related terms for individual trees
-                    'plant', 'vegetation', 'flora'
-                ], 
-                category: 'tree' 
-            },
-            // Water plants vs flowers (lotus, water lily are water plants, not typical flowers)
-            { terms: ['lotus', 'water lily', 'lily pad', 'pond plant', 'aquatic plant'], category: 'river' },
-            // Specific flowers (most specific first)
-            { terms: ['sunflower', 'sun flower'], category: 'sunflower' },
-            { terms: ['lavender', 'lavandula'], category: 'lavender' },
-            { terms: ['orchid', 'orchidaceae'], category: 'orchid' },
-            { terms: ['rose', 'rosa'], category: 'rose' },
-            { terms: ['tulip', 'tulipa'], category: 'tulip' },
-            { terms: ['lotus', 'nelumbo'], category: 'lotus' },
-            { terms: ['lily', 'lilium', 'tiger lily', 'easter lily'], category: 'lily' },
-            { terms: ['daisy', 'bellis', 'gerbera daisy', 'shasta daisy'], category: 'daisy' },
-            { terms: ['iris', 'bearded iris', 'flag iris'], category: 'iris' },
-            { terms: ['hibiscus', 'china rose'], category: 'hibiscus' },
-            { terms: ['jasmine', 'jasminum', 'star jasmine'], category: 'jasmine' },
-            { terms: ['magnolia', 'southern magnolia'], category: 'magnolia' },
-            { terms: ['violet', 'viola', 'pansy'], category: 'violet' },
-            { terms: ['gardenia', 'cape jasmine'], category: 'gardenia' },
+    findBestMatch(objectName, allConcepts) {
+        // Simple and direct approach: Check if any concept exists in database first
+        const allTerms = [objectName, ...allConcepts.map(c => c.toLowerCase())];
+        
+        console.log('🔍 All terms for matching:', allTerms); // Debug log
+        
+        // Step 1: Direct database lookup - check each concept against database categories
+        for (const term of allTerms) {
+            // Check if this exact term exists as a category in the database
+            if (this.natureDatabase[term]) {
+                console.log('✅ Direct match found:', term);
+                return term;
+            }
             
-            // Popular garden flowers
-            { terms: ['carnation', 'dianthus'], category: 'carnation' },
-            { terms: ['chrysanthemum', 'mum', 'chrysanth'], category: 'chrysanthemum' },
-            { terms: ['petunia'], category: 'petunia' },
-            { terms: ['marigold', 'tagetes', 'calendula'], category: 'marigold' },
-            { terms: ['zinnia'], category: 'zinnia' },
-            { terms: ['peony', 'paeonia'], category: 'peony' },
-            { terms: ['daffodil', 'narcissus'], category: 'daffodil' },
-            { terms: ['azalea', 'rhododendron'], category: 'azalea' },
-            { terms: ['camellia'], category: 'camellia' },
-            { terms: ['begonia'], category: 'begonia' },
-            { terms: ['impatiens'], category: 'impatiens' },
-            { terms: ['geranium', 'pelargonium'], category: 'geranium' },
+            // Check if this term exists in any category's keywords
+            for (const [category, data] of Object.entries(this.natureDatabase)) {
+                if (data.keywords && data.keywords.includes(term)) {
+                    console.log('✅ Keyword match found:', term, '→', category);
+                    return category;
+                }
+            }
+        }
+        
+        console.log('❌ No direct matches found in database, using fallback logic...');
+        
+        // Step 2: If no direct matches found, return the actual object name with general description
+        console.log('📝 No matches in database - returning actual object name for general description');
+        return objectName || allTerms[0] || 'unknown object';
+    }
+
+    findBestMatchAdvanced(objectName, allConcepts) {
+        const allTerms = [objectName, ...allConcepts.map(c => c.toLowerCase())];
+        
+        // Enhanced matching rules with better categorization
+        const matchingRules = [
+            // Trees (most specific first)
+            { terms: ['oak', 'white oak', 'red oak', 'live oak'], category: 'oak' },
+            { terms: ['maple', 'sugar maple', 'red maple', 'japanese maple'], category: 'maple' },
+            { terms: ['pine', 'pine tree', 'scots pine', 'white pine'], category: 'pine' },
+            { terms: ['birch', 'white birch', 'paper birch'], category: 'birch' },
+            { terms: ['willow', 'weeping willow', 'pussy willow'], category: 'willow' },
+            { terms: ['elm', 'american elm', 'dutch elm'], category: 'elm' },
+            { terms: ['ash', 'white ash', 'green ash'], category: 'ash' },
+            { terms: ['beech', 'american beech', 'copper beech'], category: 'beech' },
+            { terms: ['hickory', 'shagbark hickory'], category: 'hickory' },
+            { terms: ['walnut', 'black walnut', 'english walnut'], category: 'walnut' },
+            { terms: ['poplar', 'yellow poplar', 'tulip poplar'], category: 'poplar' },
+            { terms: ['sycamore', 'american sycamore'], category: 'sycamore' },
+            { terms: ['basswood', 'american basswood', 'linden'], category: 'basswood' },
+            { terms: ['spruce', 'norway spruce', 'blue spruce'], category: 'spruce' },
+            { terms: ['fir', 'douglas fir', 'balsam fir'], category: 'fir' },
+            { terms: ['cedar', 'eastern red cedar', 'western red cedar'], category: 'cedar' },
+            { terms: ['hemlock', 'eastern hemlock', 'western hemlock'], category: 'hemlock' },
+            { terms: ['redwood', 'giant redwood', 'coast redwood'], category: 'redwood' },
+            { terms: ['cypress', 'bald cypress', 'monterey cypress'], category: 'cypress' },
+            { terms: ['juniper', 'eastern juniper', 'utah juniper'], category: 'juniper' },
+            { terms: ['eucalyptus', 'blue gum eucalyptus'], category: 'eucalyptus' },
+            { terms: ['acacia', 'golden acacia'], category: 'acacia' },
+            { terms: ['teak', 'burmese teak'], category: 'teak' },
+            { terms: ['mahogany', 'honduran mahogany'], category: 'mahogany' },
+            { terms: ['bamboo', 'giant bamboo'], category: 'bamboo' },
+            { terms: ['baobab', 'african baobab'], category: 'baobab' },
             
-            // Wildflowers and native flowers
-            { terms: ['poppy', 'papaver'], category: 'poppy' },
-            { terms: ['forget-me-not', 'myosotis'], category: 'forget-me-not' },
-            { terms: ['bluebell', 'bluebonnet'], category: 'bluebell' },
-            { terms: ['buttercup', 'ranunculus'], category: 'buttercup' },
-            { terms: ['clover', 'shamrock'], category: 'clover' },
-            { terms: ['dandelion', 'taraxacum'], category: 'dandelion' },
-            { terms: ['wild rose', 'dog rose'], category: 'wild-rose' },
-            { terms: ['primrose', 'primula'], category: 'primrose' },
-            { terms: ['foxglove', 'digitalis'], category: 'foxglove' },
-            { terms: ['snapdragon', 'antirrhinum'], category: 'snapdragon' },
+            // Tree-related terms that should map to tree
+            { terms: [
+                'tree', 'trees', 'trunk', 'bark', 'branch', 'branches', 'leaf', 'leaves', 'foliage',
+                'timber', 'wood', 'wooden', 'log', 'lumber',
+                'deciduous', 'coniferous', 'evergreen', 'hardwood', 'softwood',
+                'grove', 'orchard',
+                'plant', 'vegetation', 'flora'
+            ], category: 'tree' },
             
-            // Exotic and tropical flowers
-            { terms: ['bird of paradise', 'strelitzia'], category: 'bird-of-paradise' },
-            { terms: ['anthurium', 'flamingo flower'], category: 'anthurium' },
-            { terms: ['frangipani', 'plumeria'], category: 'frangipani' },
-            { terms: ['bougainvillea'], category: 'bougainvillea' },
-            { terms: ['protea', 'king protea'], category: 'protea' },
-            { terms: ['passion flower', 'passiflora'], category: 'passion-flower' },
-            
-            // Bulb flowers
-            { terms: ['crocus'], category: 'crocus' },
-            { terms: ['hyacinth', 'hyacinthus'], category: 'hyacinth' },
-            { terms: ['amaryllis', 'hippeastrum'], category: 'amaryllis' },
-            { terms: ['gladiolus', 'sword lily'], category: 'gladiolus' },
-            { terms: ['freesia'], category: 'freesia' },
-            
-            // Climbing and vine flowers
-            { terms: ['morning glory', 'ipomoea'], category: 'morning-glory' },
-            { terms: ['sweet pea', 'lathyrus'], category: 'sweet-pea' },
-            { terms: ['clematis'], category: 'clematis' },
-            { terms: ['honeysuckle', 'lonicera'], category: 'honeysuckle' },
-            
-            // Herb flowers
-            { terms: ['chamomile', 'matricaria'], category: 'chamomile' },
-            { terms: ['sage', 'salvia'], category: 'sage' },
-            { terms: ['mint flower', 'mentha'], category: 'mint' },
-            { terms: ['thyme flower', 'thymus'], category: 'thyme' },
-            // Generic flower terms (lower priority than specific types)
-            { terms: ['flower', 'bloom', 'petal', 'blossom', 'bouquet', 'floral'], category: 'flower' },
-            { terms: ['ocean', 'sea', 'marine'], category: 'ocean' },
-            { terms: ['water', 'river', 'stream', 'lake', 'pond'], category: 'river' },
-            { terms: ['bird', 'eagle', 'sparrow', 'robin', 'owl', 'hawk'], category: 'bird' },
-            { terms: ['butterfly', 'moth'], category: 'butterfly' },
-            { terms: ['ladybug', 'ladybird'], category: 'ladybug' },
-            { terms: ['bee', 'honeybee', 'bumblebee'], category: 'bee' },
-            { terms: ['rabbit', 'bunny', 'hare'], category: 'rabbit' },
-            { terms: ['mushroom', 'fungus', 'fungi', 'boletus', 'toadstool', 'edible agaric', 'spore', 'mycelium'], category: 'mushroom' },
-            { terms: ['fish', 'salmon', 'trout'], category: 'fish' },
-            
-            // Citrus fruits (most specific first)
-            { terms: ['orange', 'valencia orange', 'navel orange'], category: 'orange' },
-            { terms: ['lemon', 'meyer lemon', 'eureka lemon'], category: 'lemon' },
-            { terms: ['lime', 'key lime', 'persian lime'], category: 'lime' },
-            { terms: ['grapefruit', 'pink grapefruit', 'white grapefruit'], category: 'grapefruit' },
-            { terms: ['tangerine', 'mandarin', 'clementine'], category: 'tangerine' },
-            { terms: ['pomelo', 'shaddock'], category: 'pomelo' },
-            { terms: ['bergamot', 'earl grey citrus'], category: 'bergamot' },
-            { terms: ['yuzu', 'japanese citron'], category: 'yuzu' },
-            
-            // Stone fruits
-            { terms: ['peach', 'nectarine'], category: 'peach' },
-            { terms: ['plum', 'damson plum', 'greengage'], category: 'plum' },
-            { terms: ['apricot', 'armenian plum'], category: 'apricot' },
-            { terms: ['cherry', 'sweet cherry', 'sour cherry', 'bing cherry'], category: 'cherry' },
-            
-            // Pome fruits
-            { terms: ['apple', 'red apple', 'green apple', 'granny smith', 'gala apple'], category: 'apple' },
-            { terms: ['pear', 'bartlett pear', 'anjou pear', 'bosc pear'], category: 'pear' },
-            { terms: ['quince', 'japanese quince'], category: 'quince' },
-            
-            // Berries
+            // Fruits (specific fruits first)
+            { terms: ['apple', 'red apple', 'green apple'], category: 'apple' },
+            { terms: ['orange', 'valencia orange'], category: 'orange' },
+            { terms: ['lemon', 'meyer lemon'], category: 'lemon' },
+            { terms: ['lime', 'key lime'], category: 'lime' },
+            { terms: ['grapefruit', 'pink grapefruit'], category: 'grapefruit' },
+            { terms: ['tangerine', 'mandarin'], category: 'tangerine' },
+            { terms: ['peach', 'georgia peach'], category: 'peach' },
+            { terms: ['plum', 'purple plum'], category: 'plum' },
+            { terms: ['cherry', 'sweet cherry'], category: 'cherry' },
+            { terms: ['banana', 'yellow banana'], category: 'banana' },
             { terms: ['strawberry', 'wild strawberry'], category: 'strawberry' },
+            { terms: ['blueberry', 'wild blueberry'], category: 'blueberry' },
+            { terms: ['raspberry', 'red raspberry'], category: 'raspberry' },
+            { terms: ['blackberry', 'wild blackberry'], category: 'blackberry' },
+            { terms: ['grape', 'wine grape'], category: 'grape' },
+            { terms: ['pear', 'bartlett pear'], category: 'pear' },
+            { terms: ['pineapple', 'fresh pineapple'], category: 'pineapple' },
+            { terms: ['mango', 'tropical mango'], category: 'mango' },
+            { terms: ['avocado', 'hass avocado'], category: 'avocado' },
+            { terms: ['coconut', 'coconut palm'], category: 'coconut' },
+            
+            // Generic fruit terms
+            { terms: ['fruit', 'fruits', 'citrus', 'berry', 'berries'], category: 'fruit' },
+            
+            // Flowers (specific first)
+            { terms: ['sunflower', 'giant sunflower'], category: 'sunflower' },
+            { terms: ['rose', 'red rose', 'white rose'], category: 'rose' },
+            { terms: ['tulip', 'red tulip'], category: 'tulip' },
+            { terms: ['daisy', 'white daisy'], category: 'daisy' },
+            { terms: ['lily', 'white lily'], category: 'lily' },
+            { terms: ['orchid', 'purple orchid'], category: 'orchid' },
+            { terms: ['iris', 'blue iris'], category: 'iris' },
+            { terms: ['carnation', 'pink carnation'], category: 'carnation' },
+            { terms: ['chrysanthemum', 'yellow mum'], category: 'chrysanthemum' },
+            { terms: ['petunia', 'purple petunia'], category: 'petunia' },
+            { terms: ['marigold', 'orange marigold'], category: 'marigold' },
+            { terms: ['zinnia', 'colorful zinnia'], category: 'zinnia' },
+            { terms: ['peony', 'pink peony'], category: 'peony' },
+            { terms: ['daffodil', 'yellow daffodil'], category: 'daffodil' },
+            { terms: ['azalea', 'pink azalea'], category: 'azalea' },
+            { terms: ['camellia', 'white camellia'], category: 'camellia' },
+            { terms: ['begonia', 'red begonia'], category: 'begonia' },
+            { terms: ['impatiens', 'pink impatiens'], category: 'impatiens' },
+            { terms: ['geranium', 'red geranium'], category: 'geranium' },
+            { terms: ['poppy', 'red poppy'], category: 'poppy' },
+            { terms: ['lavender', 'purple lavender'], category: 'lavender' },
+            { terms: ['hibiscus', 'red hibiscus'], category: 'hibiscus' },
+            { terms: ['jasmine', 'white jasmine'], category: 'jasmine' },
+            { terms: ['magnolia', 'white magnolia'], category: 'magnolia' },
+            { terms: ['violet', 'purple violet'], category: 'violet' },
+            { terms: ['gardenia', 'white gardenia'], category: 'gardenia' },
+            
+            // Water plants vs flowers (lotus, water lily are water plants, not typical flowers)
             { terms: ['blueberry', 'wild blueberry', 'huckleberry'], category: 'blueberry' },
             { terms: ['raspberry', 'red raspberry', 'black raspberry'], category: 'raspberry' },
             { terms: ['blackberry', 'dewberry', 'boysenberry'], category: 'blackberry' },
