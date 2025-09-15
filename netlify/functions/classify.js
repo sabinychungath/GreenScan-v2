@@ -56,9 +56,10 @@ async function callClarifaiModel(base64Image, modelKey, modelInfo) {
         const result = await response.json();
         if (result.outputs && result.outputs[0] && result.outputs[0].data && result.outputs[0].data.concepts) {
             const concepts = result.outputs[0].data.concepts.filter(c => {
-                // Lower threshold for flowers to catch specific varieties
+                // Lower threshold for flowers and snakes to catch specific varieties
                 const isFlower = ['lavender', 'orchid', 'sunflower', 'rose', 'tulip', 'daisy', 'lily', 'lotus', 'iris', 'hibiscus', 'jasmine', 'magnolia', 'violet', 'gardenia', 'marigold', 'carnation', 'chrysanthemum', 'petunia', 'flower', 'bloom', 'blossom'].includes(c.name.toLowerCase());
-                return c.value > (isFlower ? 0.2 : 0.3);
+                const isSnake = ['python', 'cobra', 'viper', 'rattlesnake', 'boa', 'anaconda', 'mamba', 'adder', 'copperhead', 'cottonmouth', 'kingsnake', 'garter', 'corn', 'milk', 'hognose', 'rainbow', 'ball', 'reticulated', 'burmese', 'snake', 'serpent', 'reptile'].includes(c.name.toLowerCase());
+                return c.value > ((isFlower || isSnake) ? 0.2 : 0.3);
             });
             console.log(`✅ ${modelKey} found:`, concepts.slice(0, 3).map(c => `${c.name} (${(c.value * 100).toFixed(1)}%)`));
             return { modelKey, concepts, success: true };
@@ -206,6 +207,12 @@ exports.handler = async (event, context) => {
                 'jasmine': 16, 'magnolia': 16, 'violet': 16, 'gardenia': 16,
                 'marigold': 14, 'carnation': 14, 'chrysanthemum': 14, 'petunia': 14,
                 
+                // Specific snakes - high priority
+                'python': 16, 'cobra': 16, 'viper': 16, 'rattlesnake': 16, 'boa': 16,
+                'anaconda': 16, 'mamba': 16, 'adder': 16, 'copperhead': 16, 'cottonmouth': 16,
+                'kingsnake': 14, 'garter': 14, 'corn': 14, 'milk': 14, 'hognose': 14,
+                'rainbow': 14, 'ball': 14, 'reticulated': 14, 'burmese': 14,
+                
                 // Other specific nature objects
                 'bamboo': 10, 'cat': 10, 'oak': 10, 'apple': 10, 'cherry': 10,
                 'rabbit': 10, 'eagle': 10, 'pine': 10,
@@ -223,9 +230,10 @@ exports.handler = async (event, context) => {
             // Find the concept with highest specificity score
             let bestSpecificityScore = 0;
             for (let concept of bestResult.concepts.slice(0, 8)) {
-                // Lower confidence threshold for flowers to catch them
+                // Lower confidence threshold for flowers and snakes to catch them
                 const isFlower = ['lavender', 'orchid', 'sunflower', 'rose', 'tulip', 'daisy', 'lily', 'lotus', 'iris', 'hibiscus', 'jasmine', 'magnolia', 'violet', 'gardenia', 'marigold', 'carnation', 'chrysanthemum', 'petunia', 'flower'].includes(concept.name.toLowerCase());
-                const confidenceThreshold = isFlower ? 0.3 : 0.85;
+                const isSnake = ['python', 'cobra', 'viper', 'rattlesnake', 'boa', 'anaconda', 'mamba', 'adder', 'copperhead', 'cottonmouth', 'kingsnake', 'garter', 'corn', 'milk', 'hognose', 'rainbow', 'ball', 'reticulated', 'burmese', 'snake', 'serpent', 'reptile'].includes(concept.name.toLowerCase());
+                const confidenceThreshold = (isFlower || isSnake) ? 0.3 : 0.85;
                 
                 if (concept.value > confidenceThreshold) {
                     const specificityScore = specificityRanking[concept.name.toLowerCase()] || 6;
