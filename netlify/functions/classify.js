@@ -221,8 +221,8 @@ exports.handler = async (event, context) => {
                 'butterfly': 9, 'bee': 9, 'beetle': 9, 'dragonfly': 9,
                 'mushroom': 9, 'fish': 9, 'coral': 9,
                 
-                // Generic categories
-                'bird': 5, 'animal': 4, 'flower': 6, 'tree': 5, 'wildlife': 5,
+                // Generic categories (but snake gets higher priority than other animals)
+                'snake': 8, 'reptile': 7, 'bird': 5, 'animal': 4, 'flower': 6, 'tree': 5, 'wildlife': 5,
                 'plant': 4, 'flora': 4, 'water': 4,
                 'nature': 1, 'outdoors': 1, 'travel': 1
             };
@@ -244,6 +244,16 @@ exports.handler = async (event, context) => {
                         bestSpecificityScore = specificityScore;
                         console.log(`🎯 Found higher specificity: '${concept.name}' (score: ${specificityScore}, confidence: ${(concept.value * 100).toFixed(1)}%)`);
                     }
+                }
+            }
+            
+            // SNAKE DETECTION OVERRIDE - If "snake" is in concepts but not selected, override
+            const hasSnake = bestResult.concepts.some(c => c.name.toLowerCase().includes('snake') || c.name.toLowerCase().includes('reptile'));
+            if (hasSnake && !selectedConcept.name.toLowerCase().includes('snake') && !selectedConcept.name.toLowerCase().includes('reptile')) {
+                const snakeConcept = bestResult.concepts.find(c => c.name.toLowerCase().includes('snake') || c.name.toLowerCase().includes('reptile'));
+                if (snakeConcept && snakeConcept.value > 0.3) {
+                    console.log(`🐍 SNAKE OVERRIDE: Found ${snakeConcept.name} in concepts, overriding ${selectedConcept.name}`);
+                    selectedConcept = snakeConcept;
                 }
             }
             
