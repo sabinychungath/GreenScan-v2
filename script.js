@@ -6,7 +6,7 @@ class NatureTalks {
         
         // Clarifai API configuration (now handled by serverless functions)
         this.clarifaiConfig = {
-            apiKey: '554a0303...', // Hidden - using serverless functions
+            apiKey: process.env.CLARIFAI_API_KEY || '',
             userId: 'clarifai',
             appId: 'main',
             modelId: 'general-image-recognition',
@@ -772,23 +772,43 @@ class NatureTalks {
         console.log('🧹 Filtered terms:', filteredTerms);
         
         // Step 1: Direct database lookup - check each concept against database categories
+        
+        // First pass: Exact matches only
         for (const term of filteredTerms) {
             // Check if this exact term exists as a category in the database
             if (this.natureDatabase[term]) {
-                console.log('✅ Direct match found:', term);
+                console.log('✅ Direct category match found:', term);
                 return term;
             }
             
-            // Check if this term exists in any category's keywords
+            // Check for exact keyword matches
+            for (const [category, data] of Object.entries(this.natureDatabase)) {
+                if (data.keywords && data.keywords.includes(term)) {
+                    console.log('✅ Exact keyword match found:', term, '→', category);
+                    return category;
+                }
+            }
+        }
+        
+        // Second pass: Prioritized partial matches (animals/snakes first)
+        const animalCategories = ['snake', 'butterfly', 'bee', 'bird', 'fish', 'bear', 'lion', 'tiger', 'elephant', 'kangaroo'];
+        for (const term of filteredTerms) {
+            for (const [category, data] of Object.entries(this.natureDatabase)) {
+                if (data.keywords && animalCategories.includes(category)) {
+                    for (const keyword of data.keywords) {
+                        if (term.includes(keyword) || keyword.includes(term)) {
+                            console.log('✅ Priority animal match found:', term, '→', keyword, '→', category);
+                            return category;
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Third pass: Other partial matches
+        for (const term of filteredTerms) {
             for (const [category, data] of Object.entries(this.natureDatabase)) {
                 if (data.keywords) {
-                    // First try exact match
-                    if (data.keywords.includes(term)) {
-                        console.log('✅ Exact keyword match found:', term, '→', category);
-                        return category;
-                    }
-                    
-                    // Then try partial matches for better MobileNet compatibility
                     for (const keyword of data.keywords) {
                         if (term.includes(keyword) || keyword.includes(term)) {
                             console.log('✅ Partial keyword match found:', term, '→', keyword, '→', category);
