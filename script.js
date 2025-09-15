@@ -6,7 +6,7 @@ class NatureTalks {
         
         // Clarifai API configuration (now handled by serverless functions)
         this.clarifaiConfig = {
-            apiKey: '554a0303...', // Hidden - using serverless functions
+            apiKey: process.env.CLARIFAI_PAT || process.env.CLARIFAI_API_KEY || '',
             userId: 'clarifai',
             appId: 'main',
             modelId: 'general-image-recognition',
