@@ -945,6 +945,53 @@ class NatureTalks {
             { terms: ['oil spill', 'pollution', 'contamination', 'toxic'], category: 'pollution' },
             { terms: ['cigarette', 'cigarette butt', 'smoking'], category: 'cigarette' },
             
+            // Specific tree types (most specific first)
+            // Deciduous trees
+            { terms: ['oak', 'white oak', 'red oak', 'live oak'], category: 'oak' },
+            { terms: ['maple', 'sugar maple', 'red maple', 'silver maple'], category: 'maple' },
+            { terms: ['birch', 'white birch', 'paper birch', 'silver birch'], category: 'birch' },
+            { terms: ['willow', 'weeping willow', 'pussy willow'], category: 'willow' },
+            { terms: ['elm', 'american elm', 'slippery elm'], category: 'elm' },
+            { terms: ['ash', 'white ash', 'green ash'], category: 'ash' },
+            { terms: ['beech', 'american beech', 'european beech'], category: 'beech' },
+            { terms: ['hickory', 'shagbark hickory'], category: 'hickory' },
+            { terms: ['walnut', 'black walnut', 'english walnut'], category: 'walnut' },
+            { terms: ['poplar', 'cottonwood', 'aspen'], category: 'poplar' },
+            { terms: ['sycamore', 'plane tree'], category: 'sycamore' },
+            { terms: ['basswood', 'linden', 'lime tree'], category: 'basswood' },
+            
+            // Coniferous trees  
+            { terms: ['pine', 'white pine', 'red pine', 'scots pine'], category: 'pine' },
+            { terms: ['spruce', 'norway spruce', 'blue spruce'], category: 'spruce' },
+            { terms: ['fir', 'balsam fir', 'fraser fir', 'douglas fir'], category: 'fir' },
+            { terms: ['cedar', 'red cedar', 'white cedar', 'cedar tree'], category: 'cedar' },
+            { terms: ['hemlock', 'eastern hemlock'], category: 'hemlock' },
+            { terms: ['redwood', 'sequoia', 'giant sequoia'], category: 'redwood' },
+            { terms: ['cypress', 'bald cypress'], category: 'cypress' },
+            { terms: ['juniper', 'eastern juniper'], category: 'juniper' },
+            
+            // Tropical and exotic trees
+            { terms: ['eucalyptus', 'gum tree'], category: 'eucalyptus' },
+            { terms: ['acacia', 'wattle'], category: 'acacia' },
+            { terms: ['teak', 'teak tree'], category: 'teak' },
+            { terms: ['mahogany', 'mahogany tree'], category: 'mahogany' },
+            { terms: ['bamboo', 'bamboo grove'], category: 'bamboo' },
+            { terms: ['baobab', 'bottle tree'], category: 'baobab' },
+            
+            // Water bodies and rivers (specific first)
+            { terms: ['amazon river', 'amazon'], category: 'amazon-river' },
+            { terms: ['nile river', 'nile'], category: 'nile-river' },
+            { terms: ['mississippi river', 'mississippi'], category: 'mississippi-river' },
+            { terms: ['colorado river', 'colorado'], category: 'colorado-river' },
+            { terms: ['rapids', 'whitewater', 'river rapids'], category: 'rapids' },
+            { terms: ['waterfall', 'falls', 'cascade'], category: 'waterfall' },
+            { terms: ['stream', 'brook', 'creek'], category: 'stream' },
+            { terms: ['spring', 'natural spring', 'freshwater spring'], category: 'spring' },
+            { terms: ['estuary', 'river mouth', 'delta'], category: 'estuary' },
+            { terms: ['wetland', 'marsh', 'swamp', 'bog'], category: 'wetland' },
+            { terms: ['lake', 'freshwater lake', 'mountain lake'], category: 'lake' },
+            { terms: ['pond', 'small pond', 'farm pond'], category: 'pond' },
+            
             // Specific snakes (most specific first)
             { terms: ['python', 'ball python', 'burmese python', 'reticulated python'], category: 'python' },
             { terms: ['cobra', 'king cobra', 'spitting cobra'], category: 'cobra' },
@@ -1202,6 +1249,17 @@ class NatureTalks {
             tree: '🌳', oak: '🌳', pine: '🌲', apple: '🍎', leaf: '🍃', plant: '🌱',
             bark: '🌳', trunk: '🌳', branch: '🌿',
             
+            // Deciduous trees (non-fruit)
+            maple: '🍁', birch: '🌳', willow: '🌳', elm: '🌳', ash: '🌳',
+            beech: '🌳', hickory: '🌳', walnut: '🌳', poplar: '🌳', sycamore: '🌳', basswood: '🌳',
+            
+            // Coniferous trees
+            spruce: '🌲', fir: '🌲', cedar: '🌲', hemlock: '🌲', redwood: '🌲', 
+            cypress: '🌲', juniper: '🌲',
+            
+            // Tropical and exotic trees  
+            eucalyptus: '🌳', acacia: '🌳', teak: '🌳', mahogany: '🌳', bamboo: '🎋', baobab: '🌳',
+            
             // Forests and landscapes
             forest: '🌲', rainforest: '🌿', mountain: '⛰️',
             
@@ -1272,6 +1330,16 @@ class NatureTalks {
             // Water
             ocean: '🌊', sea: '🌊', water: '💧', river: '🏞️', lake: '🏞️',
             stream: '🏞️', reef: '🪸', coral: '🪸', lotus: '🪷', lily: '🪷',
+            
+            // Famous rivers
+            'amazon-river': '🏞️', 'nile-river': '🏞️', 'mississippi-river': '🏞️', 
+            'colorado-river': '🏞️', 'ganges-river': '🏞️', 'yangtze-river': '🏞️',
+            'danube-river': '🏞️', 'rhine-river': '🏞️',
+            
+            // Water bodies and features
+            rapids: '🌊', waterfall: '💧', brook: '🏞️', creek: '🏞️',
+            spring: '💧', estuary: '🏞️', delta: '🏞️', wetland: '🌾',
+            marsh: '🌾', swamp: '🌾', pond: '🏞️',
             
             // Animals
             rabbit: '🐰', bunny: '🐰', hare: '🐰', bear: '🐻',
@@ -1356,12 +1424,42 @@ class NatureTalks {
         const introductions = {
             // Trees and plants
             tree: 'I am a mighty tree',
-            oak: 'I am a strong oak tree',
+            oak: 'I am a majestic oak tree',
             pine: 'I am an evergreen pine tree',
             apple: 'I am a crisp apple',
             leaf: 'I am a green leaf',
             bark: 'I am protective tree bark',
             plant: 'I am a growing plant',
+            
+            // Deciduous trees (non-fruit)
+            maple: 'I am a magnificent maple tree',
+            birch: 'I am a graceful birch tree',
+            willow: 'I am a weeping willow tree',
+            elm: 'I am a towering elm tree',
+            ash: 'I am a sturdy ash tree',
+            beech: 'I am a smooth-barked beech tree',
+            hickory: 'I am a strong hickory tree',
+            walnut: 'I am a black walnut tree',
+            poplar: 'I am a fast-growing poplar tree',
+            sycamore: 'I am a broad sycamore tree',
+            basswood: 'I am a fragrant basswood tree',
+            
+            // Coniferous trees
+            spruce: 'I am an evergreen spruce tree',
+            fir: 'I am a noble fir tree',
+            cedar: 'I am an aromatic cedar tree',
+            hemlock: 'I am a graceful hemlock tree',
+            redwood: 'I am a giant redwood tree',
+            cypress: 'I am a tall cypress tree',
+            juniper: 'I am a hardy juniper tree',
+            
+            // Tropical and exotic trees
+            eucalyptus: 'I am a fragrant eucalyptus tree',
+            acacia: 'I am a thorny acacia tree',
+            teak: 'I am a valuable teak tree',
+            mahogany: 'I am a precious mahogany tree',
+            bamboo: 'I am fast-growing bamboo',
+            baobab: 'I am an ancient baobab tree',
             
             // Citrus fruits
             fruit: 'I am a delicious fruit',
@@ -1517,6 +1615,30 @@ class NatureTalks {
             coral: 'I am living coral',
             lotus: 'I am a sacred lotus flower',
             lily: 'I am a beautiful water lily',
+            
+            // Famous rivers
+            'amazon-river': 'I am the mighty Amazon River',
+            'nile-river': 'I am the historic Nile River',
+            'mississippi-river': 'I am the great Mississippi River',
+            'colorado-river': 'I am the carving Colorado River',
+            'ganges-river': 'I am the sacred Ganges River',
+            'yangtze-river': 'I am the long Yangtze River',
+            'danube-river': 'I am the flowing Danube River',
+            'rhine-river': 'I am the European Rhine River',
+            
+            // Water bodies and features
+            rapids: 'I am rushing rapids',
+            waterfall: 'I am a cascading waterfall',
+            stream: 'I am a gentle stream',
+            brook: 'I am a babbling brook',
+            creek: 'I am a winding creek',
+            spring: 'I am a natural spring',
+            estuary: 'I am a river estuary',
+            delta: 'I am a river delta',
+            wetland: 'I am a vital wetland',
+            marsh: 'I am a productive marsh',
+            swamp: 'I am a mysterious swamp',
+            pond: 'I am a quiet pond',
             
             // Animals
             rabbit: 'I am a gentle rabbit',
@@ -1809,11 +1931,41 @@ class NatureTalks {
         const messages = {
             // Trees and plants
             tree: 'I produce oxygen, provide shade, and create homes for countless creatures.',
-            oak: 'I grow strong and tall, living for centuries and supporting entire ecosystems.',
-            pine: 'I stay green all year and provide shelter even in winter.',
+            oak: 'I grow strong and tall, living for centuries and supporting entire ecosystems with my acorns.',
+            pine: 'I stay green all year and provide shelter even in winter while producing valuable timber.',
             apple: 'I bloom with beautiful flowers in spring and produce delicious, nutritious fruit for humans and wildlife.',
             leaf: 'I capture sunlight and turn it into food through photosynthesis.',
             bark: 'I protect the tree from insects and weather while storing nutrients.',
+            
+            // Deciduous trees (non-fruit)
+            maple: 'I create spectacular fall colors and produce sweet maple syrup from my sap in spring.',
+            birch: 'My white bark peels like paper and was used by Native Americans for canoes and writing.',
+            willow: 'My flexible branches were used to make baskets and my bark contains natural aspirin.',
+            elm: 'I once lined city streets creating canopies, and I can live over 300 years.',
+            ash: 'My strong wood is prized for tool handles and baseball bats due to its flexibility.',
+            beech: 'My smooth gray bark bears carved initials that remain visible for decades.',
+            hickory: 'I produce nuts loved by wildlife and my wood burns hot, perfect for smoking meats.',
+            walnut: 'My nuts are brain-shaped and rich in omega-3 oils, while my wood is prized for furniture.',
+            poplar: 'I grow fast and tall, and my wood is used for matches, paper, and construction.',
+            sycamore: 'My mottled bark peels to reveal white patches, and I can live over 500 years.',
+            basswood: 'My fragrant flowers attract bees, and my soft wood is perfect for carving.',
+            
+            // Coniferous trees  
+            spruce: 'I provide Christmas trees and my wood resonates beautifully in musical instruments.',
+            fir: 'My needles are flat and friendly to touch, and I\'m often used for lumber and paper.',
+            cedar: 'My aromatic wood resists insects and decay, making me perfect for outdoor construction.',
+            hemlock: 'I create cool, shaded forests and my bark was once essential for tanning leather.',
+            redwood: 'I am among the tallest and oldest living things on Earth, reaching over 300 feet tall.',
+            cypress: 'I thrive in wetlands with my knobby "knees" and can live over 1,000 years.',
+            juniper: 'My berries flavor gin and my wood naturally repels moths and insects.',
+            
+            // Tropical and exotic trees
+            eucalyptus: 'My oils are medicinal and aromatic, and I can grow 6 feet in one year.',
+            acacia: 'I fix nitrogen in soil and produce golden flowers, thriving in harsh, dry conditions.',
+            teak: 'My wood is naturally waterproof and has been used for ship-building for centuries.',
+            mahogany: 'My rich, red wood has been prized for fine furniture and musical instruments.',
+            bamboo: 'I\'m actually a giant grass that can grow 3 feet in one day and is stronger than steel.',
+            baobab: 'I store thousands of gallons of water in my trunk and can live over 2,000 years.',
             
             // Flowers
             flower: 'I attract pollinators and spread beauty throughout the world.',
@@ -1968,6 +2120,30 @@ class NatureTalks {
             river: 'I carry fresh water from mountains to seas, supporting all life along my path.',
             lotus: 'I bloom beautifully on water surfaces and symbolize purity and rebirth in many cultures.',
             lily: 'I float gracefully on ponds and provide landing pads for frogs and shelter for fish.',
+            
+            // Famous rivers
+            'amazon-river': 'I am the world\'s largest river by volume, producing 20% of Earth\'s river water and supporting incredible biodiversity.',
+            'nile-river': 'I am the world\'s longest river, flowing 4,135 miles and supporting civilization for over 5,000 years.',
+            'mississippi-river': 'I drain 31 US states and carry nutrients from America\'s heartland to the Gulf of Mexico.',
+            'colorado-river': 'I carved the Grand Canyon over millions of years and provide water for 40 million people.',
+            'ganges-river': 'I am sacred to over 400 million people and support one of the world\'s most fertile river plains.',
+            'yangtze-river': 'I am Asia\'s longest river and the lifeline for over 400 million Chinese people.',
+            'danube-river': 'I flow through 10 countries, connecting European cultures and ecosystems for centuries.',
+            'rhine-river': 'I connect the Swiss Alps to the North Sea and have been Europe\'s most important trade route.',
+            
+            // Water bodies and features
+            rapids: 'I create thrilling whitewater and oxygenate the water for fish and aquatic life.',
+            waterfall: 'I create negative ions that purify air and provide spectacular natural beauty.',
+            stream: 'I carry mountain snowmelt to larger rivers and create cool microclimates in forests.',
+            brook: 'I provide fresh water to wildlife and create peaceful sounds that reduce human stress.',
+            creek: 'I connect wetlands and provide corridors for fish migration and aquatic insects.',
+            spring: 'I bring fresh groundwater to the surface and maintain constant temperatures year-round.',
+            estuary: 'I mix fresh and salt water, creating nurseries for 75% of commercial fish species.',
+            delta: 'I deposit rich sediments that create some of Earth\'s most fertile farmland.',
+            wetland: 'I filter pollutants, prevent flooding, and support 40% of all species on only 6% of Earth\'s surface.',
+            marsh: 'I purify water naturally and provide critical habitat for migrating birds.',
+            swamp: 'I store carbon, prevent floods, and create unique ecosystems for specialized wildlife.',
+            pond: 'I provide water for wildlife, support aquatic plants, and create peaceful natural spaces.',
             
             // Animals
             rabbit: 'I help spread seeds and serve as food for many predators in the ecosystem.',
@@ -3726,6 +3902,73 @@ class NatureTalks {
                 message: 'I provide fresh water for life, transport nutrients through ecosystems, and carve beautiful landscapes.',
                 plea: 'Please keep me clean and protect my watersheds from pollution!'
             },
+            
+            // Famous rivers
+            'amazon-river': {
+                emoji: '🏞️',
+                keywords: ['amazon river', 'amazon', 'rio amazonas'],
+                introduction: 'I am the mighty Amazon River',
+                message: 'I am the world\'s largest river by volume, producing 20% of Earth\'s river water and supporting incredible biodiversity.',
+                plea: 'Please save me from deforestation that disrupts my water cycle and destroys my rainforest!'
+            },
+            'nile-river': {
+                emoji: '🏞️',
+                keywords: ['nile river', 'nile', 'river nile'],
+                introduction: 'I am the historic Nile River',
+                message: 'I am the world\'s longest river, flowing 4,135 miles and supporting civilization for over 5,000 years.',
+                plea: 'Please save me from dams and water diversions that disrupt my ancient flow!'
+            },
+            'mississippi-river': {
+                emoji: '🏞️',
+                keywords: ['mississippi river', 'mississippi', 'mighty mississippi'],
+                introduction: 'I am the great Mississippi River',
+                message: 'I drain 31 US states and carry nutrients from America\'s heartland to the Gulf of Mexico.',
+                plea: 'Please save me from agricultural runoff that creates massive dead zones in my delta!'
+            },
+            'colorado-river': {
+                emoji: '🏞️',
+                keywords: ['colorado river', 'colorado', 'grand canyon river'],
+                introduction: 'I am the carving Colorado River',
+                message: 'I carved the Grand Canyon over millions of years and provide water for 40 million people.',
+                plea: 'Please save me from over-allocation - I no longer reach the ocean!'
+            },
+            
+            // Water bodies and features
+            rapids: {
+                emoji: '🌊',
+                keywords: ['rapids', 'whitewater', 'river rapids', 'rushing water'],
+                introduction: 'I am rushing rapids',
+                message: 'I create thrilling whitewater and oxygenate the water for fish and aquatic life.',
+                plea: 'Please save me from dams that block my natural flow patterns!'
+            },
+            waterfall: {
+                emoji: '💧',
+                keywords: ['waterfall', 'falls', 'cascade', 'plunge pool'],
+                introduction: 'I am a cascading waterfall',
+                message: 'I create negative ions that purify air and provide spectacular natural beauty.',
+                plea: 'Please save me from water diversions that reduce my flow to a trickle!'
+            },
+            stream: {
+                emoji: '🏞️',
+                keywords: ['stream', 'small river', 'flowing water', 'mountain stream'],
+                introduction: 'I am a gentle stream',
+                message: 'I carry mountain snowmelt to larger rivers and create cool microclimates in forests.',
+                plea: 'Please save me from erosion and siltation caused by development!'
+            },
+            pond: {
+                emoji: '🏞️',
+                keywords: ['pond', 'small lake', 'water hole', 'duck pond'],
+                introduction: 'I am a quiet pond',
+                message: 'I provide water for wildlife, support aquatic plants, and create peaceful natural spaces.',
+                plea: 'Please save me from being filled in for development!'
+            },
+            wetland: {
+                emoji: '🌾',
+                keywords: ['wetland', 'marsh', 'swamp', 'bog', 'fen'],
+                introduction: 'I am a vital wetland',
+                message: 'I filter pollutants, prevent flooding, and support 40% of all species on only 6% of Earth\'s surface.',
+                plea: 'Please save me from being drained for agriculture - half of all wetlands are already gone!'
+            },
             mountain: {
                 emoji: '⛰️',
                 keywords: ['mountain', 'mountains', 'peak', 'summit', 'hill', 'valley', 'canyon', 'cliff', 'ridge', 'panoramic', 'landscape', 'scenic', 'vista'],
@@ -3760,6 +4003,89 @@ class NatureTalks {
                 introduction: 'I am a mighty tree',
                 message: 'I give you oxygen to breathe, shade to rest under, and homes for countless creatures.',
                 plea: 'Please save me by not cutting down forests and planting more trees!'
+            },
+            
+            // Deciduous trees (non-fruit)
+            maple: {
+                emoji: '🍁',
+                keywords: ['maple', 'sugar maple', 'red maple', 'silver maple'],
+                introduction: 'I am a magnificent maple tree',
+                message: 'I create spectacular fall colors and produce sweet maple syrup from my sap in spring.',
+                plea: 'Please save me from acid rain and climate change that threatens my syrup production!'
+            },
+            birch: {
+                emoji: '🌳',
+                keywords: ['birch', 'white birch', 'paper birch', 'silver birch'],
+                introduction: 'I am a graceful birch tree',
+                message: 'My white bark peels like paper and was used by Native Americans for canoes and writing.',
+                plea: 'Please save me from deforestation and protect my shallow root systems!'
+            },
+            willow: {
+                emoji: '🌳',
+                keywords: ['willow', 'weeping willow', 'pussy willow', 'willow tree'],
+                introduction: 'I am a weeping willow tree',
+                message: 'My flexible branches were used to make baskets and my bark contains natural aspirin.',
+                plea: 'Please save me from water pollution that affects my streamside habitat!'
+            },
+            oak: {
+                emoji: '🌳',
+                keywords: ['oak', 'white oak', 'red oak', 'live oak', 'acorn'],
+                introduction: 'I am a majestic oak tree',
+                message: 'I grow strong and tall, living for centuries and supporting entire ecosystems with my acorns.',
+                plea: 'Please save me from development that destroys my centuries-old growth!'
+            },
+            
+            // Coniferous trees  
+            pine: {
+                emoji: '🌲',
+                keywords: ['pine', 'pine tree', 'pine cone', 'evergreen'],
+                introduction: 'I am an evergreen pine tree',
+                message: 'I stay green all year and provide shelter even in winter while producing valuable timber.',
+                plea: 'Please save me from pine beetles and forest fires caused by climate change!'
+            },
+            spruce: {
+                emoji: '🌲',
+                keywords: ['spruce', 'spruce tree', 'norway spruce', 'christmas tree'],
+                introduction: 'I am an evergreen spruce tree',
+                message: 'I provide Christmas trees and my wood resonates beautifully in musical instruments.',
+                plea: 'Please save me from air pollution that damages my needles!'
+            },
+            fir: {
+                emoji: '🌲',
+                keywords: ['fir', 'fir tree', 'douglas fir', 'balsam fir'],
+                introduction: 'I am a noble fir tree',
+                message: 'My needles are flat and friendly to touch, and I\'m often used for lumber and paper.',
+                plea: 'Please save me from logging that doesn\'t replant and forest diseases!'
+            },
+            cedar: {
+                emoji: '🌲',
+                keywords: ['cedar', 'cedar tree', 'red cedar', 'white cedar'],
+                introduction: 'I am an aromatic cedar tree',
+                message: 'My aromatic wood resists insects and decay, making me perfect for outdoor construction.',
+                plea: 'Please save me from habitat loss and unsustainable harvesting!'
+            },
+            redwood: {
+                emoji: '🌲',
+                keywords: ['redwood', 'giant redwood', 'sequoia', 'coast redwood'],
+                introduction: 'I am a giant redwood tree',
+                message: 'I am among the tallest and oldest living things on Earth, reaching over 300 feet tall.',
+                plea: 'Please save me - only 5% of my original forests remain!'
+            },
+            
+            // Tropical and exotic trees
+            bamboo: {
+                emoji: '🎋',
+                keywords: ['bamboo', 'bamboo grove', 'giant bamboo'],
+                introduction: 'I am fast-growing bamboo',
+                message: 'I\'m actually a giant grass that can grow 3 feet in one day and is stronger than steel.',
+                plea: 'Please use me sustainably as an eco-friendly alternative to wood!'
+            },
+            eucalyptus: {
+                emoji: '🌳',
+                keywords: ['eucalyptus', 'gum tree', 'koala tree'],
+                introduction: 'I am a fragrant eucalyptus tree',
+                message: 'My oils are medicinal and aromatic, and I can grow 6 feet in one year.',
+                plea: 'Please plant me responsibly - I can be invasive outside my native Australia!'
             },
             flower: {
                 emoji: '🌸',
