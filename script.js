@@ -887,12 +887,31 @@ class NatureTalks {
             }
         }
         
-        // SNAKE PRIORITY OVERRIDES - Specific snakes beat generic "snake"
+        // SNAKE PRIORITY OVERRIDES - Any snake detection beats other categories
+        const hasSnakeInConcepts = allTerms.some(term => term.includes('snake') || term.includes('reptile'));
+        if (hasSnakeInConcepts && (bestMatch === 'bear' || bestMatch === 'earth' || bestMatch === 'tree')) {
+            console.log('🐍 SNAKE OVERRIDE: Snake detected in concepts, overriding', bestMatch);
+            
+            // Check for specific snake types first
+            const specificSnakes = ['python', 'cobra', 'viper', 'rattlesnake', 'boa', 'anaconda', 'mamba', 'adder', 'copperhead', 'cottonmouth', 'kingsnake', 'garter', 'corn', 'milk', 'hognose'];
+            for (const specificSnake of specificSnakes) {
+                const hasSpecificSnake = allTerms.some(term => term.includes(specificSnake));
+                if (hasSpecificSnake) {
+                    console.log('🐍 SPECIFIC SNAKE OVERRIDE:', specificSnake);
+                    return specificSnake;
+                }
+            }
+            
+            // Default to generic snake if no specific type found
+            return 'snake';
+        }
+        
+        // SPECIFIC SNAKE PRIORITY OVERRIDES - Specific snakes beat generic "snake"
         const specificSnakes = ['python', 'cobra', 'viper', 'rattlesnake', 'boa', 'anaconda', 'mamba', 'adder', 'copperhead', 'cottonmouth', 'kingsnake', 'garter', 'corn', 'milk', 'hognose'];
         for (const specificSnake of specificSnakes) {
             const hasSpecificSnake = allTerms.some(term => term.includes(specificSnake));
-            if (hasSpecificSnake && (bestMatch === 'snake' || bestMatch === 'bear')) {
-                console.log('🐍 SNAKE PRIORITY OVERRIDE:', specificSnake, 'beats generic snake/animal');
+            if (hasSpecificSnake && bestMatch === 'snake') {
+                console.log('🐍 SPECIFIC SNAKE PRIORITY OVERRIDE:', specificSnake, 'beats generic snake');
                 return specificSnake;
             }
         }
