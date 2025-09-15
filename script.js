@@ -781,15 +781,67 @@ class NatureTalks {
             { terms: ['rose', 'rosa'], category: 'rose' },
             { terms: ['tulip', 'tulipa'], category: 'tulip' },
             { terms: ['lotus', 'nelumbo'], category: 'lotus' },
-            { terms: ['lily', 'lilium'], category: 'lily' },
-            { terms: ['daisy', 'bellis'], category: 'daisy' },
-            { terms: ['iris', 'bearded iris'], category: 'iris' },
-            { terms: ['hibiscus'], category: 'hibiscus' },
-            { terms: ['jasmine', 'jasminum'], category: 'jasmine' },
-            { terms: ['magnolia'], category: 'magnolia' },
-            { terms: ['violet', 'viola'], category: 'violet' },
-            { terms: ['gardenia'], category: 'gardenia' },
-            { terms: ['carnation', 'chrysanthemum', 'petunia', 'marigold'], category: 'flower' },
+            { terms: ['lily', 'lilium', 'tiger lily', 'easter lily'], category: 'lily' },
+            { terms: ['daisy', 'bellis', 'gerbera daisy', 'shasta daisy'], category: 'daisy' },
+            { terms: ['iris', 'bearded iris', 'flag iris'], category: 'iris' },
+            { terms: ['hibiscus', 'china rose'], category: 'hibiscus' },
+            { terms: ['jasmine', 'jasminum', 'star jasmine'], category: 'jasmine' },
+            { terms: ['magnolia', 'southern magnolia'], category: 'magnolia' },
+            { terms: ['violet', 'viola', 'pansy'], category: 'violet' },
+            { terms: ['gardenia', 'cape jasmine'], category: 'gardenia' },
+            
+            // Popular garden flowers
+            { terms: ['carnation', 'dianthus'], category: 'carnation' },
+            { terms: ['chrysanthemum', 'mum', 'chrysanth'], category: 'chrysanthemum' },
+            { terms: ['petunia'], category: 'petunia' },
+            { terms: ['marigold', 'tagetes', 'calendula'], category: 'marigold' },
+            { terms: ['zinnia'], category: 'zinnia' },
+            { terms: ['peony', 'paeonia'], category: 'peony' },
+            { terms: ['daffodil', 'narcissus'], category: 'daffodil' },
+            { terms: ['azalea', 'rhododendron'], category: 'azalea' },
+            { terms: ['camellia'], category: 'camellia' },
+            { terms: ['begonia'], category: 'begonia' },
+            { terms: ['impatiens'], category: 'impatiens' },
+            { terms: ['geranium', 'pelargonium'], category: 'geranium' },
+            
+            // Wildflowers and native flowers
+            { terms: ['poppy', 'papaver'], category: 'poppy' },
+            { terms: ['forget-me-not', 'myosotis'], category: 'forget-me-not' },
+            { terms: ['bluebell', 'bluebonnet'], category: 'bluebell' },
+            { terms: ['buttercup', 'ranunculus'], category: 'buttercup' },
+            { terms: ['clover', 'shamrock'], category: 'clover' },
+            { terms: ['dandelion', 'taraxacum'], category: 'dandelion' },
+            { terms: ['wild rose', 'dog rose'], category: 'wild-rose' },
+            { terms: ['primrose', 'primula'], category: 'primrose' },
+            { terms: ['foxglove', 'digitalis'], category: 'foxglove' },
+            { terms: ['snapdragon', 'antirrhinum'], category: 'snapdragon' },
+            
+            // Exotic and tropical flowers
+            { terms: ['bird of paradise', 'strelitzia'], category: 'bird-of-paradise' },
+            { terms: ['anthurium', 'flamingo flower'], category: 'anthurium' },
+            { terms: ['frangipani', 'plumeria'], category: 'frangipani' },
+            { terms: ['bougainvillea'], category: 'bougainvillea' },
+            { terms: ['protea', 'king protea'], category: 'protea' },
+            { terms: ['passion flower', 'passiflora'], category: 'passion-flower' },
+            
+            // Bulb flowers
+            { terms: ['crocus'], category: 'crocus' },
+            { terms: ['hyacinth', 'hyacinthus'], category: 'hyacinth' },
+            { terms: ['amaryllis', 'hippeastrum'], category: 'amaryllis' },
+            { terms: ['gladiolus', 'sword lily'], category: 'gladiolus' },
+            { terms: ['freesia'], category: 'freesia' },
+            
+            // Climbing and vine flowers
+            { terms: ['morning glory', 'ipomoea'], category: 'morning-glory' },
+            { terms: ['sweet pea', 'lathyrus'], category: 'sweet-pea' },
+            { terms: ['clematis'], category: 'clematis' },
+            { terms: ['honeysuckle', 'lonicera'], category: 'honeysuckle' },
+            
+            // Herb flowers
+            { terms: ['chamomile', 'matricaria'], category: 'chamomile' },
+            { terms: ['sage', 'salvia'], category: 'sage' },
+            { terms: ['mint flower', 'mentha'], category: 'mint' },
+            { terms: ['thyme flower', 'thymus'], category: 'thyme' },
             // Generic flower terms (lower priority than specific types)
             { terms: ['flower', 'bloom', 'petal', 'blossom', 'bouquet', 'floral'], category: 'flower' },
             { terms: ['ocean', 'sea', 'reef', 'coral', 'marine'], category: 'ocean' },
@@ -882,7 +934,15 @@ class NatureTalks {
         }
         
         // FLOWER PRIORITY OVERRIDES - Specific flowers beat generic "flower"
-        const specificFlowers = ['sunflower', 'lavender', 'orchid', 'rose', 'tulip', 'daisy', 'lily', 'lotus', 'iris'];
+        const specificFlowers = [
+            'sunflower', 'lavender', 'orchid', 'rose', 'tulip', 'daisy', 'lily', 'lotus', 'iris',
+            'carnation', 'chrysanthemum', 'petunia', 'marigold', 'zinnia', 'peony', 'daffodil',
+            'azalea', 'camellia', 'begonia', 'impatiens', 'geranium', 'poppy', 'forget-me-not',
+            'bluebell', 'buttercup', 'clover', 'dandelion', 'wild-rose', 'primrose', 'foxglove',
+            'snapdragon', 'bird-of-paradise', 'anthurium', 'frangipani', 'bougainvillea', 'protea',
+            'passion-flower', 'crocus', 'hyacinth', 'amaryllis', 'gladiolus', 'freesia',
+            'morning-glory', 'sweet-pea', 'clematis', 'honeysuckle', 'chamomile', 'sage', 'mint', 'thyme'
+        ];
         for (const specificFlower of specificFlowers) {
             const hasSpecificFlower = allTerms.some(term => term.includes(specificFlower));
             if (hasSpecificFlower && bestMatch === 'flower') {
@@ -977,6 +1037,31 @@ class NatureTalks {
             // Flowers
             flower: '🌸', rose: '🌹', tulip: '🌷', sunflower: '🌻', lavender: '💜',
             orchid: '🌺', daisy: '🌼', lily: '🌸', lotus: '🪷', iris: '🌺',
+            
+            // Garden flowers
+            carnation: '🌸', chrysanthemum: '🌼', petunia: '🌺', marigold: '🌼',
+            zinnia: '🌻', peony: '🌸', daffodil: '🌼', azalea: '🌺',
+            camellia: '🌸', begonia: '🌺', impatiens: '🌸', geranium: '🌺',
+            
+            // Wildflowers
+            poppy: '🌺', 'forget-me-not': '💙', bluebell: '💙', buttercup: '💛',
+            clover: '🍀', dandelion: '🌼', 'wild-rose': '🌹', primrose: '🌼',
+            foxglove: '💜', snapdragon: '🌸',
+            
+            // Exotic flowers
+            'bird-of-paradise': '🧡', anthurium: '❤️', frangipani: '🌸',
+            bougainvillea: '💜', protea: '🌸', 'passion-flower': '💜',
+            
+            // Bulb flowers
+            crocus: '💜', hyacinth: '💜', amaryllis: '🌺', gladiolus: '🌸', freesia: '💛',
+            
+            // Climbing flowers
+            'morning-glory': '💜', 'sweet-pea': '🌸', clematis: '💜', honeysuckle: '🌼',
+            
+            // Herb flowers
+            chamomile: '🌼', sage: '💜', mint: '🌿', thyme: '💜',
+            
+            // Other flower terms
             bloom: '🌺', blossom: '🌸', petal: '🌸',
             
             // Water
@@ -1085,6 +1170,59 @@ class NatureTalks {
             lotus: 'I am a sacred lotus',
             iris: 'I am a stately iris',
             
+            // Garden flowers
+            carnation: 'I am a ruffled carnation',
+            chrysanthemum: 'I am a colorful chrysanthemum',
+            petunia: 'I am a trumpet-shaped petunia',
+            marigold: 'I am a golden marigold',
+            zinnia: 'I am a bold zinnia',
+            peony: 'I am a luxurious peony',
+            daffodil: 'I am a cheerful daffodil',
+            azalea: 'I am a stunning azalea',
+            camellia: 'I am an elegant camellia',
+            begonia: 'I am a colorful begonia',
+            impatiens: 'I am a delicate impatiens',
+            geranium: 'I am a hardy geranium',
+            
+            // Wildflowers
+            poppy: 'I am a delicate poppy',
+            'forget-me-not': 'I am a tiny forget-me-not',
+            bluebell: 'I am a woodland bluebell',
+            buttercup: 'I am a golden buttercup',
+            clover: 'I am a lucky clover',
+            dandelion: 'I am a resilient dandelion',
+            'wild-rose': 'I am a wild rose',
+            primrose: 'I am an early primrose',
+            foxglove: 'I am a tall foxglove',
+            snapdragon: 'I am a playful snapdragon',
+            
+            // Exotic flowers
+            'bird-of-paradise': 'I am an exotic bird of paradise',
+            anthurium: 'I am a tropical anthurium',
+            frangipani: 'I am a fragrant frangipani',
+            bougainvillea: 'I am a vibrant bougainvillea',
+            protea: 'I am a unique protea',
+            'passion-flower': 'I am an intricate passion flower',
+            
+            // Bulb flowers
+            crocus: 'I am an early spring crocus',
+            hyacinth: 'I am a fragrant hyacinth',
+            amaryllis: 'I am a dramatic amaryllis',
+            gladiolus: 'I am a tall gladiolus',
+            freesia: 'I am a delicate freesia',
+            
+            // Climbing flowers
+            'morning-glory': 'I am a climbing morning glory',
+            'sweet-pea': 'I am a fragrant sweet pea',
+            clematis: 'I am a climbing clematis',
+            honeysuckle: 'I am sweet honeysuckle',
+            
+            // Herb flowers
+            chamomile: 'I am soothing chamomile',
+            sage: 'I am aromatic sage',
+            mint: 'I am refreshing mint',
+            thyme: 'I am fragrant thyme',
+            
             // Water
             ocean: 'I am the vast ocean',
             sea: 'I am the endless sea',
@@ -1163,7 +1301,15 @@ class NatureTalks {
         }
         
         // Then try specific flower matches (to avoid sunflower->flower issue)
-        const specificFlowers = ['sunflower', 'lavender', 'orchid', 'rose', 'tulip', 'daisy', 'lily', 'lotus', 'iris'];
+        const specificFlowers = [
+            'sunflower', 'lavender', 'orchid', 'rose', 'tulip', 'daisy', 'lily', 'lotus', 'iris',
+            'carnation', 'chrysanthemum', 'petunia', 'marigold', 'zinnia', 'peony', 'daffodil',
+            'azalea', 'camellia', 'begonia', 'impatiens', 'geranium', 'poppy', 'forget-me-not',
+            'bluebell', 'buttercup', 'clover', 'dandelion', 'wild-rose', 'primrose', 'foxglove',
+            'snapdragon', 'bird-of-paradise', 'anthurium', 'frangipani', 'bougainvillea', 'protea',
+            'passion-flower', 'crocus', 'hyacinth', 'amaryllis', 'gladiolus', 'freesia',
+            'morning-glory', 'sweet-pea', 'clematis', 'honeysuckle', 'chamomile', 'sage', 'mint', 'thyme'
+        ];
         for (const specificFlower of specificFlowers) {
             if (lowerObjectName.includes(specificFlower) && introductions[specificFlower]) {
                 console.log(`🎯 Found specific flower intro match: ${objectName} -> ${specificFlower} -> ${introductions[specificFlower]}`);
@@ -1338,9 +1484,68 @@ class NatureTalks {
             
             // Flowers
             flower: 'I attract pollinators and spread beauty throughout the world.',
-            rose: 'I represent love and beauty while providing nectar for bees.',
-            tulip: 'I herald the arrival of spring with my vibrant colors.',
-            sunflower: 'I turn my face to follow the sun and provide nutritious seeds.',
+            rose: 'I represent love and beauty while providing nectar for bees and essential oils for humans.',
+            tulip: 'I herald the arrival of spring with my vibrant colors and grow from bulbs that store energy.',
+            sunflower: 'I turn my face to follow the sun and provide nutritious seeds for birds and humans.',
+            lavender: 'I calm minds with my scent, repel harmful insects, and attract beneficial pollinators.',
+            orchid: 'I am one of the largest flower families with over 25,000 species, each perfectly adapted to its environment.',
+            daisy: 'I brighten meadows year-round and my simple beauty hides complex flower structures.',
+            lily: 'I produce large, trumpet-shaped blooms and have been cultivated for over 3,000 years.',
+            lotus: 'I rise pure from muddy waters and symbolize rebirth while supporting aquatic ecosystems.',
+            iris: 'My sword-like leaves and rainbow colors have inspired artists and flag designs for centuries.',
+            
+            // Garden flowers
+            carnation: 'I have ruffled petals and can bloom for weeks, making me perfect for gardens and bouquets.',
+            chrysanthemum: 'I bloom in autumn when other flowers fade, and I come in hundreds of varieties.',
+            petunia: 'I have trumpet-shaped flowers that bloom continuously and attract hummingbirds.',
+            marigold: 'I repel harmful insects while attracting beneficial ones, protecting garden plants naturally.',
+            zinnia: 'I produce bold, long-lasting blooms that butterflies love and I thrive in hot weather.',
+            peony: 'I produce large, luxurious blooms and can live for over 100 years in the same spot.',
+            daffodil: 'I emerge early in spring and am one of the first flowers to herald the end of winter.',
+            azalea: 'I create spectacular spring displays and thrive in acidic soil under tall trees.',
+            camellia: 'I bloom in winter when few other flowers do, providing color in the coldest months.',
+            begonia: 'I bloom continuously in shade and my leaves are often as colorful as my flowers.',
+            impatiens: 'I thrive in shade and produce constant blooms that brighten dark corners of gardens.',
+            geranium: 'I bloom all season long and my aromatic leaves naturally repel mosquitoes.',
+            
+            // Wildflowers
+            poppy: 'I have papery petals and produce thousands of seeds, symbolizing remembrance and peace.',
+            'forget-me-not': 'I am tiny but unforgettable, and I spread naturally to create carpets of blue.',
+            bluebell: 'I carpet woodland floors in spring and indicate ancient, undisturbed forests.',
+            buttercup: 'My shiny petals reflect sunlight to attract pollinators and I thrive in meadows.',
+            clover: 'I fix nitrogen in soil, improving it for other plants while feeding bees and livestock.',
+            dandelion: 'Every part of me is edible and medicinal, and I can grow anywhere life is possible.',
+            'wild-rose': 'I am the ancestor of garden roses and my hips provide vitamin C for wildlife and humans.',
+            primrose: 'I bloom early in spring and my name means "first rose" though I\'m not related to roses.',
+            foxglove: 'I tower above other flowers and provide medicine for heart conditions, though I can be toxic.',
+            snapdragon: 'My flowers snap open like dragon mouths when squeezed, delighting children for generations.',
+            
+            // Exotic flowers
+            'bird-of-paradise': 'I look like an exotic bird in flight and represent freedom and paradise.',
+            anthurium: 'I have waxy, heart-shaped flowers that can last for months, bringing tropical beauty indoors.',
+            frangipani: 'I produce intensely fragrant flowers and am sacred in many tropical cultures.',
+            bougainvillea: 'My colorful bracts protect tiny flowers and I can climb walls and cover buildings.',
+            protea: 'I am South Africa\'s national flower and represent diversity and transformation.',
+            'passion-flower': 'My intricate structure represents the passion of Christ and I produce edible fruits.',
+            
+            // Bulb flowers
+            crocus: 'I push through snow to bloom, bringing the first color after winter\'s end.',
+            hyacinth: 'I fill spring air with intense fragrance and grow from bulbs that multiply each year.',
+            amaryllis: 'I produce dramatic, large blooms indoors during winter when gardens are dormant.',
+            gladiolus: 'I grow tall spikes of flowers and my name means "little sword" in Latin.',
+            freesia: 'I produce intensely fragrant flowers and am native to South African grasslands.',
+            
+            // Climbing flowers
+            'morning-glory': 'I open my trumpet flowers with the sunrise and climb toward the light.',
+            'sweet-pea': 'I climb upward while producing incredibly fragrant flowers in soft colors.',
+            clematis: 'I can cover entire walls with flowers and some varieties bloom for months.',
+            honeysuckle: 'I produce nectar so sweet that children have sipped it for generations.',
+            
+            // Herb flowers
+            chamomile: 'My flowers make soothing tea and I release apple-like fragrance when stepped on.',
+            sage: 'My purple flower spikes attract bees and butterflies while my leaves flavor food.',
+            mint: 'I produce small flowers while spreading aggressively and refreshing everything around me.',
+            thyme: 'I produce tiny flowers beloved by bees and my leaves have been used medicinally for millennia.',
             
             // Water
             ocean: 'I produce most of Earth\'s oxygen and regulate the global climate.',
@@ -1417,7 +1622,15 @@ class NatureTalks {
         }
         
         // Then try specific flower matches
-        const specificFlowers = ['sunflower', 'lavender', 'orchid', 'rose', 'tulip', 'daisy', 'lily', 'lotus', 'iris'];
+        const specificFlowers = [
+            'sunflower', 'lavender', 'orchid', 'rose', 'tulip', 'daisy', 'lily', 'lotus', 'iris',
+            'carnation', 'chrysanthemum', 'petunia', 'marigold', 'zinnia', 'peony', 'daffodil',
+            'azalea', 'camellia', 'begonia', 'impatiens', 'geranium', 'poppy', 'forget-me-not',
+            'bluebell', 'buttercup', 'clover', 'dandelion', 'wild-rose', 'primrose', 'foxglove',
+            'snapdragon', 'bird-of-paradise', 'anthurium', 'frangipani', 'bougainvillea', 'protea',
+            'passion-flower', 'crocus', 'hyacinth', 'amaryllis', 'gladiolus', 'freesia',
+            'morning-glory', 'sweet-pea', 'clematis', 'honeysuckle', 'chamomile', 'sage', 'mint', 'thyme'
+        ];
         for (const specificFlower of specificFlowers) {
             if (lowerObjectName.includes(specificFlower) && messages[specificFlower]) {
                 console.log(`🎯 Found specific flower message match: ${objectName} -> ${specificFlower}`);
@@ -1721,7 +1934,15 @@ class NatureTalks {
         }
         
         // Then try specific flower matches
-        const specificFlowers = ['sunflower', 'lavender', 'orchid', 'rose', 'tulip', 'daisy', 'lily', 'lotus', 'iris'];
+        const specificFlowers = [
+            'sunflower', 'lavender', 'orchid', 'rose', 'tulip', 'daisy', 'lily', 'lotus', 'iris',
+            'carnation', 'chrysanthemum', 'petunia', 'marigold', 'zinnia', 'peony', 'daffodil',
+            'azalea', 'camellia', 'begonia', 'impatiens', 'geranium', 'poppy', 'forget-me-not',
+            'bluebell', 'buttercup', 'clover', 'dandelion', 'wild-rose', 'primrose', 'foxglove',
+            'snapdragon', 'bird-of-paradise', 'anthurium', 'frangipani', 'bougainvillea', 'protea',
+            'passion-flower', 'crocus', 'hyacinth', 'amaryllis', 'gladiolus', 'freesia',
+            'morning-glory', 'sweet-pea', 'clematis', 'honeysuckle', 'chamomile', 'sage', 'mint', 'thyme'
+        ];
         for (const specificFlower of specificFlowers) {
             if (lowerObjectName.includes(specificFlower) && pleas[specificFlower]) {
                 console.log(`🎯 Found specific flower plea match: ${objectName} -> ${specificFlower}`);
@@ -3180,6 +3401,299 @@ class NatureTalks {
                 introduction: 'I am a stately iris',
                 message: 'My sword-like leaves and colorful blooms have inspired flags and coat of arms throughout history.',
                 plea: 'Please save me by preserving natural meadows and avoiding habitat destruction!'
+            },
+            // Garden flowers
+            carnation: {
+                emoji: '🌸',
+                keywords: ['carnation', 'dianthus', 'pink'],
+                introduction: 'I am a ruffled carnation',
+                message: 'I have ruffled petals and can bloom for weeks, making me perfect for gardens and bouquets.',
+                plea: 'Please save me by supporting sustainable flower farming!'
+            },
+            chrysanthemum: {
+                emoji: '🌼',
+                keywords: ['chrysanthemum', 'mum', 'autumn flower'],
+                introduction: 'I am a colorful chrysanthemum',
+                message: 'I bloom in autumn when other flowers fade, bringing color to the season.',
+                plea: 'Please save me by choosing sustainable cut flowers and supporting organic gardens!'
+            },
+            petunia: {
+                emoji: '🌺',
+                keywords: ['petunia', 'trumpet flower'],
+                introduction: 'I am a vibrant petunia',
+                message: 'I bloom continuously all summer long and attract hummingbirds with my trumpet shape.',
+                plea: 'Please save me by avoiding harmful pesticides and planting pollinator gardens!'
+            },
+            marigold: {
+                emoji: '🌼',
+                keywords: ['marigold', 'tagetes', 'mary gold'],
+                introduction: 'I am a bright marigold',
+                message: 'I naturally repel garden pests while attracting beneficial insects with my vibrant colors.',
+                plea: 'Please save me by choosing companion planting over chemical pesticides!'
+            },
+            zinnia: {
+                emoji: '🌻',
+                keywords: ['zinnia', 'youth flower'],
+                introduction: 'I am a cheerful zinnia',
+                message: 'I attract butterflies and last long as cut flowers, bringing joy to gardens and homes.',
+                plea: 'Please save me by supporting organic gardening and butterfly conservation!'
+            },
+            peony: {
+                emoji: '🌸',
+                keywords: ['peony', 'paeonia'],
+                introduction: 'I am a lush peony',
+                message: 'I can live for 100 years and my huge, fragrant blooms herald late spring.',
+                plea: 'Please save me by protecting established gardens and avoiding soil disturbance!'
+            },
+            daffodil: {
+                emoji: '🌼',
+                keywords: ['daffodil', 'narcissus', 'jonquil'],
+                introduction: 'I am a cheerful daffodil',
+                message: 'I am one of the first flowers of spring, pushing through snow to announce winter\'s end.',
+                plea: 'Please save me by protecting natural meadows and avoiding early mowing!'
+            },
+            azalea: {
+                emoji: '🌺',
+                keywords: ['azalea', 'rhododendron'],
+                introduction: 'I am a stunning azalea',
+                message: 'I create spectacular spring displays and my nectar feeds early pollinators.',
+                plea: 'Please save me by maintaining acidic soil and protecting woodland habitats!'
+            },
+            camellia: {
+                emoji: '🌸',
+                keywords: ['camellia', 'tea flower'],
+                introduction: 'I am an elegant camellia',
+                message: 'I bloom in winter when few other flowers do, and my cousin provides tea leaves.',
+                plea: 'Please save me by protecting ancient garden varieties and supporting sustainable cultivation!'
+            },
+            begonia: {
+                emoji: '🌺',
+                keywords: ['begonia', 'wax begonia'],
+                introduction: 'I am a colorful begonia',
+                message: 'I thrive in shade where other flowers cannot, bringing color to dark corners.',
+                plea: 'Please save me by preserving forest understory habitats and shade gardens!'
+            },
+            impatiens: {
+                emoji: '🌸',
+                keywords: ['impatiens', 'busy lizzie', 'touch me not'],
+                introduction: 'I am a delicate impatiens',
+                message: 'My seed pods explode when touched, spreading my seeds in a burst of motion.',
+                plea: 'Please save me by protecting moist woodland areas and avoiding downy mildew!'
+            },
+            geranium: {
+                emoji: '🌺',
+                keywords: ['geranium', 'pelargonium', 'cranesbill'],
+                introduction: 'I am a hardy geranium',
+                message: 'I bloom reliably all season and my scented leaves naturally repel insects.',
+                plea: 'Please save me by supporting water-wise gardening and organic growing methods!'
+            },
+            // Wildflowers and native flowers
+            poppy: {
+                emoji: '🌺',
+                keywords: ['poppy', 'papaver', 'corn poppy'],
+                introduction: 'I am a vibrant poppy',
+                message: 'I grow in disturbed soil and my seeds can sleep for decades before blooming.',
+                plea: 'Please save me by preserving wild meadows and avoiding habitat destruction!'
+            },
+            'forget-me-not': {
+                emoji: '💙',
+                keywords: ['forget-me-not', 'myosotis', 'true love'],
+                introduction: 'I am a tiny forget-me-not',
+                message: 'Though small, I create carpets of blue and symbolize true love and remembrance.',
+                plea: 'Please save me by protecting moist woodland edges and stream banks!'
+            },
+            bluebell: {
+                emoji: '🔵',
+                keywords: ['bluebell', 'bluebonnet', 'wild hyacinth'],
+                introduction: 'I am a magical bluebell',
+                message: 'I create enchanted blue carpets in spring woodlands before trees leaf out.',
+                plea: 'Please save me by staying on woodland paths and never picking my bulbs!'
+            },
+            buttercup: {
+                emoji: '🌼',
+                keywords: ['buttercup', 'ranunculus', 'crowfoot'],
+                introduction: 'I am a golden buttercup',
+                message: 'My shiny petals reflect light like tiny mirrors, brightening meadows everywhere.',
+                plea: 'Please save me by preserving natural grasslands and avoiding chemical spraying!'
+            },
+            clover: {
+                emoji: '🍀',
+                keywords: ['clover', 'shamrock', 'trefoil'],
+                introduction: 'I am nutritious clover',
+                message: 'I fix nitrogen in soil, feeding other plants while providing nectar for bees.',
+                plea: 'Please save me by supporting diverse lawns over monoculture grass!'
+            },
+            dandelion: {
+                emoji: '🌼',
+                keywords: ['dandelion', 'taraxacum', 'lion tooth'],
+                introduction: 'I am a resilient dandelion',
+                message: 'Every part of me is edible and medicinal, and I can grow anywhere life is possible.',
+                plea: 'Please save me by appreciating my value instead of poisoning me with chemicals!'
+            },
+            'wild-rose': {
+                emoji: '🌹',
+                keywords: ['wild rose', 'dog rose', 'rosa canina'],
+                introduction: 'I am a wild rose',
+                message: 'I am the ancestor of garden roses, producing vitamin-rich hips that feed wildlife.',
+                plea: 'Please save me by preserving hedgerows and natural areas where I grow wild!'
+            },
+            primrose: {
+                emoji: '🌼',
+                keywords: ['primrose', 'primula', 'cowslip'],
+                introduction: 'I am a delicate primrose',
+                message: 'I am among the first flowers of spring, bringing pale beauty to woodland floors.',
+                plea: 'Please save me by protecting ancient woodlands and avoiding soil disturbance!'
+            },
+            foxglove: {
+                emoji: '💜',
+                keywords: ['foxglove', 'digitalis', 'fairy glove'],
+                introduction: 'I am a stately foxglove',
+                message: 'I tower above other wildflowers and my compounds help human hearts beat steadily.',
+                plea: 'Please save me by preserving woodland clearings and respecting my medicinal power!'
+            },
+            snapdragon: {
+                emoji: '🌺',
+                keywords: ['snapdragon', 'antirrhinum', 'dragon mouth'],
+                introduction: 'I am a playful snapdragon',
+                message: 'Children love to squeeze my flowers to make my "mouth" snap open and closed.',
+                plea: 'Please save me by supporting heirloom varieties and seed saving!'
+            },
+            // Exotic and tropical flowers
+            'bird-of-paradise': {
+                emoji: '🧡',
+                keywords: ['bird of paradise', 'strelitzia', 'crane flower'],
+                introduction: 'I am an exotic bird-of-paradise',
+                message: 'My orange and blue flowers look like tropical birds in flight.',
+                plea: 'Please save me by protecting tropical habitats and supporting sustainable tourism!'
+            },
+            anthurium: {
+                emoji: '❤️',
+                keywords: ['anthurium', 'flamingo flower', 'tail flower'],
+                introduction: 'I am a striking anthurium',
+                message: 'My shiny, heart-shaped blooms can last for months and purify indoor air.',
+                plea: 'Please save me by supporting sustainable tropical agriculture and fair trade!'
+            },
+            frangipani: {
+                emoji: '🌺',
+                keywords: ['frangipani', 'plumeria', 'temple tree'],
+                introduction: 'I am a fragrant frangipani',
+                message: 'My sweet perfume fills tropical evenings and my flowers are used in sacred ceremonies.',
+                plea: 'Please save me by protecting sacred groves and traditional cultural practices!'
+            },
+            bougainvillea: {
+                emoji: '🌺',
+                keywords: ['bougainvillea', 'paper flower'],
+                introduction: 'I am a vibrant bougainvillea',
+                message: 'My colorful bracts aren\'t actually petals, but they create stunning displays year-round.',
+                plea: 'Please save me by supporting water-wise gardening in warm climates!'
+            },
+            protea: {
+                emoji: '🌺',
+                keywords: ['protea', 'king protea', 'sugar bush'],
+                introduction: 'I am a unique protea',
+                message: 'I am South Africa\'s national flower, adapted to survive wildfires and drought.',
+                plea: 'Please save me by protecting fynbos ecosystems and supporting fire management!'
+            },
+            'passion-flower': {
+                emoji: '💜',
+                keywords: ['passion flower', 'passiflora', 'maypop'],
+                introduction: 'I am an intricate passion flower',
+                message: 'My complex flowers inspired religious symbolism and I host butterfly caterpillars.',
+                plea: 'Please save me by preserving native vines and supporting butterfly conservation!'
+            },
+            // Bulb flowers
+            crocus: {
+                emoji: '💜',
+                keywords: ['crocus', 'saffron crocus'],
+                introduction: 'I am a brave crocus',
+                message: 'I push through snow to bloom in late winter, and some of my kind produce precious saffron.',
+                plea: 'Please save me by protecting meadows and avoiding early spring cleanup!'
+            },
+            hyacinth: {
+                emoji: '💜',
+                keywords: ['hyacinth', 'hyacinthus', 'dutch hyacinth'],
+                introduction: 'I am a fragrant hyacinth',
+                message: 'My intense perfume can fill entire gardens and I\'ve been cultivated for centuries.',
+                plea: 'Please save me by supporting sustainable bulb farming and preserving old varieties!'
+            },
+            amaryllis: {
+                emoji: '🌺',
+                keywords: ['amaryllis', 'hippeastrum', 'belladonna lily'],
+                introduction: 'I am a dramatic amaryllis',
+                message: 'I produce huge flowers on tall stems, bringing tropical beauty to temperate homes.',
+                plea: 'Please save me by supporting sustainable bulb cultivation and avoiding wild collection!'
+            },
+            gladiolus: {
+                emoji: '🌺',
+                keywords: ['gladiolus', 'sword lily', 'glad'],
+                introduction: 'I am a stately gladiolus',
+                message: 'My sword-like leaves and tall flower spikes have symbolized strength for centuries.',
+                plea: 'Please save me by supporting cut flower farmers and preserving heirloom varieties!'
+            },
+            freesia: {
+                emoji: '💛',
+                keywords: ['freesia', 'fragrant freesia'],
+                introduction: 'I am a delicate freesia',
+                message: 'My small flowers pack an incredibly sweet fragrance that perfumers treasure.',
+                plea: 'Please save me by supporting sustainable perfume industry and South African conservation!'
+            },
+            // Climbing and vine flowers
+            'morning-glory': {
+                emoji: '🌺',
+                keywords: ['morning glory', 'ipomoea', 'bindweed'],
+                introduction: 'I am a climbing morning glory',
+                message: 'I open my trumpet flowers at dawn and close them by afternoon.',
+                plea: 'Please save me by providing climbing supports and managing my spread responsibly!'
+            },
+            'sweet-pea': {
+                emoji: '🌸',
+                keywords: ['sweet pea', 'lathyrus', 'fragrant pea'],
+                introduction: 'I am a climbing sweet pea',
+                message: 'My delicate flowers smell incredibly sweet and come in pastel rainbow colors.',
+                plea: 'Please save me by supporting heirloom seed varieties and organic gardening!'
+            },
+            clematis: {
+                emoji: '💜',
+                keywords: ['clematis', 'virgin\'s bower', 'old man\'s beard'],
+                introduction: 'I am a graceful clematis',
+                message: 'I can climb 20 feet high and my fluffy seed heads are as beautiful as my flowers.',
+                plea: 'Please save me by providing proper support and protecting my root zone!'
+            },
+            honeysuckle: {
+                emoji: '🌼',
+                keywords: ['honeysuckle', 'lonicera', 'woodbine'],
+                introduction: 'I am a sweet honeysuckle',
+                message: 'Children love to sip nectar from my flowers, and I perfume summer evenings.',
+                plea: 'Please save me by choosing native species and managing invasive varieties!'
+            },
+            // Herb flowers
+            chamomile: {
+                emoji: '🌼',
+                keywords: ['chamomile', 'matricaria', 'german chamomile'],
+                introduction: 'I am soothing chamomile',
+                message: 'My tiny daisy flowers make calming tea and naturally repel garden pests.',
+                plea: 'Please save me by supporting organic herb farming and medicinal plant gardens!'
+            },
+            sage: {
+                emoji: '💜',
+                keywords: ['sage', 'salvia', 'purple sage'],
+                introduction: 'I am wise sage',
+                message: 'My purple flower spikes attract bees and my leaves have been used medicinally for millennia.',
+                plea: 'Please save me by supporting drought-resistant gardening and traditional medicine!'
+            },
+            mint: {
+                emoji: '💜',
+                keywords: ['mint flower', 'mentha', 'spearmint'],
+                introduction: 'I am refreshing mint',
+                message: 'My small purple flowers top aromatic stems that flavor food and medicine.',
+                plea: 'Please save me by supporting sustainable herb cultivation and organic farming!'
+            },
+            thyme: {
+                emoji: '💜',
+                keywords: ['thyme flower', 'thymus', 'wild thyme'],
+                introduction: 'I am tiny thyme',
+                message: 'My miniature flowers carpet the ground and my leaves season food while healing wounds.',
+                plea: 'Please save me by preserving Mediterranean habitats and supporting organic herbs!'
             },
             river: {
                 emoji: '🏞️',
