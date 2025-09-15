@@ -681,7 +681,7 @@ class NatureTalks {
         }
         
         // More comprehensive mapping with better priority for category
-        let matchedCategory = this.findBestMatch(originalObjectName, identifiedObject.allConcepts || []);
+        let matchedCategory = this.findBestMatch(originalObjectName, identifiedObject.allConcepts || [], confidence);
         console.log('🌸 FLOWER DEBUG - Matched category:', matchedCategory);
         
         // Ensure we have a valid category
@@ -714,11 +714,12 @@ class NatureTalks {
         return dynamicMessage;
     }
 
-    findBestMatch(objectName, allConcepts) {
+    findBestMatch(objectName, allConcepts, confidence = 0.7) {
         // Simple and direct approach: Check if any concept exists in database first
         const allTerms = [objectName, ...allConcepts.map(c => c.toLowerCase())];
         
         console.log('🔍 All terms for matching:', allTerms); // Debug log
+        console.log('🎯 Detection confidence:', (confidence * 100).toFixed(1) + '%');
         
         // Filter out negative/placeholder terms that shouldn't be used
         const negativeTerms = ['no person', 'no people', 'no human', 'no one', 'nobody', 'nothing', 
@@ -751,8 +752,15 @@ class NatureTalks {
         
         console.log('❌ No direct matches found in database, using fallback logic...');
         
-        // Step 2: If no matches found, use generic "Object" category
-        console.log('📦 No matches in database - using generic "Object" category');
+        // Step 2: For high-confidence detections (>90%), keep the actual object name
+        if (confidence > 0.9 && filteredTerms.length > 0) {
+            const detectedObjectName = filteredTerms[0]; // Use the first filtered term (original object name)
+            console.log('🎯 High confidence detection (' + (confidence * 100).toFixed(1) + '%) - keeping object name:', detectedObjectName);
+            return detectedObjectName;
+        }
+        
+        // Step 3: For lower confidence, use generic "Object" category
+        console.log('📦 Low confidence detection - using generic "Object" category');
         return 'Object';
     }
 
@@ -770,6 +778,9 @@ class NatureTalks {
             
             // Humans
             human: '👤',
+            
+            // Food and vegetables
+            vegetable: '🥬', carrot: '🥕', tomato: '🍅', potato: '🥔',
             
             // Generic objects
             Object: '📦'
@@ -3143,10 +3154,23 @@ class NatureTalks {
             'door', 'window', 'lamp', 'mirror', 'bag', 'box', 'toy', 'furniture', 'Object'
         ];
         
-        return generalObjects.some(item => 
+        // Check if it matches known general objects
+        const isKnownGeneral = generalObjects.some(item => 
             objectName.includes(item) || item.includes(objectName) ||
             objectName === item
         );
+        
+        if (isKnownGeneral) return true;
+        
+        // If the object is not in our nature database, treat it as a general object
+        // This ensures high-confidence detections that aren't in the database get clean messaging
+        const isInNatureDatabase = this.natureDatabase && this.natureDatabase[objectName];
+        if (!isInNatureDatabase) {
+            console.log('🏠 Object not in nature database - treating as general object:', objectName);
+            return true;
+        }
+        
+        return false;
     }
 
     displayNatureMessage(natureData) {
@@ -5351,6 +5375,14 @@ class NatureTalks {
                 message: 'I contain powerful antioxidants in my seeds that support heart and brain health.',
                 plea: 'Please save me by supporting traditional fruit cultivation and protecting pomegranate diversity!'
             },
+            olive: {
+                emoji: '🫒',
+                keywords: ['olive', 'olives', 'kalamata', 'green olive', 'black olive'],
+                introduction: 'I am a savory olive',
+                message: 'I provide healthy monounsaturated fats and have been a Mediterranean staple for millennia, growing on ancient trees that can live for centuries.',
+                explanation: 'Olives contain healthy fats, vitamin E, and compounds that have anti-inflammatory properties. The olive tree is a symbol of peace and wisdom.',
+                plea: 'Please save me by supporting traditional Mediterranean farming and protecting ancient olive groves!'
+            },
             // Fruit trees
             'apple-tree': {
                 emoji: '🌳',
@@ -5483,6 +5515,20 @@ class NatureTalks {
                 message: 'I provide transportation and mobility, helping people travel efficiently from place to place.',
                 explanation: 'Cars have evolved from horse-drawn carriages to electric vehicles that can drive themselves.',
                 plea: 'Consider electric or hybrid versions of me to reduce air pollution!'
+            },
+            
+            // Vegetables and vegetable plants
+            vegetable: {
+                emoji: '🥬',
+                keywords: ['vegetable', 'vegetables', 'carrot', 'tomato', 'potato', 'lettuce', 'cabbage', 
+                          'broccoli', 'cauliflower', 'spinach', 'cucumber', 'onion', 'garlic', 'pepper',
+                          'celery', 'corn', 'peas', 'beans', 'radish', 'beet', 'turnip', 'parsnip',
+                          'asparagus', 'artichoke', 'zucchini', 'squash', 'pumpkin', 'eggplant',
+                          'root vegetable', 'leafy vegetable', 'vegetable garden', 'crop', 'produce'],
+                introduction: 'I am a vegetable',
+                message: 'I am a nutritious plant grown for food, providing essential vitamins, minerals, and fiber that keep humans and animals healthy.',
+                explanation: 'Vegetables are parts of plants that are consumed by humans - roots, stems, leaves, flowers, or fruits. They have been cultivated for thousands of years and form the foundation of healthy diets worldwide.',
+                plea: 'Support sustainable farming practices that grow me without harmful pesticides and protect soil health!'
             },
             
             // Generic fallback for unknown objects
