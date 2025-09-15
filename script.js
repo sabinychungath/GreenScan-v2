@@ -763,6 +763,7 @@ class NatureTalks {
             // Water plants vs flowers (lotus, water lily are water plants, not typical flowers)
             { terms: ['lotus', 'water lily', 'lily pad', 'pond plant', 'aquatic plant'], category: 'river' },
             // Specific flowers
+            { terms: ['lavender'], category: 'lavender' },
             { terms: ['rose', 'tulip', 'sunflower', 'carnation', 'chrysanthemum', 'petunia', 'marigold', 'daisy', 'lily'], category: 'flower' },
             // Generic flower terms (lower priority than specific types)
             { terms: ['flower', 'bloom', 'petal', 'blossom', 'bouquet', 'floral'], category: 'flower' },
@@ -873,7 +874,7 @@ class NatureTalks {
             mushroom: '🍄', fungus: '🍄', fungi: '🍄',
             
             // Flowers
-            flower: '🌸', rose: '🌹', tulip: '🌷', sunflower: '🌻',
+            flower: '🌸', rose: '🌹', tulip: '🌷', sunflower: '🌻', lavender: '💜',
             bloom: '🌺', blossom: '🌸', petal: '🌸',
             
             // Water
@@ -919,6 +920,7 @@ class NatureTalks {
             rose: 'I am a fragrant rose',
             tulip: 'I am a colorful tulip',
             sunflower: 'I am a bright sunflower',
+            lavender: 'I am fragrant lavender',
             
             // Water
             ocean: 'I am the vast ocean',
@@ -974,6 +976,59 @@ class NatureTalks {
         for (const [key, intro] of Object.entries(introductions)) {
             if (objectName.includes(key) || key.includes(objectName)) {
                 return intro;
+            }
+        }
+        
+        // Dynamic object type detection
+        const objectTypes = {
+            flowers: {
+                names: ['jasmine', 'orchid', 'hibiscus', 'peony', 'daffodil', 'carnation', 
+                       'chrysanthemum', 'petunia', 'marigold', 'pansy', 'violet', 'iris',
+                       'dahlia', 'azalea', 'camellia', 'magnolia', 'poppy', 'lily', 'geranium',
+                       'begonia', 'snapdragon', 'zinnia', 'cosmos', 'nasturtium', 'freesia'],
+                intro: `I am a beautiful ${objectName}`
+            },
+            trees: {
+                names: ['willow', 'cedar', 'elm', 'ash', 'beech', 'hickory', 'walnut', 'poplar',
+                       'spruce', 'fir', 'redwood', 'sequoia', 'cypress', 'eucalyptus', 'acacia',
+                       'teak', 'mahogany', 'bamboo', 'palm', 'coconut', 'cherry', 'peach', 'plum'],
+                intro: `I am a majestic ${objectName}`
+            },
+            fruits: {
+                names: ['apple', 'orange', 'banana', 'grape', 'strawberry', 'blueberry', 'raspberry',
+                       'blackberry', 'mango', 'pineapple', 'peach', 'pear', 'plum', 'cherry',
+                       'watermelon', 'cantaloupe', 'kiwi', 'papaya', 'coconut', 'avocado',
+                       'lemon', 'lime', 'grapefruit', 'pomegranate', 'fig', 'date'],
+                intro: `I am a delicious ${objectName}`
+            },
+            insects: {
+                names: ['butterfly', 'dragonfly', 'grasshopper', 'cricket', 'mantis', 'beetle',
+                       'ant', 'wasp', 'hornet', 'fly', 'mosquito', 'moth', 'cicada', 'aphid',
+                       'termite', 'tick', 'spider', 'caterpillar', 'firefly', 'weevil'],
+                intro: `I am a small ${objectName}`
+            },
+            birds: {
+                names: ['robin', 'cardinal', 'bluejay', 'crow', 'raven', 'hawk', 'falcon', 'vulture',
+                       'swan', 'duck', 'goose', 'heron', 'crane', 'flamingo', 'pelican', 'seagull',
+                       'sparrow', 'finch', 'canary', 'parrot', 'peacock', 'turkey', 'chicken',
+                       'pigeon', 'dove', 'woodpecker', 'hummingbird', 'kingfisher', 'penguin'],
+                intro: `I am a graceful ${objectName}`
+            },
+            animals: {
+                names: ['elephant', 'lion', 'tiger', 'leopard', 'cheetah', 'giraffe', 'zebra',
+                       'rhino', 'hippo', 'buffalo', 'deer', 'elk', 'moose', 'wolf', 'fox',
+                       'coyote', 'raccoon', 'skunk', 'squirrel', 'chipmunk', 'otter', 'seal',
+                       'whale', 'dolphin', 'shark', 'monkey', 'gorilla', 'chimpanzee', 'koala',
+                       'kangaroo', 'panda', 'sloth', 'armadillo', 'hedgehog', 'porcupine'],
+                intro: `I am a wild ${objectName}`
+            }
+        };
+
+        // Check each category
+        for (const [category, data] of Object.entries(objectTypes)) {
+            const isMatch = data.names.some(name => objectName.toLowerCase().includes(name));
+            if (isMatch) {
+                return data.intro;
             }
         }
         
@@ -1047,6 +1102,59 @@ class NatureTalks {
         for (const [key, message] of Object.entries(messages)) {
             if (objectName.includes(key) || key.includes(objectName)) {
                 return message;
+            }
+        }
+        
+        // Dynamic object type detection with specific messages
+        const objectTypes = {
+            flowers: {
+                names: ['jasmine', 'orchid', 'hibiscus', 'peony', 'daffodil', 'carnation', 
+                       'chrysanthemum', 'petunia', 'marigold', 'pansy', 'violet', 'iris',
+                       'dahlia', 'azalea', 'camellia', 'magnolia', 'poppy', 'lily', 'geranium',
+                       'begonia', 'snapdragon', 'zinnia', 'cosmos', 'nasturtium', 'freesia'],
+                message: 'I bring beauty and fragrance to the world, attracting pollinators that help plants reproduce.'
+            },
+            trees: {
+                names: ['willow', 'cedar', 'elm', 'ash', 'beech', 'hickory', 'walnut', 'poplar',
+                       'spruce', 'fir', 'redwood', 'sequoia', 'cypress', 'eucalyptus', 'acacia',
+                       'teak', 'mahogany', 'bamboo', 'palm', 'coconut', 'cherry', 'peach', 'plum'],
+                message: 'I produce oxygen, provide shade, and create homes for countless creatures while storing carbon.'
+            },
+            fruits: {
+                names: ['apple', 'orange', 'banana', 'grape', 'strawberry', 'blueberry', 'raspberry',
+                       'blackberry', 'mango', 'pineapple', 'peach', 'pear', 'plum', 'cherry',
+                       'watermelon', 'cantaloupe', 'kiwi', 'papaya', 'coconut', 'avocado',
+                       'lemon', 'lime', 'grapefruit', 'pomegranate', 'fig', 'date'],
+                message: 'I provide essential nutrients and vitamins while spreading my seeds through nature.'
+            },
+            insects: {
+                names: ['butterfly', 'dragonfly', 'grasshopper', 'cricket', 'mantis', 'beetle',
+                       'ant', 'wasp', 'hornet', 'fly', 'mosquito', 'moth', 'cicada', 'aphid',
+                       'termite', 'tick', 'spider', 'caterpillar', 'firefly', 'weevil'],
+                message: 'I play a vital role in pollination, decomposition, and maintaining the balance of ecosystems.'
+            },
+            birds: {
+                names: ['robin', 'cardinal', 'bluejay', 'crow', 'raven', 'hawk', 'falcon', 'vulture',
+                       'swan', 'duck', 'goose', 'heron', 'crane', 'flamingo', 'pelican', 'seagull',
+                       'sparrow', 'finch', 'canary', 'parrot', 'peacock', 'turkey', 'chicken',
+                       'pigeon', 'dove', 'woodpecker', 'hummingbird', 'kingfisher', 'penguin'],
+                message: 'I help spread seeds, control insect populations, and bring music to nature with my songs.'
+            },
+            animals: {
+                names: ['elephant', 'lion', 'tiger', 'leopard', 'cheetah', 'giraffe', 'zebra',
+                       'rhino', 'hippo', 'buffalo', 'deer', 'elk', 'moose', 'wolf', 'fox',
+                       'coyote', 'raccoon', 'skunk', 'squirrel', 'chipmunk', 'otter', 'seal',
+                       'whale', 'dolphin', 'shark', 'monkey', 'gorilla', 'chimpanzee', 'koala',
+                       'kangaroo', 'panda', 'sloth', 'armadillo', 'hedgehog', 'porcupine'],
+                message: 'I maintain the balance of nature through my role in the food chain and ecosystem.'
+            }
+        };
+
+        // Check each category
+        for (const [category, data] of Object.entries(objectTypes)) {
+            const isMatch = data.names.some(name => objectName.toLowerCase().includes(name));
+            if (isMatch) {
+                return data.message;
             }
         }
         
@@ -1250,6 +1358,59 @@ class NatureTalks {
                     return plea.replace(/Please save/g, 'Please avoid').replace(/Please SAVE/g, 'Please ELIMINATE');
                 }
                 return plea;
+            }
+        }
+        
+        // Dynamic object type detection with specific pleas
+        const objectTypes = {
+            flowers: {
+                names: ['jasmine', 'orchid', 'hibiscus', 'peony', 'daffodil', 'carnation', 
+                       'chrysanthemum', 'petunia', 'marigold', 'pansy', 'violet', 'iris',
+                       'dahlia', 'azalea', 'camellia', 'magnolia', 'poppy', 'lily', 'geranium',
+                       'begonia', 'snapdragon', 'zinnia', 'cosmos', 'nasturtium', 'freesia'],
+                plea: 'Please save me by protecting gardens, avoiding pesticides, and supporting pollinators!'
+            },
+            trees: {
+                names: ['willow', 'cedar', 'elm', 'ash', 'beech', 'hickory', 'walnut', 'poplar',
+                       'spruce', 'fir', 'redwood', 'sequoia', 'cypress', 'eucalyptus', 'acacia',
+                       'teak', 'mahogany', 'bamboo', 'palm', 'coconut', 'cherry', 'peach', 'plum'],
+                plea: 'Please save me by stopping deforestation, planting new trees, and protecting forests!'
+            },
+            fruits: {
+                names: ['apple', 'orange', 'banana', 'grape', 'strawberry', 'blueberry', 'raspberry',
+                       'blackberry', 'mango', 'pineapple', 'peach', 'pear', 'plum', 'cherry',
+                       'watermelon', 'cantaloupe', 'kiwi', 'papaya', 'coconut', 'avocado',
+                       'lemon', 'lime', 'grapefruit', 'pomegranate', 'fig', 'date'],
+                plea: 'Please save me by supporting organic farming and protecting the trees that grow me!'
+            },
+            insects: {
+                names: ['butterfly', 'dragonfly', 'grasshopper', 'cricket', 'mantis', 'beetle',
+                       'ant', 'wasp', 'hornet', 'fly', 'mosquito', 'moth', 'cicada', 'aphid',
+                       'termite', 'tick', 'spider', 'caterpillar', 'firefly', 'weevil'],
+                plea: 'Please save me by avoiding pesticides and protecting natural habitats!'
+            },
+            birds: {
+                names: ['robin', 'cardinal', 'bluejay', 'crow', 'raven', 'hawk', 'falcon', 'vulture',
+                       'swan', 'duck', 'goose', 'heron', 'crane', 'flamingo', 'pelican', 'seagull',
+                       'sparrow', 'finch', 'canary', 'parrot', 'peacock', 'turkey', 'chicken',
+                       'pigeon', 'dove', 'woodpecker', 'hummingbird', 'kingfisher', 'penguin'],
+                plea: 'Please save me by protecting forests, keeping cats indoors, and stopping window strikes!'
+            },
+            animals: {
+                names: ['elephant', 'lion', 'tiger', 'leopard', 'cheetah', 'giraffe', 'zebra',
+                       'rhino', 'hippo', 'buffalo', 'deer', 'elk', 'moose', 'wolf', 'fox',
+                       'coyote', 'raccoon', 'skunk', 'squirrel', 'chipmunk', 'otter', 'seal',
+                       'whale', 'dolphin', 'shark', 'monkey', 'gorilla', 'chimpanzee', 'koala',
+                       'kangaroo', 'panda', 'sloth', 'armadillo', 'hedgehog', 'porcupine'],
+                plea: 'Please save me by protecting wildlife habitats and stopping poaching!'
+            }
+        };
+
+        // Check each category
+        for (const [category, data] of Object.entries(objectTypes)) {
+            const isMatch = data.names.some(name => objectName.toLowerCase().includes(name));
+            if (isMatch) {
+                return data.plea;
             }
         }
         
@@ -2565,6 +2726,13 @@ class NatureTalks {
                 introduction: 'I am a beautiful flower',
                 message: 'I bring color to your world and help bees make honey.',
                 plea: 'Please save me by not picking wildflowers and protecting pollinator habitats!'
+            },
+            lavender: {
+                emoji: '💜',
+                keywords: ['lavender', 'purple', 'aromatic', 'herb'],
+                introduction: 'I am fragrant lavender',
+                message: 'I calm your mind with my scent and attract bees to my purple flowers.',
+                plea: 'Please save me by supporting organic farming and bee-friendly gardens!'
             },
             river: {
                 emoji: '🏞️',
