@@ -770,6 +770,7 @@ class NatureTalks {
             { terms: ['water', 'river', 'stream', 'lake', 'pond'], category: 'river' },
             { terms: ['bird', 'eagle', 'sparrow', 'robin', 'owl', 'hawk'], category: 'bird' },
             { terms: ['butterfly', 'moth'], category: 'butterfly' },
+            { terms: ['ladybug', 'ladybird'], category: 'ladybug' },
             { terms: ['bee', 'honeybee', 'bumblebee'], category: 'bee' },
             { terms: ['rabbit', 'bunny', 'hare', 'animal', 'mammal', 'wildlife'], category: 'bear' },
             { terms: ['mushroom', 'fungus', 'fungi', 'boletus', 'toadstool', 'edible agaric', 'spore', 'mycelium'], category: 'mushroom' },
@@ -805,6 +806,34 @@ class NatureTalks {
                 bestMatch = rule.category;
                 console.log('New best match:', rule.category, 'score:', matchScore, 'terms:', matchedTerms);
             }
+        }
+        
+        // Priority override: Specific detections beat generic ones
+        const hasLadybug = allTerms.some(term => term.includes('ladybug') || term.includes('ladybird'));
+        const hasRainforest = allTerms.some(term => term.includes('rainforest') || term.includes('jungle'));
+        const hasForest = allTerms.some(term => term.includes('forest') && !term.includes('rainforest'));
+        const hasMountain = allTerms.some(term => term.includes('mountain') || term.includes('panoramic') || term.includes('landscape'));
+        const hasWater = allTerms.some(term => term.includes('water') || term.includes('river') || term.includes('stream'));
+        
+        if (hasLadybug && bestMatch !== 'ladybug') {
+            console.log('🎯 Priority override: Ladybug detected, overriding', bestMatch);
+            return 'ladybug';
+        }
+        if (hasRainforest && bestMatch !== 'rainforest') {
+            console.log('🎯 Priority override: Rainforest detected, overriding', bestMatch);
+            return 'rainforest';
+        }
+        if (hasForest && bestMatch === 'tree') {
+            console.log('🎯 Priority override: Forest ecosystem beats individual tree');
+            return 'forest';  
+        }
+        if (hasMountain && (bestMatch === 'tree' || bestMatch === 'forest')) {
+            console.log('🎯 Priority override: Mountain landscape detected');
+            return 'mountain';
+        }
+        if (hasWater && bestMatch === 'tree') {
+            console.log('🎯 Priority override: Water body detected');
+            return 'river';
         }
         
         if (bestMatch) {
@@ -854,7 +883,7 @@ class NatureTalks {
             // Animals
             rabbit: '🐰', bunny: '🐰', hare: '🐰', bear: '🐻',
             bird: '🐦', eagle: '🦅', owl: '🦉', fish: '🐟',
-            butterfly: '🦋', bee: '🐝', animal: '🐾',
+            butterfly: '🦋', bee: '🐝', ladybug: '🐞', beetle: '🐞', animal: '🐾',
             
             // Landscapes
             mountain: '⛰️', hill: '🏔️', rock: '🪨', stone: '🪨',
@@ -2585,6 +2614,13 @@ class NatureTalks {
                 introduction: 'I am a busy bee',
                 message: 'I pollinate the plants that grow your food and make sweet honey.',
                 plea: 'Please save me by planting bee-friendly flowers and avoiding harmful pesticides!'
+            },
+            ladybug: {
+                emoji: '🐞',
+                keywords: ['ladybug', 'ladybird', 'beetle', 'spot'],
+                introduction: 'I am a lucky ladybug',
+                message: 'I protect your garden by eating harmful pests like aphids.',
+                plea: 'Please save me by avoiding pesticides and creating bug-friendly gardens!'
             },
             ocean: {
                 emoji: '🌊',
