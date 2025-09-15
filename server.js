@@ -739,26 +739,39 @@ class NatureTalks {
         
         console.log('❌ No direct matches found in database, using fallback logic...');
         
-        // Step 2: If no direct matches found, return the actual object name with general description
-        console.log('📝 No matches in database - returning actual object name for general description');
-        return objectName || allTerms[0] || 'unknown object';
-    }
-
-    getObjectEmoji(objectName) {
-        const emojiMap = {
-            // Trees and plants
-            tree: '🌳', oak: '🌳', pine: '🌲', apple: '🍎', leaf: '🍃', plant: '🌱',
-            bark: '🌳', trunk: '🌳', branch: '🌿',
+        // Define matching rules with priority - expanded nature detection
+        const matchingRules = [
+            // WATER BODIES (highest priority - most specific)
+            { 
+                terms: ['river', 'stream', 'creek', 'waterfall', 'rapids', 'water', 'flowing water', 'brook', 'tributary'], 
+                category: 'river' 
+            },
             
-            // Forests and landscapes
-            forest: '🌲', rainforest: '🌿', mountain: '⛰️',
+            // LANDSCAPES (very high priority - scenic environments)
+            { 
+                terms: ['mountain', 'mountains', 'peak', 'summit', 'hill', 'valley', 'canyon', 'cliff', 'ridge', 'panoramic', 'landscape', 'scenic', 'vista'], 
+                category: 'mountain' 
+            },
             
-            // Humans
-            human: '👤'
-        };
-        
-        return emojiMap[objectName] || '🌍';
-    }
+            // RAINFOREST (very high priority - specific ecosystems beat general trees)
+            { 
+                terms: ['rainforest', 'jungle', 'tropical forest', 'dense forest', 'amazon', 'tropical'], 
+                category: 'rainforest' 
+            },
+            
+            // FOREST (high priority - forest ecosystems beat individual trees)  
+            { 
+                terms: ['forest', 'woods', 'woodland', 'forestry'], 
+                category: 'forest' 
+            },
+            
+            // MUSHROOMS (medium-high priority - specific organisms)
+            { 
+                terms: ['mushroom', 'fungi', 'fungus', 'toadstool', 'spore', 'mycorrhiza'], 
+                category: 'mushroom' 
+            },
+            
+            // Trees (medium priority - expanded list for Clarifai terms)
             { 
                 terms: [
                     // General tree terms
