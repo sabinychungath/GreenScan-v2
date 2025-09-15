@@ -36,6 +36,29 @@ const NATURE_CONCEPT_MAPPING = {
     'jasmine': 'jasmine',
     'gardenia': 'gardenia',
     'magnolia': 'magnolia',
+    
+    // Specific snake mappings
+    'python': 'python',
+    'cobra': 'cobra',
+    'viper': 'viper',
+    'rattlesnake': 'rattlesnake',
+    'boa': 'boa',
+    'anaconda': 'anaconda',
+    'mamba': 'mamba',
+    'adder': 'adder',
+    'copperhead': 'copperhead',
+    'cottonmouth': 'cottonmouth',
+    'kingsnake': 'kingsnake',
+    'garter': 'garter',
+    'corn snake': 'corn',
+    'milk snake': 'milk',
+    'hognose': 'hognose',
+    'rainbow boa': 'rainbow',
+    'ball python': 'ball',
+    'reticulated python': 'reticulated',
+    'burmese python': 'burmese',
+    'serpent': 'snake',
+    'reptile': 'snake',
     'blossom': 'flower',
     'bloom': 'flower',
     'petal': 'flower',
@@ -63,6 +86,12 @@ const CONCEPT_PRIORITY = {
     'daisy': 16, 'lily': 16, 'lotus': 16, 'iris': 16, 'hibiscus': 16,
     'jasmine': 16, 'magnolia': 16, 'violet': 16, 'gardenia': 16,
     'marigold': 14, 'carnation': 14, 'chrysanthemum': 14, 'petunia': 14,
+    
+    // Very high priority - specific snakes
+    'python': 18, 'cobra': 18, 'viper': 18, 'rattlesnake': 18, 'boa': 18,
+    'anaconda': 18, 'mamba': 18, 'adder': 16, 'copperhead': 16, 'cottonmouth': 16,
+    'kingsnake': 14, 'garter': 14, 'corn': 14, 'milk': 14, 'hognose': 14,
+    'rainbow': 14, 'ball': 14, 'reticulated': 14, 'burmese': 14,
     
     // High priority - nature objects
     'tree': 12, 'flower': 12, 'plant': 10, 'grass': 10,
