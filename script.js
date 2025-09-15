@@ -693,6 +693,7 @@ class NatureTalks {
             originalDetection: identifiedObject.name || finalObjectName,
             introduction: this.generateSpecificIntroduction(finalObjectName),
             message: this.generateSpecificMessage(finalObjectName),
+            explanation: this.generateEducationalExplanation(finalObjectName),
             consequences: this.generateConsequences(finalObjectName),
             plea: this.generateSpecificPlea(finalObjectName)
         };
@@ -1033,6 +1034,86 @@ class NatureTalks {
         }
         
         return `I am ${objectName}`;
+    }
+
+    generateEducationalExplanation(objectName) {
+        // Comprehensive educational explanations for different object types
+        const explanations = {
+            // Specific explanations for popular objects
+            rose: 'Roses have been cultivated for over 5,000 years and belong to the Rosaceae family. They communicate through chemical signals and their thorns are actually modified stems called "prickles".',
+            sunflower: 'Sunflowers can grow up to 30 feet tall and their heads contain up to 2,000 seeds. They exhibit heliotropism, following the sun across the sky each day.',
+            lavender: 'Lavender contains compounds that naturally repel insects while attracting beneficial pollinators. It has been used for aromatherapy and medicine for over 2,500 years.',
+            oak: 'Oak trees can live for over 1,000 years and support more wildlife species than any other tree. A single oak can host over 500 different types of insects.',
+            pine: 'Pine trees are conifers that stay green year-round and communicate with each other through underground fungal networks called "mycorrhizae".',
+            bee: 'Bees have five eyes, dance to communicate locations of flowers, and a single colony can contain up to 80,000 bees working together.',
+            butterfly: 'Butterflies taste with their feet, smell with their antennae, and can see ultraviolet patterns on flowers that are invisible to humans.',
+            ladybug: 'Ladybugs can eat up to 5,000 aphids in their lifetime and some species migrate over 120 miles. They hibernate in groups under rocks and logs.',
+            eagle: 'Eagles have eyesight 4-8 times stronger than humans and can spot prey from over 2 miles away. They mate for life and return to the same nest each year.',
+            
+            // Dynamic explanations by category
+        };
+
+        // Check for specific explanation first
+        const specificExplanation = explanations[objectName.toLowerCase()];
+        if (specificExplanation) {
+            return specificExplanation;
+        }
+
+        // Dynamic explanations by category
+        const categoryExplanations = {
+            flowers: {
+                names: ['jasmine', 'orchid', 'hibiscus', 'peony', 'daffodil', 'carnation', 
+                       'chrysanthemum', 'petunia', 'marigold', 'pansy', 'violet', 'iris',
+                       'dahlia', 'azalea', 'camellia', 'magnolia', 'poppy', 'lily', 'geranium',
+                       'begonia', 'snapdragon', 'zinnia', 'cosmos', 'nasturtium', 'freesia'],
+                explanation: `${objectName.charAt(0).toUpperCase() + objectName.slice(1)} flowers have evolved specific colors, scents, and shapes to attract their preferred pollinators. Each flower species has unique adaptations that make them perfectly suited to their environment.`
+            },
+            trees: {
+                names: ['willow', 'cedar', 'elm', 'ash', 'beech', 'hickory', 'walnut', 'poplar',
+                       'spruce', 'fir', 'redwood', 'sequoia', 'cypress', 'eucalyptus', 'acacia',
+                       'teak', 'mahogany', 'bamboo', 'palm', 'coconut', 'cherry', 'peach', 'plum'],
+                explanation: `${objectName.charAt(0).toUpperCase() + objectName.slice(1)} trees are remarkable organisms that can live for decades or centuries. They communicate through chemical signals, share nutrients through root networks, and create their own ecosystems by providing shelter and food for countless species.`
+            },
+            fruits: {
+                names: ['apple', 'orange', 'banana', 'grape', 'strawberry', 'blueberry', 'raspberry',
+                       'blackberry', 'mango', 'pineapple', 'peach', 'pear', 'plum', 'cherry',
+                       'watermelon', 'cantaloupe', 'kiwi', 'papaya', 'coconut', 'avocado',
+                       'lemon', 'lime', 'grapefruit', 'pomegranate', 'fig', 'date'],
+                explanation: `${objectName.charAt(0).toUpperCase() + objectName.slice(1)} fruits are nature's way of protecting and dispersing seeds. Each fruit has evolved specific colors, flavors, and nutrients to attract the right animals to help spread their seeds to new locations.`
+            },
+            insects: {
+                names: ['butterfly', 'dragonfly', 'grasshopper', 'cricket', 'mantis', 'beetle',
+                       'ant', 'wasp', 'hornet', 'fly', 'mosquito', 'moth', 'cicada', 'aphid',
+                       'termite', 'tick', 'spider', 'caterpillar', 'firefly', 'weevil'],
+                explanation: `${objectName.charAt(0).toUpperCase() + objectName.slice(1)} insects are incredibly diverse and have been on Earth for over 400 million years. They have specialized body parts, unique life cycles, and play crucial ecological roles from pollination to decomposition.`
+            },
+            birds: {
+                names: ['robin', 'cardinal', 'bluejay', 'crow', 'raven', 'hawk', 'falcon', 'vulture',
+                       'swan', 'duck', 'goose', 'heron', 'crane', 'flamingo', 'pelican', 'seagull',
+                       'sparrow', 'finch', 'canary', 'parrot', 'peacock', 'turkey', 'chicken',
+                       'pigeon', 'dove', 'woodpecker', 'hummingbird', 'kingfisher', 'penguin'],
+                explanation: `${objectName.charAt(0).toUpperCase() + objectName.slice(1)} birds are descendants of dinosaurs with specialized features like hollow bones, unique respiratory systems, and incredible navigation abilities. Many species can migrate thousands of miles using magnetic fields and star patterns.`
+            },
+            animals: {
+                names: ['elephant', 'lion', 'tiger', 'leopard', 'cheetah', 'giraffe', 'zebra',
+                       'rhino', 'hippo', 'buffalo', 'deer', 'elk', 'moose', 'wolf', 'fox',
+                       'coyote', 'raccoon', 'skunk', 'squirrel', 'chipmunk', 'otter', 'seal',
+                       'whale', 'dolphin', 'shark', 'monkey', 'gorilla', 'chimpanzee', 'koala',
+                       'kangaroo', 'panda', 'sloth', 'armadillo', 'hedgehog', 'porcupine'],
+                explanation: `${objectName.charAt(0).toUpperCase() + objectName.slice(1)} animals have evolved amazing adaptations over millions of years. Each species has developed unique behaviors, physical features, and survival strategies that make them perfectly suited to their specific environment and ecological niche.`
+            }
+        };
+
+        // Check each category for dynamic explanation
+        for (const [category, data] of Object.entries(categoryExplanations)) {
+            const isMatch = data.names.some(name => objectName.toLowerCase().includes(name));
+            if (isMatch) {
+                return data.explanation;
+            }
+        }
+
+        // Fallback explanation
+        return `${objectName.charAt(0).toUpperCase() + objectName.slice(1)} represents the incredible diversity of life on Earth. Every living thing has evolved unique characteristics that help it survive and contribute to the complex web of nature.`;
     }
 
     generateSpecificMessage(objectName) {
@@ -1509,12 +1590,12 @@ class NatureTalks {
         this.natureAvatar.textContent = natureData.emoji;
         this.natureTitle.textContent = `Hello! ${natureData.introduction}`;
         
-        // Include consequences in the message display
-        const fullMessage = `${natureData.message} ${natureData.consequences ? 'But ' + natureData.consequences + ' ' : ''}${natureData.plea}`;
+        // Include explanation and consequences in the message display
+        const fullMessage = `${natureData.message}\n\n🧠 Did you know? ${natureData.explanation}\n\n${natureData.consequences ? '⚠️ Warning: ' + natureData.consequences + '\n\n' : ''}💚 ${natureData.plea}`;
         this.natureText.textContent = fullMessage;
         
-        // Include consequences in the spoken message
-        this.currentMessage = `${natureData.introduction}. ${natureData.message} ${natureData.consequences ? 'But ' + natureData.consequences + ' ' : ''}${natureData.plea}`;
+        // Include explanation and consequences in the spoken message
+        this.currentMessage = `${natureData.introduction}. ${natureData.message} Did you know? ${natureData.explanation} ${natureData.consequences ? 'But ' + natureData.consequences + ' ' : ''}${natureData.plea}`;
         this.currentObjectType = natureData.detectedAs || 'nature';
         this.detectedObjectName = natureData.originalDetection || natureData.detectedAs || 'nature'; // Use original AI detection
         
