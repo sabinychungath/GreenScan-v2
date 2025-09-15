@@ -720,8 +720,20 @@ class NatureTalks {
         
         console.log('🔍 All terms for matching:', allTerms); // Debug log
         
+        // Filter out negative/placeholder terms that shouldn't be used
+        const negativeTerms = ['no person', 'no people', 'no human', 'no one', 'nobody', 'nothing', 
+                              'unknown', 'unidentified', 'unclear', 'no object', 'no detection'];
+        const filteredTerms = allTerms.filter(term => {
+            // Remove negative terms and very short/generic terms
+            return !negativeTerms.some(negTerm => term.includes(negTerm)) && 
+                   term.length > 2 && 
+                   term !== 'the' && term !== 'and' && term !== 'or';
+        });
+        
+        console.log('🧹 Filtered terms:', filteredTerms);
+        
         // Step 1: Direct database lookup - check each concept against database categories
-        for (const term of allTerms) {
+        for (const term of filteredTerms) {
             // Check if this exact term exists as a category in the database
             if (this.natureDatabase[term]) {
                 console.log('✅ Direct match found:', term);
@@ -739,9 +751,9 @@ class NatureTalks {
         
         console.log('❌ No direct matches found in database, using fallback logic...');
         
-        // Step 2: If no direct matches found, return the actual object name with general description
-        console.log('📝 No matches in database - returning actual object name for general description');
-        return objectName || allTerms[0] || 'unknown object';
+        // Step 2: If no matches found, use generic "Object" category
+        console.log('📦 No matches in database - using generic "Object" category');
+        return 'Object';
     }
 
     getObjectEmoji(objectName) {
@@ -753,41 +765,17 @@ class NatureTalks {
             // Forests and landscapes
             forest: '🌲', rainforest: '🌿', mountain: '⛰️',
             
+            // Insects
+            insect: '🐛', butterfly: '🦋', bee: '🐝',
+            
             // Humans
-            human: '👤'
+            human: '👤',
+            
+            // Generic objects
+            Object: '📦'
         };
         
         return emojiMap[objectName] || '🌍';
-    }
-
-    findBestMatch(objectName, allConcepts) {
-        // Simple and direct approach: Check if any concept exists in database first
-        const allTerms = [objectName, ...allConcepts.map(c => c.toLowerCase())];
-        
-        console.log('🔍 All terms for matching:', allTerms); // Debug log
-        
-        // Step 1: Direct database lookup - check each concept against database categories
-        for (const term of allTerms) {
-            // Check if this exact term exists as a category in the database
-            if (this.natureDatabase[term]) {
-                console.log('✅ Direct match found:', term);
-                return term;
-            }
-            
-            // Check if this term exists in any category's keywords
-            for (const [category, data] of Object.entries(this.natureDatabase)) {
-                if (data.keywords && data.keywords.includes(term)) {
-                    console.log('✅ Keyword match found:', term, '→', category);
-                    return category;
-                }
-            }
-        }
-        
-        console.log('❌ No direct matches found in database, using fallback logic...');
-        
-        // Step 2: If no direct matches found, return the actual object name with general description
-        console.log('📝 No matches in database - returning actual object name for general description');
-        return objectName || allTerms[0] || 'unknown object';
     }
 
     findBestMatchAdvanced(objectName, allConcepts) {
@@ -3146,16 +3134,43 @@ class NatureTalks {
         return this.intelligentNatureDetection();
     }
 
+    isGeneralObject(objectName) {
+        // Define general objects that shouldn't have environmental warnings/pleas
+        const generalObjects = [
+            'house', 'home', 'building', 'car', 'vehicle', 'cup', 'mug', 'bottle', 
+            'phone', 'computer', 'chair', 'table', 'bed', 'book', 'pen', 'food', 
+            'bread', 'pizza', 'burger', 'clothing', 'shoe', 'hat', 'tool', 'clock',
+            'door', 'window', 'lamp', 'mirror', 'bag', 'box', 'toy', 'furniture', 'Object'
+        ];
+        
+        return generalObjects.some(item => 
+            objectName.includes(item) || item.includes(objectName) ||
+            objectName === item
+        );
+    }
+
     displayNatureMessage(natureData) {
         this.natureAvatar.textContent = natureData.emoji;
         this.natureTitle.textContent = `Hello! ${natureData.introduction}`;
         
-        // Include explanation and consequences in the message display
-        const fullMessage = `${natureData.message}\n\n🧠 Did you know? ${natureData.explanation}\n\n${natureData.consequences ? '⚠️ Warning: ' + natureData.consequences + '\n\n' : ''}💚 ${natureData.plea}`;
-        this.natureText.textContent = fullMessage;
+        // Check if this is a general object to exclude environmental warnings/pleas
+        const isGeneral = this.isGeneralObject(natureData.detectedAs) || this.isGeneralObject(natureData.originalDetection);
         
-        // Include explanation and consequences in the spoken message
-        this.currentMessage = `${natureData.introduction}. ${natureData.message} Did you know? ${natureData.explanation} ${natureData.consequences ? 'But ' + natureData.consequences + ' ' : ''}${natureData.plea}`;
+        let fullMessage, spokenMessage;
+        
+        if (isGeneral) {
+            // For general objects, only include message and explanation (no consequences/plea)
+            fullMessage = `${natureData.message}\n\n🧠 Did you know? ${natureData.explanation}`;
+            spokenMessage = `${natureData.introduction}. ${natureData.message} Did you know? ${natureData.explanation}`;
+            console.log('🏠 General object detected - skipping environmental warnings/pleas');
+        } else {
+            // For nature objects, include full message with consequences and plea
+            fullMessage = `${natureData.message}\n\n🧠 Did you know? ${natureData.explanation}\n\n${natureData.consequences ? '⚠️ Warning: ' + natureData.consequences + '\n\n' : ''}💚 ${natureData.plea}`;
+            spokenMessage = `${natureData.introduction}. ${natureData.message} Did you know? ${natureData.explanation} ${natureData.consequences ? 'But ' + natureData.consequences + ' ' : ''}${natureData.plea}`;
+        }
+        
+        this.natureText.textContent = fullMessage;
+        this.currentMessage = spokenMessage;
         this.currentObjectType = natureData.detectedAs || 'nature';
         this.detectedObjectName = natureData.originalDetection || natureData.detectedAs || 'nature'; // Use original AI detection
         
@@ -4897,10 +4912,17 @@ class NatureTalks {
             },
             butterfly: {
                 emoji: '🦋',
-                keywords: ['butterfly', 'moth', 'insect', 'wing'],
+                keywords: ['butterfly', 'moth', 'wing'],
                 introduction: 'I am a delicate butterfly',
                 message: 'I pollinate flowers and transform from a caterpillar in an amazing metamorphosis.',
                 plea: 'Please save me by planting native flowers and avoiding pesticides!'
+            },
+            insect: {
+                emoji: '🐛',
+                keywords: ['insect', 'bug', 'arthropod', 'invertebrate'],
+                introduction: 'I am a small insect',
+                message: 'I play a vital role in ecosystems through pollination, decomposition, and serving as food for other animals.',
+                plea: 'Please save me by avoiding pesticides and protecting natural habitats!'
             },
             bear: {
                 emoji: '🐻',
@@ -5435,6 +5457,42 @@ class NatureTalks {
                 introduction: 'I am planet Earth',
                 message: 'I am your only home in the vast universe, supporting all life.',
                 plea: 'Please save me by taking care of the environment and living sustainably!'
+            },
+            
+            // General objects (no environmental warnings/pleas)
+            house: {
+                emoji: '🏠',
+                keywords: ['house', 'home', 'building', 'residence'],
+                introduction: 'I am a house',
+                message: 'I provide shelter and safety for families, and can be designed to be energy-efficient and environmentally friendly.',
+                explanation: 'Houses have evolved from simple shelters to complex structures with electricity, plumbing, and smart technology.',
+                plea: 'Consider making me more sustainable with solar panels and energy-efficient features!'
+            },
+            phone: {
+                emoji: '📱',
+                keywords: ['phone', 'smartphone', 'mobile', 'cellular'],
+                introduction: 'I am a phone',
+                message: 'I connect people across the world and provide access to information, communication, and entertainment.',
+                explanation: 'Modern phones are actually powerful computers that can perform millions of calculations per second.',
+                plea: 'Help reduce electronic waste by recycling me properly when I\'m no longer needed!'
+            },
+            car: {
+                emoji: '🚗',
+                keywords: ['car', 'automobile', 'vehicle', 'sedan'],
+                introduction: 'I am a car',
+                message: 'I provide transportation and mobility, helping people travel efficiently from place to place.',
+                explanation: 'Cars have evolved from horse-drawn carriages to electric vehicles that can drive themselves.',
+                plea: 'Consider electric or hybrid versions of me to reduce air pollution!'
+            },
+            
+            // Generic fallback for unknown objects
+            Object: {
+                emoji: '📦',
+                keywords: ['object', 'item', 'thing'],
+                introduction: 'I am an object',
+                message: 'I am something that exists in the world around you, part of the vast collection of items that make up our daily environment.',
+                explanation: 'Objects can be natural or human-made, each serving different purposes and having unique properties and characteristics.',
+                plea: 'Help keep the world organized by using and disposing of items responsibly!'
             }
         };
     }
