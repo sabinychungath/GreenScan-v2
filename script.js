@@ -764,9 +764,21 @@ class NatureTalks {
             // Water plants vs flowers (lotus, water lily are water plants, not typical flowers)
             { terms: ['lotus', 'water lily', 'lily pad', 'pond plant', 'aquatic plant'], category: 'river' },
             // Specific flowers (most specific first)
-            { terms: ['sunflower'], category: 'sunflower' },
-            { terms: ['lavender'], category: 'lavender' },
-            { terms: ['rose', 'tulip', 'carnation', 'chrysanthemum', 'petunia', 'marigold', 'daisy', 'lily'], category: 'flower' },
+            { terms: ['sunflower', 'sun flower'], category: 'sunflower' },
+            { terms: ['lavender', 'lavandula'], category: 'lavender' },
+            { terms: ['orchid', 'orchidaceae'], category: 'orchid' },
+            { terms: ['rose', 'rosa'], category: 'rose' },
+            { terms: ['tulip', 'tulipa'], category: 'tulip' },
+            { terms: ['lotus', 'nelumbo'], category: 'lotus' },
+            { terms: ['lily', 'lilium'], category: 'lily' },
+            { terms: ['daisy', 'bellis'], category: 'daisy' },
+            { terms: ['iris', 'bearded iris'], category: 'iris' },
+            { terms: ['hibiscus'], category: 'hibiscus' },
+            { terms: ['jasmine', 'jasminum'], category: 'jasmine' },
+            { terms: ['magnolia'], category: 'magnolia' },
+            { terms: ['violet', 'viola'], category: 'violet' },
+            { terms: ['gardenia'], category: 'gardenia' },
+            { terms: ['carnation', 'chrysanthemum', 'petunia', 'marigold'], category: 'flower' },
             // Generic flower terms (lower priority than specific types)
             { terms: ['flower', 'bloom', 'petal', 'blossom', 'bouquet', 'floral'], category: 'flower' },
             { terms: ['ocean', 'sea', 'reef', 'coral', 'marine'], category: 'ocean' },
@@ -877,6 +889,7 @@ class NatureTalks {
             
             // Flowers
             flower: '🌸', rose: '🌹', tulip: '🌷', sunflower: '🌻', lavender: '💜',
+            orchid: '🌺', daisy: '🌼', lily: '🌸', lotus: '🪷', iris: '🌺',
             bloom: '🌺', blossom: '🌸', petal: '🌸',
             
             // Water
@@ -920,10 +933,15 @@ class NatureTalks {
             
             // Flowers
             flower: 'I am a beautiful flower',
-            rose: 'I am a fragrant rose',
-            tulip: 'I am a colorful tulip',
+            rose: 'I am a beautiful rose',
+            tulip: 'I am a vibrant tulip',
             sunflower: 'I am a bright sunflower',
             lavender: 'I am fragrant lavender',
+            orchid: 'I am an elegant orchid',
+            daisy: 'I am a cheerful daisy',
+            lily: 'I am a graceful lily',
+            lotus: 'I am a sacred lotus',
+            iris: 'I am a stately iris',
             
             // Water
             ocean: 'I am the vast ocean',
@@ -2833,6 +2851,55 @@ class NatureTalks {
                 introduction: 'I am fragrant lavender',
                 message: 'I calm your mind with my scent and attract bees to my purple flowers.',
                 plea: 'Please save me by supporting organic farming and bee-friendly gardens!'
+            },
+            orchid: {
+                emoji: '🌺',
+                keywords: ['orchid', 'exotic', 'tropical', 'elegant'],
+                introduction: 'I am an elegant orchid',
+                message: 'I am one of the largest flower families with over 25,000 species. My intricate blooms can last for months.',
+                plea: 'Please save me by protecting tropical forests and not collecting wild orchids!'
+            },
+            rose: {
+                emoji: '🌹',
+                keywords: ['rose', 'romantic', 'thorns', 'fragrant'],
+                introduction: 'I am a beautiful rose',
+                message: 'I have been cherished for thousands of years and symbolize love and beauty across cultures.',
+                plea: 'Please save me by supporting sustainable flower farming and protecting wild roses!'
+            },
+            tulip: {
+                emoji: '🌷',
+                keywords: ['tulip', 'spring', 'bulb', 'colorful'],
+                introduction: 'I am a vibrant tulip',
+                message: 'I emerge each spring from bulbs and bring bright colors after winter. I come in nearly every color except true blue.',
+                plea: 'Please save me by planting native varieties and protecting natural grasslands!'
+            },
+            daisy: {
+                emoji: '🌼',
+                keywords: ['daisy', 'simple', 'cheerful', 'white'],
+                introduction: 'I am a cheerful daisy',
+                message: 'My simple beauty brightens meadows and I can bloom almost year-round in the right conditions.',
+                plea: 'Please save me by not using lawn chemicals and leaving wild spaces for me to grow!'
+            },
+            lily: {
+                emoji: '🌸',
+                keywords: ['lily', 'elegant', 'trumpet', 'bulb'],
+                introduction: 'I am a graceful lily',
+                message: 'My trumpet-shaped flowers have guided travelers and inspired artists for millennia.',
+                plea: 'Please save me by protecting wetlands and avoiding toxic pesticides!'
+            },
+            lotus: {
+                emoji: '🪷',
+                keywords: ['lotus', 'sacred', 'water', 'purity'],
+                introduction: 'I am a sacred lotus',
+                message: 'I rise pure from muddy waters and symbolize rebirth and enlightenment in many cultures.',
+                plea: 'Please save me by keeping waterways clean and protecting wetland habitats!'
+            },
+            iris: {
+                emoji: '🌺',
+                keywords: ['iris', 'sword', 'rainbow', 'flag'],
+                introduction: 'I am a stately iris',
+                message: 'My sword-like leaves and colorful blooms have inspired flags and coat of arms throughout history.',
+                plea: 'Please save me by preserving natural meadows and avoiding habitat destruction!'
             },
             river: {
                 emoji: '🏞️',
