@@ -171,7 +171,7 @@ class NatureTalks {
             ctx.drawImage(video, 0, 0);
             
             canvas.toBlob((blob) => {
-                const file = new File([blob], 'camera_capture.jpg', { type: 'image/jpeg' });
+                const file = new File([blob], 'ai-camera.png', { type: 'image/png' });
                 this.processCapturedImage(file, canvas.toDataURL());
                 stream.getTracks().forEach(track => track.stop());
                 cameraDiv.remove();
