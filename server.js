@@ -768,14 +768,10 @@ class NatureTalks {
             
             // Deciduous trees (non-fruit)
             maple: '🍁', birch: '🌳', willow: '🌳', elm: '🌳', ash: '🌳',
-            beech: '🌳', hickory: '🌳', walnut: '🌳', poplar: '🌳', sycamore: '🌳', basswood: '🌳',
-            
-            // Humans
-            human: '👤'
-        };
-        
-        return emojiMap[objectName] || '🌍';
-    } 
+                    'trunk', 'bark', 'branch', 'branches', 'twig', 'stem', 'root', 'roots',
+                    'leaf', 'leaves', 'foliage', 'canopy', 'crown',
+                    // Specific tree types
+                    'oak', 'pine', 'maple', 'birch', 'willow', 'elm', 
                     'cedar', 'fir', 'spruce', 'poplar', 'ash', 'beech', 'hickory', 'walnut',
                     // Tree groupings (individual trees, not forests)
                     'grove', 'orchard',
