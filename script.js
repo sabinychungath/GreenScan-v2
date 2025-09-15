@@ -692,17 +692,21 @@ class NatureTalks {
         
         console.log('📂 Original object:', originalObjectName, '-> Matched category:', matchedCategory);
         
-        // Create completely custom message based on the ORIGINAL detected object name
+        // Use the matched category for generating specific content (not the original detection)
+        const categoryToUse = matchedCategory || originalObjectName;
+        console.log('🎯 Using category for content generation:', categoryToUse);
+        
+        // Create completely custom message based on the MATCHED CATEGORY
         const dynamicMessage = {
-            emoji: this.getObjectEmoji(originalObjectName),
+            emoji: this.getObjectEmoji(categoryToUse),
             confidence: confidence,
             detectedAs: identifiedObject.name || 'nature object',
             originalDetection: identifiedObject.name || originalObjectName,
-            introduction: this.generateSpecificIntroduction(originalObjectName),
-            message: this.generateSpecificMessage(originalObjectName),
-            explanation: this.generateEducationalExplanation(originalObjectName),
-            consequences: this.generateConsequences(originalObjectName),
-            plea: this.generateSpecificPlea(originalObjectName)
+            introduction: this.generateSpecificIntroduction(categoryToUse),
+            message: this.generateSpecificMessage(categoryToUse),
+            explanation: this.generateEducationalExplanation(categoryToUse),
+            consequences: this.generateConsequences(categoryToUse),
+            plea: this.generateSpecificPlea(categoryToUse)
         };
         
         console.log('✅ Generated dynamic message:', dynamicMessage);
