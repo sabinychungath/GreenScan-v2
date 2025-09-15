@@ -1010,13 +1010,31 @@ class NatureTalks {
             bulldozer: 'I am heavy machinery destroying natural habitats'
         };
         
-        // Find best match (case-insensitive)
+        // Find best match (case-insensitive) - prioritize exact and longer matches
         const lowerObjectName = objectName.toLowerCase();
-        for (const [key, intro] of Object.entries(introductions)) {
+        
+        // First, try exact match
+        if (introductions[lowerObjectName]) {
+            console.log(`🎯 Found exact intro match: ${objectName} -> ${lowerObjectName} -> ${introductions[lowerObjectName]}`);
+            return introductions[lowerObjectName];
+        }
+        
+        // Then try specific flower matches (to avoid sunflower->flower issue)
+        const specificFlowers = ['sunflower', 'lavender', 'orchid', 'rose', 'tulip', 'daisy', 'lily', 'lotus', 'iris'];
+        for (const specificFlower of specificFlowers) {
+            if (lowerObjectName.includes(specificFlower) && introductions[specificFlower]) {
+                console.log(`🎯 Found specific flower intro match: ${objectName} -> ${specificFlower} -> ${introductions[specificFlower]}`);
+                return introductions[specificFlower];
+            }
+        }
+        
+        // Finally, try partial matches (sorted by length, longest first)
+        const sortedKeys = Object.keys(introductions).sort((a, b) => b.length - a.length);
+        for (const key of sortedKeys) {
             const lowerKey = key.toLowerCase();
             if (lowerObjectName.includes(lowerKey) || lowerKey.includes(lowerObjectName)) {
-                console.log(`🎯 Found specific intro match: ${objectName} -> ${key} -> ${intro}`);
-                return intro;
+                console.log(`🎯 Found partial intro match: ${objectName} -> ${key} -> ${introductions[key]}`);
+                return introductions[key];
             }
         }
         
@@ -1219,13 +1237,31 @@ class NatureTalks {
             bulldozer: 'I crush entire ecosystems in minutes, destroying habitats that took years to develop.'
         };
         
-        // Find best match (case-insensitive)
+        // Find best match (case-insensitive) - prioritize exact and longer matches
         const lowerObjectName = objectName.toLowerCase();
-        for (const [key, message] of Object.entries(messages)) {
+        
+        // First, try exact match
+        if (messages[lowerObjectName]) {
+            console.log(`🎯 Found exact message match: ${objectName} -> ${lowerObjectName}`);
+            return messages[lowerObjectName];
+        }
+        
+        // Then try specific flower matches
+        const specificFlowers = ['sunflower', 'lavender', 'orchid', 'rose', 'tulip', 'daisy', 'lily', 'lotus', 'iris'];
+        for (const specificFlower of specificFlowers) {
+            if (lowerObjectName.includes(specificFlower) && messages[specificFlower]) {
+                console.log(`🎯 Found specific flower message match: ${objectName} -> ${specificFlower}`);
+                return messages[specificFlower];
+            }
+        }
+        
+        // Finally, try partial matches (sorted by length, longest first)
+        const sortedKeys = Object.keys(messages).sort((a, b) => b.length - a.length);
+        for (const key of sortedKeys) {
             const lowerKey = key.toLowerCase();
             if (lowerObjectName.includes(lowerKey) || lowerKey.includes(lowerObjectName)) {
-                console.log(`🎯 Found specific message match: ${objectName} -> ${key}`);
-                return message;
+                console.log(`🎯 Found partial message match: ${objectName} -> ${key}`);
+                return messages[key];
             }
         }
         
@@ -1474,15 +1510,36 @@ class NatureTalks {
             bulldozer: 'Please STOP habitat destruction and protect wildlife areas!'
         };
         
-        // Find best match (case-insensitive)
+        // Find best match (case-insensitive) - prioritize exact and longer matches
         const lowerObjectName = objectName.toLowerCase();
-        for (const [key, plea] of Object.entries(pleas)) {
+        
+        // First, try exact match
+        if (pleas[lowerObjectName]) {
+            console.log(`🎯 Found exact plea match: ${objectName} -> ${lowerObjectName}`);
+            const plea = pleas[lowerObjectName];
+            if (this.isHarmfulObject(objectName)) {
+                return plea.replace(/Please save/g, 'Please avoid').replace(/Please SAVE/g, 'Please ELIMINATE');
+            }
+            return plea;
+        }
+        
+        // Then try specific flower matches
+        const specificFlowers = ['sunflower', 'lavender', 'orchid', 'rose', 'tulip', 'daisy', 'lily', 'lotus', 'iris'];
+        for (const specificFlower of specificFlowers) {
+            if (lowerObjectName.includes(specificFlower) && pleas[specificFlower]) {
+                console.log(`🎯 Found specific flower plea match: ${objectName} -> ${specificFlower}`);
+                return pleas[specificFlower];
+            }
+        }
+        
+        // Finally, try partial matches (sorted by length, longest first)
+        const sortedKeys = Object.keys(pleas).sort((a, b) => b.length - a.length);
+        for (const key of sortedKeys) {
             const lowerKey = key.toLowerCase();
             if (lowerObjectName.includes(lowerKey) || lowerKey.includes(lowerObjectName)) {
-                console.log(`🎯 Found specific plea match: ${objectName} -> ${key}`);
-                // Modify plea based on harmful vs beneficial
+                console.log(`🎯 Found partial plea match: ${objectName} -> ${key}`);
+                const plea = pleas[key];
                 if (this.isHarmfulObject(objectName)) {
-                    // Change "Please save" to "Please avoid" or "Please eliminate" for harmful objects
                     return plea.replace(/Please save/g, 'Please avoid').replace(/Please SAVE/g, 'Please ELIMINATE');
                 }
                 return plea;
