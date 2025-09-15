@@ -745,6 +745,7 @@ class NatureTalks {
             for (const [category, data] of Object.entries(this.natureDatabase)) {
                 if (data.keywords && data.keywords.includes(term)) {
                     console.log('✅ Keyword match found:', term, '→', category);
+                    console.log('🔍 Keywords for', category + ':', data.keywords);
                     return category;
                 }
             }
@@ -775,6 +776,9 @@ class NatureTalks {
             
             // Insects
             insect: '🐛', butterfly: '🦋', bee: '🐝',
+            
+            // Animals
+            kangaroo: '🦘', bear: '🐻',
             
             // Humans
             human: '👤',
@@ -3173,22 +3177,49 @@ class NatureTalks {
         return false;
     }
 
+    isAnimalOrSnake(objectName) {
+        // Define animals and snakes that shouldn't have environmental warnings
+        const animalsAndSnakes = [
+            'lion', 'bear', 'bird', 'butterfly', 'bee', 'rabbit', 'fish', 'dog', 'cat', 
+            'horse', 'elephant', 'tiger', 'snake', 'rattlesnake', 'kangaroo', 'insect',
+            'mammal', 'reptile', 'amphibian', 'animal', 'wildlife', 'creature'
+        ];
+        
+        // Check if it matches known animals or snakes
+        const isAnimal = animalsAndSnakes.some(item => 
+            objectName.includes(item) || item.includes(objectName) ||
+            objectName === item
+        );
+        
+        if (isAnimal) {
+            console.log('🐾 Animal/snake detected - skipping environmental warnings:', objectName);
+            return true;
+        }
+        
+        return false;
+    }
+
     displayNatureMessage(natureData) {
         this.natureAvatar.textContent = natureData.emoji;
         this.natureTitle.textContent = `Hello! ${natureData.introduction}`;
         
-        // Check if this is a general object to exclude environmental warnings/pleas
+        // Check if this is a general object or animal/snake to exclude environmental warnings/pleas
         const isGeneral = this.isGeneralObject(natureData.detectedAs) || this.isGeneralObject(natureData.originalDetection);
+        const isAnimalOrSnake = this.isAnimalOrSnake(natureData.detectedAs) || this.isAnimalOrSnake(natureData.originalDetection);
         
         let fullMessage, spokenMessage;
         
-        if (isGeneral) {
-            // For general objects, only include message and explanation (no consequences/plea)
+        if (isGeneral || isAnimalOrSnake) {
+            // For general objects and animals/snakes, only include message and explanation (no consequences/plea)
             fullMessage = `${natureData.message}\n\n🧠 Did you know? ${natureData.explanation}`;
             spokenMessage = `${natureData.introduction}. ${natureData.message} Did you know? ${natureData.explanation}`;
-            console.log('🏠 General object detected - skipping environmental warnings/pleas');
+            if (isGeneral) {
+                console.log('🏠 General object detected - skipping environmental warnings/pleas');
+            } else {
+                console.log('🐾 Animal/snake detected - skipping environmental warnings/pleas');
+            }
         } else {
-            // For nature objects, include full message with consequences and plea
+            // For nature objects (plants, environment), include full message with consequences and plea
             fullMessage = `${natureData.message}\n\n🧠 Did you know? ${natureData.explanation}\n\n${natureData.consequences ? '⚠️ Warning: ' + natureData.consequences + '\n\n' : ''}💚 ${natureData.plea}`;
             spokenMessage = `${natureData.introduction}. ${natureData.message} Did you know? ${natureData.explanation} ${natureData.consequences ? 'But ' + natureData.consequences + ' ' : ''}${natureData.plea}`;
         }
@@ -4950,10 +4981,19 @@ class NatureTalks {
             },
             bear: {
                 emoji: '🐻',
-                keywords: ['bear', 'animal', 'mammal', 'wildlife'],
+                keywords: ['bear', 'grizzly', 'black bear', 'brown bear', 'polar bear'],
                 introduction: 'I am a powerful bear',
                 message: 'I help spread seeds through the forest and keep ecosystems balanced.',
+                explanation: 'Bears are intelligent mammals with excellent memory and problem-solving skills. We play crucial roles as both predators and seed dispersers.',
                 plea: 'Please save me by protecting wilderness areas and securing your garbage!'
+            },
+            kangaroo: {
+                emoji: '🦘',
+                keywords: ['kangaroo', 'marsupial', 'wallaby', 'joey', 'australian'],
+                introduction: 'I am a kangaroo',
+                message: 'I am a unique marsupial that carries my young in a pouch and can hop at speeds up to 35 mph across the Australian landscape.',
+                explanation: 'Kangaroos are the largest marsupials on Earth and can go long periods without water. My powerful hind legs allow me to cover 25 feet in a single bound!',
+                plea: 'Please save me by protecting Australian grasslands and preventing habitat destruction!'
             },
             snake: {
                 emoji: '🐍',
