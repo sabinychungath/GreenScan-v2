@@ -1042,7 +1042,7 @@ class NatureTalks {
             'watermelon', 'cantaloupe', 'honeydew', 'casaba',
             'grape', 'fig', 'date', 'pomegranate', 'persimmon', 'olive'
         ];
-        for (const specificFruit of specificFruits) {
+        for (const specificFruit of specificFruitsIntro) {
             const hasSpecificFruit = allTerms.some(term => term.includes(specificFruit));
             if (hasSpecificFruit && bestMatch === 'fruit') {
                 console.log('🍎 FRUIT PRIORITY OVERRIDE:', specificFruit, 'beats generic fruit');
@@ -1546,7 +1546,7 @@ class NatureTalks {
         }
         
         // Then try specific fruit matches
-        const specificFruits = [
+        const specificFruitsIntro = [
             'orange', 'lemon', 'lime', 'grapefruit', 'tangerine', 'pomelo', 'bergamot', 'yuzu',
             'peach', 'plum', 'apricot', 'cherry', 'apple', 'pear', 'quince',
             'strawberry', 'blueberry', 'raspberry', 'blackberry', 'cranberry', 'gooseberry', 'elderberry', 'mulberry', 'currant',
@@ -1555,7 +1555,7 @@ class NatureTalks {
             'watermelon', 'cantaloupe', 'honeydew', 'casaba',
             'grape', 'fig', 'date', 'pomegranate', 'persimmon', 'olive'
         ];
-        for (const specificFruit of specificFruits) {
+        for (const specificFruit of specificFruitsIntro) {
             if (lowerObjectName.includes(specificFruit) && introductions[specificFruit]) {
                 console.log(`🎯 Found specific fruit intro match: ${objectName} -> ${specificFruit} -> ${introductions[specificFruit]}`);
                 return introductions[specificFruit];
@@ -1582,7 +1582,7 @@ class NatureTalks {
         }
         
         // Then try specific fruit matches
-        const specificFruits = [
+        const specificFruitsMsg = [
             'orange', 'lemon', 'lime', 'grapefruit', 'tangerine', 'pomelo', 'bergamot', 'yuzu',
             'peach', 'plum', 'apricot', 'cherry', 'apple', 'pear', 'quince',
             'strawberry', 'blueberry', 'raspberry', 'blackberry', 'cranberry', 'gooseberry', 'elderberry', 'mulberry', 'currant',
@@ -1591,7 +1591,7 @@ class NatureTalks {
             'watermelon', 'cantaloupe', 'honeydew', 'casaba',
             'grape', 'fig', 'date', 'pomegranate', 'persimmon', 'olive'
         ];
-        for (const specificFruit of specificFruits) {
+        for (const specificFruit of specificFruitsMsg) {
             if (lowerObjectName.includes(specificFruit) && messages[specificFruit]) {
                 console.log(`🎯 Found specific fruit message match: ${objectName} -> ${specificFruit}`);
                 return messages[specificFruit];
@@ -2292,7 +2292,7 @@ class NatureTalks {
         }
         
         // Then try specific fruit matches
-        const specificFruits = [
+        const specificFruitsPlea = [
             'orange', 'lemon', 'lime', 'grapefruit', 'tangerine', 'pomelo', 'bergamot', 'yuzu',
             'peach', 'plum', 'apricot', 'cherry', 'apple', 'pear', 'quince',
             'strawberry', 'blueberry', 'raspberry', 'blackberry', 'cranberry', 'gooseberry', 'elderberry', 'mulberry', 'currant',
@@ -2301,7 +2301,7 @@ class NatureTalks {
             'watermelon', 'cantaloupe', 'honeydew', 'casaba',
             'grape', 'fig', 'date', 'pomegranate', 'persimmon', 'olive'
         ];
-        for (const specificFruit of specificFruits) {
+        for (const specificFruit of specificFruitsPlea) {
             if (lowerObjectName.includes(specificFruit) && pleas[specificFruit]) {
                 console.log(`🎯 Found specific fruit plea match: ${objectName} -> ${specificFruit}`);
                 return pleas[specificFruit];
