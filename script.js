@@ -715,48 +715,52 @@ class NatureTalks {
     }
 
     findBestMatch(objectName, allConcepts) {
-        // Create priority-based matching
+        // Simple and direct approach: Check if any concept exists in database first
         const allTerms = [objectName, ...allConcepts.map(c => c.toLowerCase())];
         
         console.log('🔍 All terms for matching:', allTerms); // Debug log
         
-        // Define matching rules with priority - expanded nature detection
-        const matchingRules = [
-            // WATER BODIES (highest priority - most specific)
-            { 
-                terms: ['river', 'stream', 'creek', 'waterfall', 'rapids', 'water', 'flowing water', 'brook', 'tributary'], 
-                category: 'river' 
-            },
+        // Step 1: Direct database lookup - check each concept against database categories
+        for (const term of allTerms) {
+            // Check if this exact term exists as a category in the database
+            if (this.natureDatabase[term]) {
+                console.log('✅ Direct match found:', term);
+                return term;
+            }
             
-            // LANDSCAPES (very high priority - scenic environments)
-            { 
-                terms: ['mountain', 'mountains', 'peak', 'summit', 'hill', 'valley', 'canyon', 'cliff', 'ridge', 'panoramic', 'landscape', 'scenic', 'vista'], 
-                category: 'mountain' 
-            },
+            // Check if this term exists in any category's keywords
+            for (const [category, data] of Object.entries(this.natureDatabase)) {
+                if (data.keywords && data.keywords.includes(term)) {
+                    console.log('✅ Keyword match found:', term, '→', category);
+                    return category;
+                }
+            }
+        }
+        
+        console.log('❌ No direct matches found in database, using fallback logic...');
+        
+        // Step 2: If no direct matches found, return the actual object name with general description
+        console.log('📝 No matches in database - returning actual object name for general description');
+        return objectName || allTerms[0] || 'unknown object';
+    }
+
+    getObjectEmoji(objectName) {
+        const emojiMap = {
+            // Trees and plants
+            tree: '🌳', oak: '🌳', pine: '🌲', apple: '🍎', leaf: '🍃', plant: '🌱',
+            bark: '🌳', trunk: '🌳', branch: '🌿',
             
-            // RAINFOREST (very high priority - specific ecosystems beat general trees)
-            { 
-                terms: ['rainforest', 'jungle', 'tropical forest', 'dense forest', 'amazon', 'tropical'], 
-                category: 'rainforest' 
-            },
+            // Forests and landscapes
+            forest: '🌲', rainforest: '🌿', mountain: '⛰️',
             
-            // FOREST (high priority - forest ecosystems beat individual trees)  
-            { 
-                terms: ['forest', 'woods', 'woodland', 'forestry'], 
-                category: 'forest' 
-            },
-            
-            // MUSHROOMS (medium-high priority - specific organisms)
-            { 
-                terms: ['mushroom', 'fungi', 'fungus', 'toadstool', 'spore', 'mycorrhiza'], 
-                category: 'mushroom' 
-            },
-            
-            // Trees (medium priority - expanded list for Clarifai terms)
-            { 
-                terms: [
-                    // General tree terms
-                    'tree', 'trees', 'wood', 'timber', 'lumber', 'log', 'woody plant',
+            // Humans
+            human: '👤'
+        };
+        
+        return emojiMap[objectName] || '🌍';
+    }
+
+    getObjectEmoji(objectName) {
                     // Tree parts
                     'trunk', 'bark', 'branch', 'branches', 'twig', 'stem', 'root', 'roots',
                     'leaf', 'leaves', 'foliage', 'canopy', 'crown',
@@ -850,7 +854,7 @@ class NatureTalks {
             { terms: ['butterfly', 'moth'], category: 'butterfly' },
             { terms: ['ladybug', 'ladybird'], category: 'ladybug' },
             { terms: ['bee', 'honeybee', 'bumblebee'], category: 'bee' },
-            { terms: ['rabbit', 'bunny', 'hare', 'animal', 'mammal', 'wildlife'], category: 'bear' },
+            { terms: ['rabbit', 'bunny', 'hare'], category: 'rabbit' },
             { terms: ['mushroom', 'fungus', 'fungi', 'boletus', 'toadstool', 'edible agaric', 'spore', 'mycelium'], category: 'mushroom' },
             { terms: ['fish', 'salmon', 'trout'], category: 'fish' },
             
@@ -1094,8 +1098,11 @@ class NatureTalks {
             { terms: ['sea turtle', 'turtle', 'marine reptile'], category: 'sea-turtle' },
             { terms: ['crab', 'crustacean', 'claws'], category: 'crab' },
             
+            // Humans and people (high priority)
+            { terms: ['person', 'people', 'human', 'man', 'woman', 'child', 'adult', 'portrait', 'face', 'individual'], category: 'human' },
+            
             // Generic animal terms (lowest priority)
-            { terms: ['animal', 'creature', 'wildlife'], category: 'animal' },
+            { terms: ['animal', 'creature', 'wildlife', 'mammal'], category: 'animal' },
             
             { terms: ['mountain', 'hill', 'peak', 'summit'], category: 'mountain' },
             { terms: ['rock', 'stone', 'cliff', 'boulder'], category: 'mountain' },
@@ -1115,7 +1122,16 @@ class NatureTalks {
             
             for (const term of allTerms) {
                 for (const ruleTerm of rule.terms) {
-                    if (term.includes(ruleTerm) || ruleTerm.includes(term)) {
+                    // Use exact match or word boundary matching to prevent false positives
+                    const termLower = term.toLowerCase();
+                    const ruleTermLower = ruleTerm.toLowerCase();
+                    
+                    if (termLower === ruleTermLower || 
+                        (termLower.includes(ruleTermLower) && termLower.includes(' ' + ruleTermLower)) ||
+                        (ruleTermLower.includes(termLower) && ruleTermLower.includes(' ' + termLower)) ||
+                        (termLower.includes(ruleTermLower + ' ')) ||
+                        (ruleTermLower.includes(termLower + ' ')) ||
+                        termLower.includes(ruleTermLower) && ruleTermLower.length >= 4) {
                         matchScore++;
                         matchedTerms.push(term + '->' + ruleTerm);
                         break; // Don't double-count the same term
@@ -1352,6 +1368,8 @@ class NatureTalks {
             'rhinoceros', 'hippopotamus',
             // Primates
             'monkey', 'chimpanzee', 'gorilla', 'orangutan',
+            // Humans
+            'human',
             // Marine mammals
             'whale', 'dolphin', 'seal', 'walrus',
             // Birds
@@ -1398,7 +1416,7 @@ class NatureTalks {
         } else if (primaryTerm.includes('water') || primaryTerm.includes('pond') || primaryTerm.includes('lake')) {
             return 'river';
         } else if (primaryTerm.includes('animal') || primaryTerm.includes('mammal') || primaryTerm.includes('pet')) {
-            return 'bear'; // Using bear as generic animal category
+            return 'animal'; // Using animal as generic animal category
         }
         
         // For non-nature objects, return the actual detected object name
@@ -1522,6 +1540,8 @@ class NatureTalks {
             
             // Mammals - Primates
             monkey: '🐒', chimpanzee: '🐵', gorilla: '🦍', orangutan: '🦧',
+            // Humans
+            human: '👤',
             
             // Marine mammals
             whale: '🐋', dolphin: '🐬', seal: '🦭', walrus: '🦭',
@@ -1890,6 +1910,9 @@ class NatureTalks {
             gorilla: 'I am a gentle gorilla',
             orangutan: 'I am a thoughtful orangutan',
             
+            // Humans
+            human: 'I am a human being',
+            
             // Marine mammals
             whale: 'I am a magnificent whale',
             dolphin: 'I am an intelligent dolphin',
@@ -2104,7 +2127,7 @@ class NatureTalks {
                 names: ['elephant', 'lion', 'tiger', 'leopard', 'cheetah', 'giraffe', 'zebra',
                        'rhino', 'hippo', 'buffalo', 'deer', 'elk', 'moose', 'wolf', 'fox',
                        'coyote', 'raccoon', 'skunk', 'squirrel', 'chipmunk', 'otter', 'seal',
-                       'whale', 'dolphin', 'shark', 'monkey', 'gorilla', 'chimpanzee', 'koala',
+                       'whale', 'dolphin', 'shark', 'monkey', 'gorilla', 'chimpanzee', 'human', 'koala',
                        'kangaroo', 'panda', 'sloth', 'armadillo', 'hedgehog', 'porcupine'],
                 intro: `I am a wild ${objectName}`
             }
@@ -2183,7 +2206,7 @@ class NatureTalks {
                 names: ['elephant', 'lion', 'tiger', 'leopard', 'cheetah', 'giraffe', 'zebra',
                        'rhino', 'hippo', 'buffalo', 'deer', 'elk', 'moose', 'wolf', 'fox',
                        'coyote', 'raccoon', 'skunk', 'squirrel', 'chipmunk', 'otter', 'seal',
-                       'whale', 'dolphin', 'shark', 'monkey', 'gorilla', 'chimpanzee', 'koala',
+                       'whale', 'dolphin', 'shark', 'monkey', 'gorilla', 'chimpanzee', 'human', 'koala',
                        'kangaroo', 'panda', 'sloth', 'armadillo', 'hedgehog', 'porcupine'],
                 explanation: `${objectName.charAt(0).toUpperCase() + objectName.slice(1)} animals have evolved amazing adaptations over millions of years. Each species has developed unique behaviors, physical features, and survival strategies that make them perfectly suited to their specific environment and ecological niche.`
             }
@@ -2466,6 +2489,9 @@ class NatureTalks {
             gorilla: 'Despite my strength, I am gentle and vegetarian, eating up to 40 pounds of plants daily.',
             orangutan: 'I am one of the most intelligent primates and can use tools to extract honey and insects.',
             
+            // Humans
+            human: 'I am the most adaptable species on Earth, capable of complex reasoning, creativity, and building civilizations that span the globe.',
+            
             // Marine mammals
             whale: 'I am the largest animal ever known to exist and my songs can travel hundreds of miles underwater.',
             dolphin: 'I have a complex language, use echolocation to navigate, and can recognize myself in mirrors.',
@@ -2630,7 +2656,7 @@ class NatureTalks {
                 names: ['elephant', 'lion', 'tiger', 'leopard', 'cheetah', 'giraffe', 'zebra',
                        'rhino', 'hippo', 'buffalo', 'deer', 'elk', 'moose', 'wolf', 'fox',
                        'coyote', 'raccoon', 'skunk', 'squirrel', 'chipmunk', 'otter', 'seal',
-                       'whale', 'dolphin', 'shark', 'monkey', 'gorilla', 'chimpanzee', 'koala',
+                       'whale', 'dolphin', 'shark', 'monkey', 'gorilla', 'chimpanzee', 'human', 'koala',
                        'kangaroo', 'panda', 'sloth', 'armadillo', 'hedgehog', 'porcupine'],
                 message: 'I maintain the balance of nature through my role in the food chain and ecosystem.'
             }
@@ -2987,7 +3013,7 @@ class NatureTalks {
                 names: ['elephant', 'lion', 'tiger', 'leopard', 'cheetah', 'giraffe', 'zebra',
                        'rhino', 'hippo', 'buffalo', 'deer', 'elk', 'moose', 'wolf', 'fox',
                        'coyote', 'raccoon', 'skunk', 'squirrel', 'chipmunk', 'otter', 'seal',
-                       'whale', 'dolphin', 'shark', 'monkey', 'gorilla', 'chimpanzee', 'koala',
+                       'whale', 'dolphin', 'shark', 'monkey', 'gorilla', 'chimpanzee', 'human', 'koala',
                        'kangaroo', 'panda', 'sloth', 'armadillo', 'hedgehog', 'porcupine'],
                 plea: 'Please save me by protecting wildlife habitats and stopping poaching!'
             }
@@ -4973,6 +4999,15 @@ class NatureTalks {
                 introduction: 'I am a gentle gorilla',
                 message: 'Despite my strength, I am gentle and vegetarian, eating up to 40 pounds of plants daily.',
                 plea: 'Please save me from poaching and protect my mountain forest home!'
+            },
+            
+            // Humans
+            human: {
+                emoji: '👤',
+                keywords: ['person', 'people', 'human', 'man', 'woman', 'child', 'adult', 'portrait', 'face', 'individual'],
+                introduction: 'I am a human being',
+                message: 'I am the most adaptable species on Earth, capable of complex reasoning, creativity, and building civilizations that span the globe.',
+                plea: 'Please help me live sustainably and protect the natural world for future generations!'
             },
             
             // Marine mammals
