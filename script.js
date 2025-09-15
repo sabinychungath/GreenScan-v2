@@ -1064,7 +1064,7 @@ class NatureTalks {
             { terms: ['cardinal', 'red bird', 'northern cardinal'], category: 'cardinal' },
             { terms: ['blue jay', 'jay', 'corvid'], category: 'blue-jay' },
             { terms: ['crow', 'raven', 'black bird'], category: 'crow' },
-            { terms: ['sparrow', 'house sparrow', 'small bird'], category: 'sparrow' },
+            { terms: ['sparrow', 'small sparrow', 'small bird'], category: 'sparrow' },
             { terms: ['woodpecker', 'red-headed', 'pecker'], category: 'woodpecker' },
             
             // Birds - Large/exotic birds  
@@ -2641,9 +2641,31 @@ class NatureTalks {
             }
         }
         
-        // For non-nature objects, provide a general descriptive message
-        console.log('🏠 NON-NATURE OBJECT MESSAGE: Creating generic message for:', objectName);
-        return `I am a ${objectName} created by humans.`;
+        // For non-nature objects, provide description with environmental connection
+        console.log('🏠 NON-NATURE OBJECT MESSAGE: Creating eco-friendly message for:', objectName);
+        
+        // Create environmental messages for common objects
+        const ecoMessages = {
+            house: 'I am a house that can help the environment through solar panels, energy efficiency, and green building materials.',
+            home: 'I am a home where you can help nature by conserving water, recycling, and using eco-friendly products.',
+            car: 'I am a car, but electric and hybrid versions of me help reduce air pollution and protect the environment.',
+            vehicle: 'I am a vehicle that can be more eco-friendly through electric power and efficient driving habits.',
+            cup: 'I am a cup - reusable versions of me help reduce waste and protect the environment from plastic pollution.',
+            mug: 'I am a mug that helps the environment by reducing single-use cup waste when you use me repeatedly.',
+            bottle: 'I am a bottle - reusable versions of me help reduce plastic waste and protect marine life.',
+            phone: 'I am a phone that can help the environment through recycling programs and by reducing paper use with digital communication.',
+            computer: 'I am a computer that helps the environment by enabling remote work, digital documents, and reducing travel needs.',
+            chair: 'I am a chair made from sustainable materials that can help protect forests when manufactured responsibly.',
+            table: 'I am a table that helps the environment when made from recycled or sustainably sourced materials.',
+            book: 'I am a book that helps share knowledge about nature and environmental protection with people.',
+            human: 'I am a human who can help protect the environment through conservation, recycling, and sustainable living choices.',
+            person: 'I am a person who has the power to make eco-friendly choices that help protect nature and wildlife.',
+            man: 'I am a man who can help the environment through sustainable living and nature conservation efforts.',
+            woman: 'I am a woman who can make environmentally conscious choices to protect the planet for future generations.',
+            food: 'I am food that helps the environment when grown organically and locally, reducing transportation and chemical use.'
+        };
+        
+        return ecoMessages[objectName.toLowerCase()] || `I am a ${objectName} that can help the environment when used responsibly and sustainably.`;
     }
 
     // Categorize objects as harmful or beneficial
@@ -2980,9 +3002,30 @@ class NatureTalks {
         if (this.isHarmfulObject(objectName)) {
             return 'Please avoid me by reducing pollution and stopping environmental destruction!';
         } else {
-            // For general non-nature objects, provide a more appropriate message
-            console.log('🏠 NON-NATURE OBJECT PLEA: Creating appropriate plea for:', objectName);
-            return 'Please use me responsibly and think about nature when making choices!';
+            // For general non-nature objects, provide environmental action suggestions
+            console.log('🏠 NON-NATURE OBJECT PLEA: Creating environmental action message for:', objectName);
+            
+            const ecoActions = {
+                house: 'Help the environment by making me energy-efficient with solar panels, LED lights, and proper insulation!',
+                home: 'Help the environment by conserving water, recycling, and using eco-friendly products in me!',
+                car: 'Help the environment by choosing electric or hybrid versions of me, or by carpooling and using public transport!',
+                vehicle: 'Help the environment by maintaining me properly, driving efficiently, and considering electric alternatives!',
+                cup: 'Help the environment by choosing reusable versions of me instead of disposable cups!',
+                mug: 'Help the environment by using me repeatedly instead of disposable cups and bottles!',
+                bottle: 'Help the environment by choosing reusable versions of me and recycling plastic ones properly!',
+                phone: 'Help the environment by recycling me properly when I\'m old and using me to reduce paper consumption!',
+                computer: 'Help the environment by using me for remote work, digital documents, and energy-saving settings!',
+                chair: 'Help the environment by choosing me made from sustainable or recycled materials!',
+                table: 'Help the environment by selecting me made from responsibly sourced or reclaimed wood!',
+                book: 'Help the environment by sharing knowledge about nature conservation and recycling me when done!',
+                human: 'Help the environment by making sustainable choices, conserving resources, and protecting wildlife!',
+                person: 'Help the environment by living sustainably, reducing waste, and caring for nature!',
+                man: 'Help the environment through eco-friendly choices, conservation efforts, and environmental awareness!',
+                woman: 'Help the environment by making conscious choices that protect nature for future generations!',
+                food: 'Help the environment by choosing organic, local, and sustainably grown versions of me!'
+            };
+            
+            return ecoActions[objectName.toLowerCase()] || `Help the environment by using me responsibly, recycling when possible, and choosing sustainable alternatives!`;
         }
     }
 
