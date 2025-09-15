@@ -303,6 +303,7 @@ class NatureTalks {
     async classifyWithClarifai(imageData) {
         try {
             console.log('🎯 Starting Clarifai classification via backend...');
+            console.log('🔍 Debug: Testing flower detection improvements...');
             
             // Use backend proxy endpoint - no more CORS issues!
             const response = await fetch('/api/classify', {
@@ -326,6 +327,8 @@ class NatureTalks {
             if (result.success && result.result) {
                 console.log('✅ Clarifai detection via backend successful:', result.result.name, `${(result.result.confidence * 100).toFixed(1)}%`);
                 console.log('📋 All concepts found:', result.result.allConcepts);
+                console.log('🔍 FLOWER DEBUG - Detected name:', result.result.name);
+                console.log('🔍 FLOWER DEBUG - All concepts:', result.result.allConcepts);
                 
                 return result.result;
             } else {
@@ -668,6 +671,8 @@ class NatureTalks {
         const confidence = identifiedObject.confidence || 0.7;
         
         console.log('🎯 Generating message for:', objectName, 'confidence:', confidence, 'concepts:', identifiedObject.allConcepts);
+        console.log('🌸 FLOWER DEBUG - Input object name:', objectName);
+        console.log('🌸 FLOWER DEBUG - All concepts:', identifiedObject.allConcepts);
         
         // Preserve the original object name for specific messages
         let originalObjectName = objectName;
@@ -677,9 +682,11 @@ class NatureTalks {
         
         // More comprehensive mapping with better priority for category
         let matchedCategory = this.findBestMatch(originalObjectName, identifiedObject.allConcepts || []);
+        console.log('🌸 FLOWER DEBUG - Matched category:', matchedCategory);
         
         // Ensure we have a valid category
         if (!this.natureDatabase[matchedCategory]) {
+            console.log('🌸 FLOWER DEBUG - Category not found in database, using fallback');
             matchedCategory = 'tree'; // Safe fallback
         }
         
@@ -849,6 +856,16 @@ class NatureTalks {
         if (hasWater && bestMatch === 'tree') {
             console.log('🎯 Priority override: Water body detected');
             return 'river';
+        }
+        
+        // FLOWER PRIORITY OVERRIDES - Specific flowers beat generic "flower"
+        const specificFlowers = ['sunflower', 'lavender', 'orchid', 'rose', 'tulip', 'daisy', 'lily', 'lotus', 'iris'];
+        for (const specificFlower of specificFlowers) {
+            const hasSpecificFlower = allTerms.some(term => term.includes(specificFlower));
+            if (hasSpecificFlower && bestMatch === 'flower') {
+                console.log('🌸 FLOWER PRIORITY OVERRIDE:', specificFlower, 'beats generic flower');
+                return specificFlower;
+            }
         }
         
         if (bestMatch) {
