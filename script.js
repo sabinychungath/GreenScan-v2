@@ -925,11 +925,13 @@ class NatureTalks {
         
         // If we matched to generic 'snake', try intelligent detection
         if (bestMatch === 'snake') {
+            console.log('🔍 DETECTED GENERIC SNAKE - Attempting intelligent detection...');
             const intelligentSnakeType = this.detectSnakeType(allTerms);
             if (intelligentSnakeType !== 'snake') {
                 console.log('🐍 INTELLIGENT SNAKE DETECTION for generic snake:', intelligentSnakeType);
                 return intelligentSnakeType;
             }
+            console.log('⚠️ No intelligent detection - defaulting to generic snake');
         }
         
         if (bestMatch) {
@@ -1045,12 +1047,14 @@ class NatureTalks {
             return 'corn';
         }
         
-        // If no specific context, provide educational variety by suggesting different snake types
-        // This gives users a chance to learn about different snake species
-        const educationalSnakes = ['python', 'garter', 'corn', 'milk', 'kingsnake', 'boa'];
-        const selectedSnake = educationalSnakes[Math.floor(Math.random() * educationalSnakes.length)];
-        console.log('🎓 Educational variety - selecting snake type for learning:', selectedSnake);
-        return selectedSnake;
+        // For testing - let's always suggest python first to verify the system works
+        console.log('🎓 Educational variety - selecting python for testing');
+        return 'python';
+        
+        // Original random selection (commented out for testing)
+        // const educationalSnakes = ['python', 'garter', 'corn', 'milk', 'kingsnake', 'boa'];
+        // const selectedSnake = educationalSnakes[Math.floor(Math.random() * educationalSnakes.length)];
+        // return selectedSnake;
     }
 
     generateSpecificIntroduction(objectName) {
