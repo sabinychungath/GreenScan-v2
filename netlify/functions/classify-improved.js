@@ -17,6 +17,31 @@ const NATURE_CONCEPT_MAPPING = {
     'countryside': 'meadow',
     'outdoors': 'nature scene',
     
+    // Specific flower mappings
+    'lavender': 'lavender',
+    'orchid': 'orchid',
+    'rose': 'rose',
+    'tulip': 'tulip',
+    'sunflower': 'sunflower',
+    'daisy': 'daisy',
+    'lily': 'lily',
+    'lotus': 'lotus',
+    'marigold': 'marigold',
+    'carnation': 'carnation',
+    'chrysanthemum': 'chrysanthemum',
+    'petunia': 'petunia',
+    'violet': 'violet',
+    'iris': 'iris',
+    'hibiscus': 'hibiscus',
+    'jasmine': 'jasmine',
+    'gardenia': 'gardenia',
+    'magnolia': 'magnolia',
+    'blossom': 'flower',
+    'bloom': 'flower',
+    'petal': 'flower',
+    'bouquet': 'flower',
+    'floral': 'flower',
+    
     // Keep good nature terms as-is
     'forest': 'forest',
     'valley': 'valley',
@@ -32,6 +57,12 @@ const CONCEPT_PRIORITY = {
     // Highest priority - specific nature scenes
     'forest': 15, 'valley': 15, 'river': 15, 'mountain': 15, 'lake': 15,
     'waterfall': 15, 'canyon': 15, 'meadow': 15, 'prairie': 15,
+    
+    // Very high priority - specific flowers
+    'lavender': 18, 'orchid': 18, 'rose': 18, 'tulip': 18, 'sunflower': 18,
+    'daisy': 16, 'lily': 16, 'lotus': 16, 'iris': 16, 'hibiscus': 16,
+    'jasmine': 16, 'magnolia': 16, 'violet': 16, 'gardenia': 16,
+    'marigold': 14, 'carnation': 14, 'chrysanthemum': 14, 'petunia': 14,
     
     // High priority - nature objects
     'tree': 12, 'flower': 12, 'plant': 10, 'grass': 10,
