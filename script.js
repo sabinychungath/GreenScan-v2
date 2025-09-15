@@ -763,9 +763,10 @@ class NatureTalks {
             },
             // Water plants vs flowers (lotus, water lily are water plants, not typical flowers)
             { terms: ['lotus', 'water lily', 'lily pad', 'pond plant', 'aquatic plant'], category: 'river' },
-            // Specific flowers
+            // Specific flowers (most specific first)
+            { terms: ['sunflower'], category: 'sunflower' },
             { terms: ['lavender'], category: 'lavender' },
-            { terms: ['rose', 'tulip', 'sunflower', 'carnation', 'chrysanthemum', 'petunia', 'marigold', 'daisy', 'lily'], category: 'flower' },
+            { terms: ['rose', 'tulip', 'carnation', 'chrysanthemum', 'petunia', 'marigold', 'daisy', 'lily'], category: 'flower' },
             // Generic flower terms (lower priority than specific types)
             { terms: ['flower', 'bloom', 'petal', 'blossom', 'bouquet', 'floral'], category: 'flower' },
             { terms: ['ocean', 'sea', 'reef', 'coral', 'marine'], category: 'ocean' },
@@ -1388,6 +1389,7 @@ class NatureTalks {
             // Flowers
             flower: 'Please save me by avoiding pesticides and planting pollinator gardens!',
             rose: 'Please save me by supporting organic farming and bee conservation!',
+            sunflower: 'Please save me by supporting organic farming and protecting natural habitats!',
             
             // Water
             ocean: 'Please save me by reducing plastic waste and stopping ocean pollution!',
@@ -2817,6 +2819,13 @@ class NatureTalks {
                 introduction: 'I am a beautiful flower',
                 message: 'I bring color to your world and help bees make honey.',
                 plea: 'Please save me by not picking wildflowers and protecting pollinator habitats!'
+            },
+            sunflower: {
+                emoji: '🌻',
+                keywords: ['sunflower'],
+                introduction: 'I am a bright sunflower',
+                message: 'I turn my face to follow the sun and provide nutritious seeds for birds and humans.',
+                plea: 'Please save me by supporting organic farming and protecting natural habitats!'
             },
             lavender: {
                 emoji: '💜',
