@@ -1010,6 +1010,90 @@ class NatureTalks {
             { terms: ['hognose', 'hog nose snake'], category: 'hognose' },
             // Generic snake terms (lower priority than specific types)
             { terms: ['snake', 'serpent', 'reptile'], category: 'snake' },
+            
+            // Mammals - Domestic animals
+            { terms: ['dog', 'puppy', 'canine', 'golden retriever', 'labrador'], category: 'dog' },
+            { terms: ['cat', 'kitten', 'feline', 'tabby', 'persian cat'], category: 'cat' },
+            { terms: ['horse', 'stallion', 'mare', 'foal', 'pony'], category: 'horse' },
+            { terms: ['cow', 'cattle', 'bull', 'calf', 'dairy cow'], category: 'cow' },
+            { terms: ['sheep', 'lamb', 'ram', 'ewe', 'flock'], category: 'sheep' },
+            { terms: ['goat', 'kid goat', 'billy goat', 'nanny goat'], category: 'goat' },
+            { terms: ['pig', 'swine', 'hog', 'piglet', 'boar'], category: 'pig' },
+            
+            // Mammals - Wild animals
+            { terms: ['bear', 'grizzly', 'black bear', 'brown bear', 'polar bear'], category: 'bear' },
+            { terms: ['wolf', 'gray wolf', 'pack', 'alpha wolf'], category: 'wolf' },
+            { terms: ['fox', 'red fox', 'arctic fox', 'fennec fox'], category: 'fox' },
+            { terms: ['deer', 'white-tail', 'buck', 'doe', 'fawn'], category: 'deer' },
+            { terms: ['elk', 'wapiti', 'bull elk'], category: 'elk' },
+            { terms: ['moose', 'bull moose', 'antlers'], category: 'moose' },
+            { terms: ['rabbit', 'bunny', 'cottontail', 'hare'], category: 'rabbit' },
+            { terms: ['squirrel', 'tree squirrel', 'ground squirrel'], category: 'squirrel' },
+            { terms: ['raccoon', 'trash panda', 'masked bandit'], category: 'raccoon' },
+            { terms: ['skunk', 'striped skunk', 'polecat'], category: 'skunk' },
+            { terms: ['opossum', 'possum', 'marsupial'], category: 'opossum' },
+            
+            // Mammals - Large African animals
+            { terms: ['elephant', 'african elephant', 'asian elephant'], category: 'elephant' },
+            { terms: ['lion', 'lioness', 'pride', 'mane'], category: 'lion' },
+            { terms: ['tiger', 'siberian tiger', 'bengal tiger'], category: 'tiger' },
+            { terms: ['leopard', 'snow leopard', 'jaguar'], category: 'leopard' },
+            { terms: ['cheetah', 'fastest cat'], category: 'cheetah' },
+            { terms: ['giraffe', 'tall neck', 'african giraffe'], category: 'giraffe' },
+            { terms: ['zebra', 'striped horse', 'plains zebra'], category: 'zebra' },
+            { terms: ['rhinoceros', 'rhino', 'horn'], category: 'rhinoceros' },
+            { terms: ['hippopotamus', 'hippo', 'river horse'], category: 'hippopotamus' },
+            
+            // Mammals - Primates
+            { terms: ['monkey', 'primate', 'ape'], category: 'monkey' },
+            { terms: ['chimpanzee', 'chimp', 'pan troglodytes'], category: 'chimpanzee' },
+            { terms: ['gorilla', 'silverback', 'mountain gorilla'], category: 'gorilla' },
+            { terms: ['orangutan', 'great ape'], category: 'orangutan' },
+            
+            // Marine mammals
+            { terms: ['whale', 'humpback', 'blue whale', 'sperm whale'], category: 'whale' },
+            { terms: ['dolphin', 'bottlenose', 'marine mammal'], category: 'dolphin' },
+            { terms: ['seal', 'sea lion', 'harbor seal'], category: 'seal' },
+            { terms: ['walrus', 'tusk', 'arctic marine'], category: 'walrus' },
+            
+            // Birds - Common birds
+            { terms: ['eagle', 'bald eagle', 'golden eagle', 'raptor'], category: 'eagle' },
+            { terms: ['hawk', 'red-tail', 'bird of prey'], category: 'hawk' },
+            { terms: ['owl', 'hoot owl', 'barn owl', 'great horned'], category: 'owl' },
+            { terms: ['robin', 'american robin', 'red breast'], category: 'robin' },
+            { terms: ['cardinal', 'red bird', 'northern cardinal'], category: 'cardinal' },
+            { terms: ['blue jay', 'jay', 'corvid'], category: 'blue-jay' },
+            { terms: ['crow', 'raven', 'black bird'], category: 'crow' },
+            { terms: ['sparrow', 'house sparrow', 'small bird'], category: 'sparrow' },
+            { terms: ['woodpecker', 'red-headed', 'pecker'], category: 'woodpecker' },
+            
+            // Birds - Large/exotic birds  
+            { terms: ['flamingo', 'pink bird', 'wading bird'], category: 'flamingo' },
+            { terms: ['peacock', 'peafowl', 'colorful plumes'], category: 'peacock' },
+            { terms: ['swan', 'white swan', 'mute swan'], category: 'swan' },
+            { terms: ['pelican', 'large beak', 'fishing bird'], category: 'pelican' },
+            { terms: ['penguin', 'antarctic bird', 'flightless'], category: 'penguin' },
+            { terms: ['ostrich', 'large flightless', 'african bird'], category: 'ostrich' },
+            
+            // Insects
+            { terms: ['butterfly', 'monarch', 'colorful wings'], category: 'butterfly' },
+            { terms: ['bee', 'honey bee', 'bumble bee', 'pollinator'], category: 'bee' },
+            { terms: ['ladybug', 'ladybird', 'red beetle'], category: 'ladybug' },
+            { terms: ['dragonfly', 'damselfly', 'pond insect'], category: 'dragonfly' },
+            { terms: ['spider', 'arachnid', 'web spinner'], category: 'spider' },
+            { terms: ['ant', 'worker ant', 'colony'], category: 'ant' },
+            
+            // Marine life
+            { terms: ['fish', 'swimming', 'aquatic'], category: 'fish' },
+            { terms: ['shark', 'great white', 'predator fish'], category: 'shark' },
+            { terms: ['octopus', 'tentacles', 'cephalopod'], category: 'octopus' },
+            { terms: ['jellyfish', 'sea jelly', 'transparent'], category: 'jellyfish' },
+            { terms: ['sea turtle', 'turtle', 'marine reptile'], category: 'sea-turtle' },
+            { terms: ['crab', 'crustacean', 'claws'], category: 'crab' },
+            
+            // Generic animal terms (lowest priority)
+            { terms: ['animal', 'creature', 'wildlife'], category: 'animal' },
+            
             { terms: ['mountain', 'hill', 'peak', 'summit'], category: 'mountain' },
             { terms: ['rock', 'stone', 'cliff', 'boulder'], category: 'mountain' },
             { terms: ['sky', 'cloud', 'weather'], category: 'earth' },
@@ -1253,6 +1337,36 @@ class NatureTalks {
             }
         }
         
+        // ANIMAL PRIORITY OVERRIDES - Specific animals beat generic "animal"
+        const specificAnimals = [
+            // Domestic animals
+            'dog', 'cat', 'horse', 'cow', 'sheep', 'goat', 'pig',
+            // Wild mammals
+            'bear', 'wolf', 'fox', 'deer', 'elk', 'moose', 'rabbit', 'squirrel', 
+            'raccoon', 'skunk', 'opossum',
+            // Large African animals
+            'elephant', 'lion', 'tiger', 'leopard', 'cheetah', 'giraffe', 'zebra', 
+            'rhinoceros', 'hippopotamus',
+            // Primates
+            'monkey', 'chimpanzee', 'gorilla', 'orangutan',
+            // Marine mammals
+            'whale', 'dolphin', 'seal', 'walrus',
+            // Birds
+            'eagle', 'hawk', 'owl', 'robin', 'cardinal', 'blue-jay', 'crow', 'sparrow', 
+            'woodpecker', 'flamingo', 'peacock', 'swan', 'pelican', 'penguin', 'ostrich',
+            // Insects
+            'butterfly', 'bee', 'ladybug', 'dragonfly', 'spider', 'ant',
+            // Marine life
+            'fish', 'shark', 'octopus', 'jellyfish', 'sea-turtle', 'crab'
+        ];
+        for (const specificAnimal of specificAnimals) {
+            const hasSpecificAnimal = allTerms.some(term => term.includes(specificAnimal));
+            if (hasSpecificAnimal && (bestMatch === 'animal' || bestMatch === 'bird')) {
+                console.log('🐾 ANIMAL PRIORITY OVERRIDE:', specificAnimal, 'beats generic', bestMatch);
+                return specificAnimal;
+            }
+        }
+        
         // If we matched to generic 'snake', try intelligent detection
         if (bestMatch === 'snake') {
             console.log('🔍 DETECTED GENERIC SNAKE - Attempting intelligent detection...');
@@ -1273,7 +1387,7 @@ class NatureTalks {
         const primaryTerm = allTerms[0] || '';
         console.log('No rule matches, using enhanced fallback for:', primaryTerm);
         
-        // Smart fallback classifications
+        // Smart fallback classifications for nature-related terms
         if (primaryTerm.includes('tree') || primaryTerm.includes('wood') || primaryTerm.includes('bark')) {
             return 'tree';
         } else if (primaryTerm.includes('flower') || primaryTerm.includes('bloom') || primaryTerm.includes('petal')) {
@@ -1284,8 +1398,9 @@ class NatureTalks {
             return 'bear'; // Using bear as generic animal category
         }
         
-        // Final fallback
-        return 'earth';
+        // For non-nature objects, return the actual detected object name
+        console.log('🏠 NON-NATURE OBJECT DETECTED: Returning actual object name:', primaryTerm);
+        return primaryTerm || 'earth';
     }
 
     getObjectEmoji(objectName) {
@@ -1391,6 +1506,36 @@ class NatureTalks {
             bird: '🐦', eagle: '🦅', owl: '🦉', fish: '🐟',
             butterfly: '🦋', bee: '🐝', ladybug: '🐞', beetle: '🐞', animal: '🐾',
             
+            // Mammals - Domestic animals
+            dog: '🐕', cat: '🐱', horse: '🐴', cow: '🐄', sheep: '🐑', goat: '🐐', pig: '🐷',
+            
+            // Mammals - Wild animals  
+            wolf: '🐺', fox: '🦊', deer: '🦌', elk: '🦌', moose: '🫎', squirrel: '🐿️',
+            raccoon: '🦝', skunk: '🦨', opossum: '🐀',
+            
+            // Mammals - Large African animals
+            elephant: '🐘', lion: '🦁', tiger: '🐅', leopard: '🐆', cheetah: '🐆',
+            giraffe: '🦒', zebra: '🦓', rhinoceros: '🦏', hippopotamus: '🦛',
+            
+            // Mammals - Primates
+            monkey: '🐒', chimpanzee: '🐵', gorilla: '🦍', orangutan: '🦧',
+            
+            // Marine mammals
+            whale: '🐋', dolphin: '🐬', seal: '🦭', walrus: '🦭',
+            
+            // Birds - Common birds
+            hawk: '🦅', robin: '🐦', cardinal: '🐦', 'blue-jay': '🐦', crow: '🐦',
+            sparrow: '🐦', woodpecker: '🐦',
+            
+            // Birds - Large/exotic birds
+            flamingo: '🦩', peacock: '🦚', swan: '🦢', pelican: '🦆', penguin: '🐧', ostrich: '🦓',
+            
+            // Insects
+            dragonfly: '🐉', spider: '🕷️', ant: '🐜',
+            
+            // Marine life
+            shark: '🦈', octopus: '🐙', jellyfish: '🪼', 'sea-turtle': '🐢', crab: '🦀',
+            
             // Snakes
             snake: '🐍', python: '🐍', cobra: '🐍', viper: '🐍', rattlesnake: '🐍',
             boa: '🐍', anaconda: '🐍', mamba: '🐍', adder: '🐍', copperhead: '🐍',
@@ -1400,6 +1545,13 @@ class NatureTalks {
             // Landscapes
             mountain: '⛰️', hill: '🏔️', rock: '🪨', stone: '🪨',
             sky: '☁️', cloud: '☁️', forest: '🌲',
+            
+            // General objects
+            house: '🏠', home: '🏠', building: '🏢', car: '🚗', vehicle: '🚙',
+            cup: '☕', mug: '☕', bottle: '🍼', phone: '📱', computer: '💻',
+            chair: '🪑', table: '🪑', bed: '🛏️', book: '📚', pen: '✏️',
+            human: '👤', person: '👤', man: '👨', woman: '👩', child: '🧒',
+            food: '🍎', bread: '🍞', pizza: '🍕', burger: '🍔',
             
             // Default
             nature: '🌍'
@@ -1412,7 +1564,9 @@ class NatureTalks {
             }
         }
         
-        return '🌍'; // Default nature emoji
+        // For unknown objects, return a general object emoji instead of nature emoji
+        console.log('🏠 UNKNOWN OBJECT EMOJI: Using general object emoji for:', objectName);
+        return '📦'; // Default general object emoji
     }
 
     detectSnakeType(allTerms) {
@@ -1695,6 +1849,78 @@ class NatureTalks {
             butterfly: 'I am a delicate butterfly',
             bee: 'I am a busy bee',
             fish: 'I am a swimming fish',
+            
+            // Mammals - Domestic animals
+            dog: 'I am a loyal dog',
+            cat: 'I am an independent cat',
+            horse: 'I am a majestic horse',
+            cow: 'I am a gentle cow',
+            sheep: 'I am a fluffy sheep',
+            goat: 'I am a curious goat',
+            pig: 'I am an intelligent pig',
+            
+            // Mammals - Wild animals
+            wolf: 'I am a wild wolf',
+            fox: 'I am a clever fox',
+            deer: 'I am a graceful deer',
+            elk: 'I am a noble elk',
+            moose: 'I am a mighty moose',
+            squirrel: 'I am a busy squirrel',
+            raccoon: 'I am a clever raccoon',
+            skunk: 'I am a defensive skunk',
+            opossum: 'I am a resilient opossum',
+            
+            // Mammals - Large African animals
+            elephant: 'I am a wise elephant',
+            lion: 'I am a powerful lion',
+            tiger: 'I am a fierce tiger',
+            leopard: 'I am a stealthy leopard',
+            cheetah: 'I am the fastest cheetah',
+            giraffe: 'I am a tall giraffe',
+            zebra: 'I am a striped zebra',
+            rhinoceros: 'I am a strong rhinoceros',
+            hippopotamus: 'I am a massive hippopotamus',
+            
+            // Mammals - Primates
+            monkey: 'I am a playful monkey',
+            chimpanzee: 'I am an intelligent chimpanzee',
+            gorilla: 'I am a gentle gorilla',
+            orangutan: 'I am a thoughtful orangutan',
+            
+            // Marine mammals
+            whale: 'I am a magnificent whale',
+            dolphin: 'I am an intelligent dolphin',
+            seal: 'I am a playful seal',
+            walrus: 'I am a tusked walrus',
+            
+            // Birds - Common birds
+            hawk: 'I am a sharp-eyed hawk',
+            robin: 'I am a cheerful robin',
+            cardinal: 'I am a bright red cardinal',
+            'blue-jay': 'I am a smart blue jay',
+            crow: 'I am an intelligent crow',
+            sparrow: 'I am a small sparrow',
+            woodpecker: 'I am a drumming woodpecker',
+            
+            // Birds - Large/exotic birds
+            flamingo: 'I am a pink flamingo',
+            peacock: 'I am a colorful peacock',
+            swan: 'I am an elegant swan',
+            pelican: 'I am a large-beaked pelican',
+            penguin: 'I am a tuxedo-wearing penguin',
+            ostrich: 'I am a fast-running ostrich',
+            
+            // Insects
+            dragonfly: 'I am a swift dragonfly',
+            spider: 'I am a web-spinning spider',
+            ant: 'I am a hardworking ant',
+            
+            // Marine life
+            shark: 'I am a powerful shark',
+            octopus: 'I am an intelligent octopus',
+            jellyfish: 'I am a floating jellyfish',
+            'sea-turtle': 'I am an ancient sea turtle',
+            crab: 'I am a sideways-walking crab',
             
             // Fungi
             mushroom: 'I am a mushroom',
@@ -2200,6 +2426,78 @@ class NatureTalks {
             bee: 'I pollinate 1/3 of all the food you eat and create sweet honey.',
             fish: 'I keep aquatic ecosystems healthy and provide protein for many animals.',
             
+            // Mammals - Domestic animals
+            dog: 'I am humanity\'s oldest companion, loyal for over 15,000 years, and can detect diseases with my nose.',
+            cat: 'I control rodent populations and have been worshipped by humans since ancient Egypt.',
+            horse: 'I helped build civilizations by carrying humans and goods across continents for thousands of years.',
+            cow: 'I provide milk, meat, and leather while grazing helps maintain grassland ecosystems.',
+            sheep: 'I provide wool, milk, and meat while my grazing helps prevent wildfires by managing grass.',
+            goat: 'I can survive in harsh environments and provide milk, meat, and fiber to communities worldwide.',
+            pig: 'I am highly intelligent, can learn tricks, and my rooting behavior helps till soil naturally.',
+            
+            // Mammals - Wild animals
+            wolf: 'I control deer populations and my howls can be heard up to 6 miles away in forest ecosystems.',
+            fox: 'I control rodent populations with my excellent hearing and can jump 6 feet high to catch prey.',
+            deer: 'I help plant forests by spreading seeds in my droppings and serve as food for large predators.',
+            elk: 'I bugle to attract mates and my massive antlers can weigh up to 40 pounds each.',
+            moose: 'I am the largest member of the deer family and can dive 20 feet underwater to feed on plants.',
+            squirrel: 'I plant thousands of trees by burying nuts and forgetting where I hid them.',
+            raccoon: 'I have human-like hands and am one of the most adaptable mammals in North America.',
+            skunk: 'I control insect populations and my spray can be smelled from over a mile away.',
+            opossum: 'I am immune to most snake venoms and eat thousands of disease-carrying ticks each year.',
+            
+            // Mammals - Large African animals
+            elephant: 'I have the largest brain of any land animal and can communicate using infrasonic sounds.',
+            lion: 'I am the only cat that lives in social groups and my roar can be heard from 5 miles away.',
+            tiger: 'I am the largest wild cat and each of my stripes is unique, like human fingerprints.',
+            leopard: 'I am the strongest climber among big cats and can carry prey twice my weight up trees.',
+            cheetah: 'I am the fastest land animal, reaching 70 mph, but can only maintain this speed for short bursts.',
+            giraffe: 'I am the tallest mammal with a heart that weighs 25 pounds to pump blood up my long neck.',
+            zebra: 'My stripes confuse predators and help regulate my body temperature in the African heat.',
+            rhinoceros: 'My horn is made of compressed hair and I can run 35 mph despite weighing up to 5,000 pounds.',
+            hippopotamus: 'I spend most of my day in water and despite my appearance, I am most closely related to whales.',
+            
+            // Mammals - Primates
+            monkey: 'I use tools, have complex social structures, and can learn sign language to communicate with humans.',
+            chimpanzee: 'I share 98.8% of my DNA with humans and can learn to use computers and solve complex problems.',
+            gorilla: 'Despite my strength, I am gentle and vegetarian, eating up to 40 pounds of plants daily.',
+            orangutan: 'I am one of the most intelligent primates and can use tools to extract honey and insects.',
+            
+            // Marine mammals
+            whale: 'I am the largest animal ever known to exist and my songs can travel hundreds of miles underwater.',
+            dolphin: 'I have a complex language, use echolocation to navigate, and can recognize myself in mirrors.',
+            seal: 'I can dive to 1,500 feet and hold my breath for up to 20 minutes while hunting for fish.',
+            walrus: 'My tusks can grow up to 3 feet long and I use them to pull myself onto ice and establish dominance.',
+            
+            // Birds - Common birds
+            hawk: 'I have eyesight 8 times sharper than humans and control rodent populations in ecosystems.',
+            robin: 'I am often the first bird to sing at dawn and my red breast signals the arrival of spring.',
+            cardinal: 'I mate for life and my bright red color comes from carotenoid pigments in the food I eat.',
+            'blue-jay': 'I can mimic the calls of other birds and remember thousands of locations where I hide acorns.',
+            crow: 'I am one of the most intelligent birds, can solve puzzles, and remember human faces for years.',
+            sparrow: 'I control insect populations and can eat up to 400 insects per day during nesting season.',
+            woodpecker: 'I create nesting holes used by many other species and my drumming can be heard a mile away.',
+            
+            // Birds - Large/exotic birds
+            flamingo: 'My pink color comes from eating shrimp and algae, and I can live over 50 years.',
+            peacock: 'My tail has over 200 feathers with eye-spots that I display to attract mates.',
+            swan: 'I mate for life and my neck has more vertebrae than a giraffe, allowing incredible flexibility.',
+            pelican: 'My bill can hold 3 gallons of water and fish, and I dive from heights up to 60 feet.',
+            penguin: 'I can swim up to 22 mph and huddle with thousands of others to survive Antarctic winters.',
+            ostrich: 'I am the largest bird and can run 45 mph with legs powerful enough to kill a lion.',
+            
+            // Insects
+            dragonfly: 'I have existed for over 300 million years and can catch 90% of the prey I hunt.',
+            spider: 'My silk is stronger than steel by weight and I control billions of insect pests annually.',
+            ant: 'I can lift 50 times my body weight and live in colonies with millions of individuals.',
+            
+            // Marine life
+            shark: 'I have existed for over 400 million years and play a crucial role in maintaining ocean health.',
+            octopus: 'I have three hearts, blue blood, and can change color and texture to match my surroundings.',
+            jellyfish: 'I have existed for over 500 million years and some species are theoretically immortal.',
+            'sea-turtle': 'I can live over 100 years and navigate thousands of miles using Earth\'s magnetic field.',
+            crab: 'I help clean ocean floors and some species can regenerate lost limbs multiple times.',
+            
             // Snakes
             snake: 'I control rodent populations and play a vital role in ecosystem balance.',
             python: 'I am a powerful constrictor that helps control prey populations in my habitat.',
@@ -2343,7 +2641,9 @@ class NatureTalks {
             }
         }
         
-        return 'I play an important role in the balance of nature.';
+        // For non-nature objects, provide a general descriptive message
+        console.log('🏠 NON-NATURE OBJECT MESSAGE: Creating generic message for:', objectName);
+        return `I am a ${objectName} created by humans.`;
     }
 
     // Categorize objects as harmful or beneficial
@@ -2680,7 +2980,9 @@ class NatureTalks {
         if (this.isHarmfulObject(objectName)) {
             return 'Please avoid me by reducing pollution and stopping environmental destruction!';
         } else {
-            return 'Please save nature by protecting the environment and stopping destruction!';
+            // For general non-nature objects, provide a more appropriate message
+            console.log('🏠 NON-NATURE OBJECT PLEA: Creating appropriate plea for:', objectName);
+            return 'Please use me responsibly and think about nature when making choices!';
         }
     }
 
@@ -4537,6 +4839,165 @@ class NatureTalks {
                 message: 'I control rodent populations and play a vital role in ecosystem balance.',
                 plea: 'Please save me by protecting my habitat and learning that I am not your enemy!'
             },
+            // Comprehensive Animal Database - Domestic animals
+            dog: {
+                emoji: '🐕',
+                keywords: ['dog', 'puppy', 'canine', 'golden retriever', 'labrador'],
+                introduction: 'I am a loyal dog',
+                message: 'I am humanity\'s oldest companion, loyal for over 15,000 years, and can detect diseases with my nose.',
+                plea: 'Please save me by adopting from shelters and being a responsible pet owner!'
+            },
+            cat: {
+                emoji: '🐱',
+                keywords: ['cat', 'kitten', 'feline', 'tabby', 'persian cat'],
+                introduction: 'I am an independent cat',
+                message: 'I control rodent populations and have been worshipped by humans since ancient Egypt.',
+                plea: 'Please save me by keeping me indoors to protect birds and getting me spayed/neutered!'
+            },
+            horse: {
+                emoji: '🐴',
+                keywords: ['horse', 'stallion', 'mare', 'foal', 'pony'],
+                introduction: 'I am a majestic horse',
+                message: 'I helped build civilizations by carrying humans and goods across continents for thousands of years.',
+                plea: 'Please save me by supporting humane treatment and wild mustang protection!'
+            },
+            
+            // Wild mammals
+            wolf: {
+                emoji: '🐺',
+                keywords: ['wolf', 'gray wolf', 'pack', 'alpha wolf'],
+                introduction: 'I am a wild wolf',
+                message: 'I control deer populations and my howls can be heard up to 6 miles away in forest ecosystems.',
+                plea: 'Please save me by protecting wilderness and understanding I avoid humans!'
+            },
+            fox: {
+                emoji: '🦊',
+                keywords: ['fox', 'red fox', 'arctic fox', 'fennec fox'],
+                introduction: 'I am a clever fox',
+                message: 'I control rodent populations with my excellent hearing and can jump 6 feet high to catch prey.',
+                plea: 'Please save me by preserving habitats and reducing vehicle strikes!'
+            },
+            deer: {
+                emoji: '🦌',
+                keywords: ['deer', 'white-tail', 'buck', 'doe', 'fawn'],
+                introduction: 'I am a graceful deer',
+                message: 'I help plant forests by spreading seeds in my droppings and serve as food for large predators.',
+                plea: 'Please save me by driving carefully and preserving natural corridors!'
+            },
+            elephant: {
+                emoji: '🐘',
+                keywords: ['elephant', 'african elephant', 'asian elephant'],
+                introduction: 'I am a wise elephant',
+                message: 'I have the largest brain of any land animal and can communicate using infrasonic sounds.',
+                plea: 'Please save me from ivory poaching and habitat destruction!'
+            },
+            lion: {
+                emoji: '🦁',
+                keywords: ['lion', 'lioness', 'pride', 'mane'],
+                introduction: 'I am a powerful lion',
+                message: 'I am the only cat that lives in social groups and my roar can be heard from 5 miles away.',
+                plea: 'Please save me from habitat loss and human-wildlife conflict!'
+            },
+            tiger: {
+                emoji: '🐅',
+                keywords: ['tiger', 'siberian tiger', 'bengal tiger'],
+                introduction: 'I am a fierce tiger',
+                message: 'I am the largest wild cat and each of my stripes is unique, like human fingerprints.',
+                plea: 'Please save me from poaching and deforestation - only 3,200 of us remain!'
+            },
+            giraffe: {
+                emoji: '🦒',
+                keywords: ['giraffe', 'tall neck', 'african giraffe'],
+                introduction: 'I am a tall giraffe',
+                message: 'I am the tallest mammal with a heart that weighs 25 pounds to pump blood up my long neck.',
+                plea: 'Please save me from habitat fragmentation and illegal hunting!'
+            },
+            
+            // Primates
+            monkey: {
+                emoji: '🐒',
+                keywords: ['monkey', 'primate', 'ape'],
+                introduction: 'I am a playful monkey',
+                message: 'I use tools, have complex social structures, and can learn sign language to communicate with humans.',
+                plea: 'Please save me from deforestation and the illegal pet trade!'
+            },
+            gorilla: {
+                emoji: '🦍',
+                keywords: ['gorilla', 'silverback', 'mountain gorilla'],
+                introduction: 'I am a gentle gorilla',
+                message: 'Despite my strength, I am gentle and vegetarian, eating up to 40 pounds of plants daily.',
+                plea: 'Please save me from poaching and protect my mountain forest home!'
+            },
+            
+            // Marine mammals
+            whale: {
+                emoji: '🐋',
+                keywords: ['whale', 'humpback', 'blue whale', 'sperm whale'],
+                introduction: 'I am a magnificent whale',
+                message: 'I am the largest animal ever known to exist and my songs can travel hundreds of miles underwater.',
+                plea: 'Please save me from ship strikes, plastic pollution, and noise pollution!'
+            },
+            dolphin: {
+                emoji: '🐬',
+                keywords: ['dolphin', 'bottlenose', 'marine mammal'],
+                introduction: 'I am an intelligent dolphin',
+                message: 'I have a complex language, use echolocation to navigate, and can recognize myself in mirrors.',
+                plea: 'Please save me from fishing nets, pollution, and captivity!'
+            },
+            
+            // Birds
+            eagle: {
+                emoji: '🦅',
+                keywords: ['eagle', 'bald eagle', 'golden eagle', 'raptor'],
+                introduction: 'I am a soaring eagle',
+                message: 'I have eyesight 8 times sharper than humans and control rodent populations in ecosystems.',
+                plea: 'Please save me from lead poisoning and protect my nesting areas!'
+            },
+            owl: {
+                emoji: '🦉',
+                keywords: ['owl', 'hoot owl', 'barn owl', 'great horned'],
+                introduction: 'I am a wise owl',
+                message: 'I hunt silently at night and can turn my head 270 degrees to spot prey.',
+                plea: 'Please save me by preserving old forests and reducing rodenticides!'
+            },
+            flamingo: {
+                emoji: '🦩',
+                keywords: ['flamingo', 'pink bird', 'wading bird'],
+                introduction: 'I am a pink flamingo',
+                message: 'My pink color comes from eating shrimp and algae, and I can live over 50 years.',
+                plea: 'Please save me from habitat destruction and water pollution!'
+            },
+            penguin: {
+                emoji: '🐧',
+                keywords: ['penguin', 'antarctic bird', 'flightless'],
+                introduction: 'I am a tuxedo-wearing penguin',
+                message: 'I can swim up to 22 mph and huddle with thousands of others to survive Antarctic winters.',
+                plea: 'Please save me from climate change melting my icy home!'
+            },
+            
+            // Marine life
+            shark: {
+                emoji: '🦈',
+                keywords: ['shark', 'great white', 'predator fish'],
+                introduction: 'I am a powerful shark',
+                message: 'I have existed for over 400 million years and play a crucial role in maintaining ocean health.',
+                plea: 'Please save me from overfishing and shark fin soup demand!'
+            },
+            octopus: {
+                emoji: '🐙',
+                keywords: ['octopus', 'tentacles', 'cephalopod'],
+                introduction: 'I am an intelligent octopus',
+                message: 'I have three hearts, blue blood, and can change color and texture to match my surroundings.',
+                plea: 'Please save me from ocean pollution and overfishing!'
+            },
+            'sea-turtle': {
+                emoji: '🐢',
+                keywords: ['sea turtle', 'turtle', 'marine reptile'],
+                introduction: 'I am an ancient sea turtle',
+                message: 'I can live over 100 years and navigate thousands of miles using Earth\'s magnetic field.',
+                plea: 'Please save me from plastic bags I mistake for jellyfish and beach development!'
+            },
+            
             python: {
                 emoji: '🐍',
                 keywords: ['python', 'ball python', 'burmese python', 'reticulated python'],
