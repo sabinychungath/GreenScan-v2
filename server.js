@@ -759,15 +759,11 @@ class NatureTalks {
         
         return emojiMap[objectName] || '🌍';
     }
-
-    getObjectEmoji(objectName) {
-        const emojiMap = {
-            // Trees and plants
-            tree: '🌳', oak: '🌳', pine: '🌲', apple: '🍎', leaf: '🍃', plant: '🌱',
-            bark: '🌳', trunk: '🌳', branch: '🌿',
-            
-            // Deciduous trees (non-fruit)
-            maple: '🍁', birch: '🌳', willow: '🌳', elm: '🌳', ash: '🌳',
+            { 
+                terms: [
+                    // General tree terms
+                    'tree', 'trees', 'wood', 'timber', 'lumber', 'log', 'woody plant',
+                    // Tree parts
                     'trunk', 'bark', 'branch', 'branches', 'twig', 'stem', 'root', 'roots',
                     'leaf', 'leaves', 'foliage', 'canopy', 'crown',
                     // Specific tree types
