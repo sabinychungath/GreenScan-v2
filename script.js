@@ -906,6 +906,7 @@ class NatureTalks {
     }
 
     generateSpecificIntroduction(objectName) {
+        console.log(`🔍 generateSpecificIntroduction called with: "${objectName}"`);
         const introductions = {
             // Trees and plants
             tree: 'I am a mighty tree',
@@ -973,9 +974,12 @@ class NatureTalks {
             bulldozer: 'I am heavy machinery destroying natural habitats'
         };
         
-        // Find best match
+        // Find best match (case-insensitive)
+        const lowerObjectName = objectName.toLowerCase();
         for (const [key, intro] of Object.entries(introductions)) {
-            if (objectName.includes(key) || key.includes(objectName)) {
+            const lowerKey = key.toLowerCase();
+            if (lowerObjectName.includes(lowerKey) || lowerKey.includes(lowerObjectName)) {
+                console.log(`🎯 Found specific intro match: ${objectName} -> ${key} -> ${intro}`);
                 return intro;
             }
         }
@@ -1179,9 +1183,12 @@ class NatureTalks {
             bulldozer: 'I crush entire ecosystems in minutes, destroying habitats that took years to develop.'
         };
         
-        // Find best match
+        // Find best match (case-insensitive)
+        const lowerObjectName = objectName.toLowerCase();
         for (const [key, message] of Object.entries(messages)) {
-            if (objectName.includes(key) || key.includes(objectName)) {
+            const lowerKey = key.toLowerCase();
+            if (lowerObjectName.includes(lowerKey) || lowerKey.includes(lowerObjectName)) {
+                console.log(`🎯 Found specific message match: ${objectName} -> ${key}`);
                 return message;
             }
         }
@@ -1430,9 +1437,12 @@ class NatureTalks {
             bulldozer: 'Please STOP habitat destruction and protect wildlife areas!'
         };
         
-        // Find best match
+        // Find best match (case-insensitive)
+        const lowerObjectName = objectName.toLowerCase();
         for (const [key, plea] of Object.entries(pleas)) {
-            if (objectName.includes(key) || key.includes(objectName)) {
+            const lowerKey = key.toLowerCase();
+            if (lowerObjectName.includes(lowerKey) || lowerKey.includes(lowerObjectName)) {
+                console.log(`🎯 Found specific plea match: ${objectName} -> ${key}`);
                 // Modify plea based on harmful vs beneficial
                 if (this.isHarmfulObject(objectName)) {
                     // Change "Please save" to "Please avoid" or "Please eliminate" for harmful objects
