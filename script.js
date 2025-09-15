@@ -738,7 +738,23 @@ class NatureTalks {
 
     findBestMatch(objectName, allConcepts, confidence = 0.7) {
         // Simple and direct approach: Check if any concept exists in database first
-        const allTerms = [objectName, ...allConcepts.map(c => c.toLowerCase())];
+        let allTerms = [objectName, ...allConcepts.map(c => c.toLowerCase())];
+        
+        // Enhanced parsing for MobileNet/complex strings (e.g., "rock python, rock snake, Python sebae")
+        const expandedTerms = [];
+        for (const term of allTerms) {
+            expandedTerms.push(term);
+            // Split by commas and extract individual terms
+            if (term.includes(',')) {
+                const splitTerms = term.split(',').map(t => t.trim());
+                expandedTerms.push(...splitTerms);
+            }
+            // Extract individual words for better matching
+            const words = term.split(' ').map(w => w.trim()).filter(w => w.length > 2);
+            expandedTerms.push(...words);
+        }
+        
+        allTerms = [...new Set(expandedTerms)]; // Remove duplicates
         
         console.log('🔍 All terms for matching:', allTerms); // Debug log
         console.log('🎯 Detection confidence:', (confidence * 100).toFixed(1) + '%');
@@ -765,10 +781,20 @@ class NatureTalks {
             
             // Check if this term exists in any category's keywords
             for (const [category, data] of Object.entries(this.natureDatabase)) {
-                if (data.keywords && data.keywords.includes(term)) {
-                    console.log('✅ Keyword match found:', term, '→', category);
-                    console.log('🔍 Keywords for', category + ':', data.keywords);
-                    return category;
+                if (data.keywords) {
+                    // First try exact match
+                    if (data.keywords.includes(term)) {
+                        console.log('✅ Exact keyword match found:', term, '→', category);
+                        return category;
+                    }
+                    
+                    // Then try partial matches for better MobileNet compatibility
+                    for (const keyword of data.keywords) {
+                        if (term.includes(keyword) || keyword.includes(term)) {
+                            console.log('✅ Partial keyword match found:', term, '→', keyword, '→', category);
+                            return category;
+                        }
+                    }
                 }
             }
         }
