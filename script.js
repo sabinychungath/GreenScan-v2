@@ -1031,7 +1031,10 @@ class NatureTalks {
             { terms: ['squirrel', 'tree squirrel', 'ground squirrel'], category: 'squirrel' },
             { terms: ['raccoon', 'trash panda', 'masked bandit'], category: 'raccoon' },
             { terms: ['skunk', 'striped skunk', 'polecat'], category: 'skunk' },
-            { terms: ['opossum', 'possum', 'marsupial'], category: 'opossum' },
+            { terms: ['opossum', 'possum', 'virginia opossum'], category: 'opossum' },
+            
+            // Mammals - Australian animals (specific first before African animals)
+            { terms: ['kangaroo', 'wallaby', 'joey', 'australian marsupial'], category: 'kangaroo' },
             
             // Mammals - Large African animals
             { terms: ['elephant', 'african elephant', 'asian elephant'], category: 'elephant' },
@@ -1343,7 +1346,7 @@ class NatureTalks {
             'dog', 'cat', 'horse', 'cow', 'sheep', 'goat', 'pig',
             // Wild mammals
             'bear', 'wolf', 'fox', 'deer', 'elk', 'moose', 'rabbit', 'squirrel', 
-            'raccoon', 'skunk', 'opossum',
+            'raccoon', 'skunk', 'opossum', 'kangaroo',
             // Large African animals
             'elephant', 'lion', 'tiger', 'leopard', 'cheetah', 'giraffe', 'zebra', 
             'rhinoceros', 'hippopotamus',
@@ -1511,7 +1514,7 @@ class NatureTalks {
             
             // Mammals - Wild animals  
             wolf: '🐺', fox: '🦊', deer: '🦌', elk: '🦌', moose: '🫎', squirrel: '🐿️',
-            raccoon: '🦝', skunk: '🦨', opossum: '🐀',
+            raccoon: '🦝', skunk: '🦨', opossum: '🐀', kangaroo: '🦘',
             
             // Mammals - Large African animals
             elephant: '🐘', lion: '🦁', tiger: '🐅', leopard: '🐆', cheetah: '🐆',
