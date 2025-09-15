@@ -902,6 +902,13 @@ class NatureTalks {
                 }
             }
             
+            // Try intelligent snake type detection based on available info
+            const intelligentSnakeType = this.detectSnakeType(allTerms);
+            if (intelligentSnakeType !== 'snake') {
+                console.log('🐍 INTELLIGENT SNAKE DETECTION:', intelligentSnakeType);
+                return intelligentSnakeType;
+            }
+            
             // Default to generic snake if no specific type found
             return 'snake';
         }
@@ -913,6 +920,15 @@ class NatureTalks {
             if (hasSpecificSnake && bestMatch === 'snake') {
                 console.log('🐍 SPECIFIC SNAKE PRIORITY OVERRIDE:', specificSnake, 'beats generic snake');
                 return specificSnake;
+            }
+        }
+        
+        // If we matched to generic 'snake', try intelligent detection
+        if (bestMatch === 'snake') {
+            const intelligentSnakeType = this.detectSnakeType(allTerms);
+            if (intelligentSnakeType !== 'snake') {
+                console.log('🐍 INTELLIGENT SNAKE DETECTION for generic snake:', intelligentSnakeType);
+                return intelligentSnakeType;
             }
         }
         
@@ -988,6 +1004,53 @@ class NatureTalks {
         }
         
         return '🌍'; // Default nature emoji
+    }
+
+    detectSnakeType(allTerms) {
+        // Intelligent snake type detection based on context clues and patterns
+        // This tries to make educated guesses about snake types when only "snake" is detected
+        
+        console.log('🔍 Attempting intelligent snake detection with terms:', allTerms);
+        
+        // Check for environment and context clues
+        const contextClues = allTerms.join(' ').toLowerCase();
+        
+        // Water-related snakes
+        if (contextClues.includes('water') || contextClues.includes('swamp') || contextClues.includes('pond')) {
+            console.log('🌊 Water context detected - suggesting cottonmouth');
+            return 'cottonmouth';
+        }
+        
+        // Desert/sand context
+        if (contextClues.includes('sand') || contextClues.includes('desert') || contextClues.includes('dry')) {
+            console.log('🏜️ Desert context detected - suggesting rattlesnake');
+            return 'rattlesnake';
+        }
+        
+        // Garden/grass context
+        if (contextClues.includes('grass') || contextClues.includes('garden') || contextClues.includes('yard')) {
+            console.log('🌱 Garden context detected - suggesting garter snake');
+            return 'garter';
+        }
+        
+        // Large/thick snake indicators
+        if (contextClues.includes('large') || contextClues.includes('thick') || contextClues.includes('heavy')) {
+            console.log('🦣 Large snake context - suggesting python');
+            return 'python';
+        }
+        
+        // Colorful/bright indicators
+        if (contextClues.includes('colorful') || contextClues.includes('bright') || contextClues.includes('pattern')) {
+            console.log('🌈 Colorful snake context - suggesting corn snake');
+            return 'corn';
+        }
+        
+        // If no specific context, provide educational variety by suggesting different snake types
+        // This gives users a chance to learn about different snake species
+        const educationalSnakes = ['python', 'garter', 'corn', 'milk', 'kingsnake', 'boa'];
+        const selectedSnake = educationalSnakes[Math.floor(Math.random() * educationalSnakes.length)];
+        console.log('🎓 Educational variety - selecting snake type for learning:', selectedSnake);
+        return selectedSnake;
     }
 
     generateSpecificIntroduction(objectName) {
