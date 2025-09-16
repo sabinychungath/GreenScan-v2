@@ -759,31 +759,22 @@ class NatureTalks {
         console.log('🔍 All terms for matching:', allTerms); // Debug log
         console.log('🎯 Detection confidence:', (confidence * 100).toFixed(1) + '%');
         
-        // Filter out negative/placeholder terms that shouldn't be used
+        // Filter out negative/placeholder terms and misleading concepts that shouldn't be used
         const negativeTerms = ['no person', 'no people', 'no human', 'no one', 'nobody', 'nothing', 
                               'unknown', 'unidentified', 'unclear', 'no object', 'no detection'];
+        const misleadingTerms = ['person', 'people', 'human', 'man', 'woman', 'adult', 'child']; // These often appear incorrectly in object detection
+        
         const filteredTerms = allTerms.filter(term => {
-            // Remove negative terms and very short/generic terms
+            // Remove negative terms, misleading terms, and very short/generic terms
             return !negativeTerms.some(negTerm => term.includes(negTerm)) && 
+                   !misleadingTerms.includes(term.toLowerCase()) &&
                    term.length > 2 && 
                    term !== 'the' && term !== 'and' && term !== 'or';
         });
         
         console.log('🧹 Filtered terms:', filteredTerms);
         
-        // Step 1: Check if this is a non-nature object that should be returned as-is
-        const commonNonNatureObjects = ['literature', 'book', 'writing', 'paper', 'text', 'document', 'furniture', 'building', 'vehicle', 'technology', 'computer', 'phone', 'clothing', 'food', 'drink', 'tool', 'instrument', 'art', 'painting', 'sculpture', 'isolated', 'equipment', 'housework', 'laundry', 'iron', 'appliance', 'household', 'kitchen', 'bathroom', 'bedroom'];
-        const originalObjectName = filteredTerms[0] || objectName;
-        
-        // Check if any of the terms are non-nature objects
-        for (const term of filteredTerms) {
-            if (commonNonNatureObjects.includes(term.toLowerCase())) {
-                console.log('📚 Non-nature object detected - keeping original name:', originalObjectName);
-                return originalObjectName;
-            }
-        }
-
-        // Step 2: Direct database lookup - check each concept against database categories
+        // Step 1: Direct database lookup - check each concept against database categories
         for (const term of filteredTerms) {
             // Check if this exact term exists as a category in the database
             if (this.natureDatabase[term]) {
@@ -817,14 +808,13 @@ class NatureTalks {
         
         console.log('❌ No direct matches found in database, using fallback logic...');
         
-        // Step 3: For high-confidence detections (>90%), keep the actual object name
-        if (confidence > 0.9 && filteredTerms.length > 0) {
-            const detectedObjectName = filteredTerms[0]; // Use the first filtered term (original object name)
-            console.log('🎯 High confidence detection (' + (confidence * 100).toFixed(1) + '%) - keeping object name:', detectedObjectName);
-            return detectedObjectName;
+        // Step 2: For high-confidence detections (>90%), keep the original Clarifai detection
+        if (confidence > 0.9) {
+            console.log('🎯 High confidence detection (' + (confidence * 100).toFixed(1) + '%) - keeping original Clarifai detection:', objectName);
+            return objectName;
         }
         
-        // Step 4: For lower confidence, use generic "Object" category
+        // Step 3: For lower confidence, use generic "Object" category
         console.log('📦 Low confidence detection - using generic "Object" category');
         return 'Object';
     }
