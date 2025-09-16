@@ -772,12 +772,15 @@ class NatureTalks {
         console.log('🧹 Filtered terms:', filteredTerms);
         
         // Step 1: Check if this is a non-nature object that should be returned as-is
-        const commonNonNatureObjects = ['literature', 'book', 'writing', 'paper', 'text', 'document', 'furniture', 'building', 'vehicle', 'technology', 'computer', 'phone', 'clothing', 'food', 'drink', 'tool', 'instrument', 'art', 'painting', 'sculpture'];
+        const commonNonNatureObjects = ['literature', 'book', 'writing', 'paper', 'text', 'document', 'furniture', 'building', 'vehicle', 'technology', 'computer', 'phone', 'clothing', 'food', 'drink', 'tool', 'instrument', 'art', 'painting', 'sculpture', 'isolated', 'equipment', 'housework', 'laundry', 'iron', 'appliance', 'household', 'kitchen', 'bathroom', 'bedroom'];
         const originalObjectName = filteredTerms[0] || objectName;
         
-        if (commonNonNatureObjects.includes(originalObjectName.toLowerCase())) {
-            console.log('📚 Non-nature object detected - keeping original name:', originalObjectName);
-            return originalObjectName;
+        // Check if any of the terms are non-nature objects
+        for (const term of filteredTerms) {
+            if (commonNonNatureObjects.includes(term.toLowerCase())) {
+                console.log('📚 Non-nature object detected - keeping original name:', originalObjectName);
+                return originalObjectName;
+            }
         }
 
         // Step 2: Direct database lookup - check each concept against database categories
