@@ -771,7 +771,16 @@ class NatureTalks {
         
         console.log('🧹 Filtered terms:', filteredTerms);
         
-        // Step 1: Direct database lookup - check each concept against database categories
+        // Step 1: Check if this is a non-nature object that should be returned as-is
+        const commonNonNatureObjects = ['literature', 'book', 'writing', 'paper', 'text', 'document', 'furniture', 'building', 'vehicle', 'technology', 'computer', 'phone', 'clothing', 'food', 'drink', 'tool', 'instrument', 'art', 'painting', 'sculpture'];
+        const originalObjectName = filteredTerms[0] || objectName;
+        
+        if (commonNonNatureObjects.includes(originalObjectName.toLowerCase())) {
+            console.log('📚 Non-nature object detected - keeping original name:', originalObjectName);
+            return originalObjectName;
+        }
+
+        // Step 2: Direct database lookup - check each concept against database categories
         for (const term of filteredTerms) {
             // Check if this exact term exists as a category in the database
             if (this.natureDatabase[term]) {
@@ -800,15 +809,6 @@ class NatureTalks {
         }
         
         console.log('❌ No direct matches found in database, using fallback logic...');
-        
-        // Step 2: Check if this is a non-nature object that should be returned as-is
-        const commonNonNatureObjects = ['literature', 'book', 'writing', 'paper', 'text', 'document', 'furniture', 'building', 'vehicle', 'technology', 'computer', 'phone', 'clothing', 'food', 'drink', 'tool', 'instrument', 'art', 'painting', 'sculpture'];
-        const originalObjectName = filteredTerms[0] || objectName;
-        
-        if (commonNonNatureObjects.includes(originalObjectName.toLowerCase())) {
-            console.log('📚 Non-nature object detected - keeping original name:', originalObjectName);
-            return originalObjectName;
-        }
         
         // Step 3: For high-confidence detections (>90%), keep the actual object name
         if (confidence > 0.9 && filteredTerms.length > 0) {
