@@ -801,14 +801,23 @@ class NatureTalks {
         
         console.log('❌ No direct matches found in database, using fallback logic...');
         
-        // Step 2: For high-confidence detections (>90%), keep the actual object name
+        // Step 2: Check if this is a non-nature object that should be returned as-is
+        const commonNonNatureObjects = ['literature', 'book', 'writing', 'paper', 'text', 'document', 'furniture', 'building', 'vehicle', 'technology', 'computer', 'phone', 'clothing', 'food', 'drink', 'tool', 'instrument', 'art', 'painting', 'sculpture'];
+        const originalObjectName = filteredTerms[0] || objectName;
+        
+        if (commonNonNatureObjects.includes(originalObjectName.toLowerCase())) {
+            console.log('📚 Non-nature object detected - keeping original name:', originalObjectName);
+            return originalObjectName;
+        }
+        
+        // Step 3: For high-confidence detections (>90%), keep the actual object name
         if (confidence > 0.9 && filteredTerms.length > 0) {
             const detectedObjectName = filteredTerms[0]; // Use the first filtered term (original object name)
             console.log('🎯 High confidence detection (' + (confidence * 100).toFixed(1) + '%) - keeping object name:', detectedObjectName);
             return detectedObjectName;
         }
         
-        // Step 3: For lower confidence, use generic "Object" category
+        // Step 4: For lower confidence, use generic "Object" category
         console.log('📦 Low confidence detection - using generic "Object" category');
         return 'Object';
     }
