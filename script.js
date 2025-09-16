@@ -798,7 +798,11 @@ class NatureTalks {
                     }
                     
                     // Then try partial matches for better MobileNet compatibility
+                    // But be more restrictive to avoid false matches like "carrot" → "car"
                     for (const keyword of data.keywords) {
+                        // Skip partial matching for very short keywords (3 chars or less) to avoid false positives
+                        if (keyword.length <= 3) continue;
+                        
                         if (term.includes(keyword) || keyword.includes(term)) {
                             console.log('✅ Partial keyword match found:', term, '→', keyword, '→', category);
                             return category;
