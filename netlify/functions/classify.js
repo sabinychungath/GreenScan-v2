@@ -11,6 +11,11 @@ const CLARIFAI_CONFIG = {
             id: 'general-image-recognition', 
             version: 'aa7f35c01e0642fda5cf400f543e7c40'
         },
+        // Animal model for better species identification when animals are detected
+        animals: {
+            id: 'animals',
+            version: null // Use latest version
+        },
         // Food model for plants/fruits
         food: {
             id: 'food-item-recognition',
@@ -162,7 +167,39 @@ exports.handler = async (event, context) => {
         const topConcepts = bestResult.concepts.slice(0, 3).map(c => c.name.toLowerCase());
         console.log('🔍 Top concepts from', bestResult.modelKey + ':', topConcepts);
 
-        // Step 2: Only try food model if we detect food/fruit with high confidence
+        // Step 2: Check for animals and use animal model for better species identification
+        const animalKeywords = ['animal', 'snake', 'bird', 'dog', 'cat', 'horse', 'cow', 'pig', 'sheep', 'goat', 'chicken', 'duck', 'rabbit', 'mouse', 'rat', 'squirrel', 'deer', 'bear', 'wolf', 'fox', 'lion', 'tiger', 'elephant', 'giraffe', 'zebra', 'monkey', 'kangaroo', 'koala', 'reptile', 'mammal', 'wildlife', 'fauna'];
+        const hasAnimalContent = topConcepts.some(concept => 
+            animalKeywords.some(animal => concept.includes(animal) || animal.includes(concept))
+        );
+        
+        if (hasAnimalContent) {
+            console.log('🐾 Animal content detected, trying animals model for better species identification...');
+            try {
+                const animalInfo = CLARIFAI_CONFIG.models.animals;
+                const animalResult = await callClarifaiModel(base64Image, 'animals', animalInfo);
+                allResults.animals = animalResult;
+                
+                if (animalResult.success && animalResult.concepts.length > 0) {
+                    const topAnimalConcept = animalResult.concepts[0];
+                    const isSpecificAnimal = !['animal', 'wildlife', 'fauna', 'mammal', 'reptile'].includes(topAnimalConcept.name.toLowerCase());
+                    const isReasonablyConfident = topAnimalConcept.value > 0.3; // Lower threshold for animals
+                    
+                    if (isReasonablyConfident && isSpecificAnimal) {
+                        bestResult = animalResult;
+                        console.log('✅ Using animal model results for better species identification');
+                    } else {
+                        console.log('⚠️ Animal model result not specific enough, keeping general result');
+                    }
+                } else {
+                    console.log('⚠️ Animal model failed, keeping general result');
+                }
+            } catch (error) {
+                console.log('⚠️ Animal model error:', error.message);
+            }
+        }
+
+        // Step 3: Only try food model if we detect food/fruit with high confidence
         const foodKeywords = ['fruit', 'apple', 'orange', 'banana', 'food', 'vegetable', 'berry'];
         const hasFoodContent = topConcepts.some(concept => 
             foodKeywords.some(food => concept.includes(food))
