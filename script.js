@@ -5164,7 +5164,7 @@ class NatureTalks {
                 explanation: 'Woma Pythons are immune to many snake venoms and actively hunt other snakes. We live in arid regions and have a distinctive broad head and narrow neck. We\'re also excellent burrowers.',
                 consequences: 'if I disappear: venomous snake populations would increase dramatically, posing greater risks to humans and livestock.',
                 plea: 'Please save me by protecting Australia\'s arid landscapes and understanding my vital role in controlling dangerous snakes!'
-            }
+            },
             // Comprehensive Animal Database - Domestic animals
             dog: {
                 emoji: '🐕',
