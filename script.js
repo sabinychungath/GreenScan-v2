@@ -813,7 +813,17 @@ class NatureTalks {
         
         console.log('❌ No direct matches found in database, using fallback logic...');
         
-        // Step 2: For high-confidence detections (>90%), keep the original Clarifai detection
+        // Step 2: Intelligent Australian python detection for generic "python" results
+        if (objectName.toLowerCase() === 'python' && confidence > 0.8) {
+            console.log('🐍 Generic python detected, trying intelligent Australian python detection...');
+            const australianPython = this.detectAustralianPython(filteredTerms, allConcepts || []);
+            if (australianPython !== 'python') {
+                console.log('🎯 Intelligent detection identified Australian python:', australianPython);
+                return australianPython;
+            }
+        }
+        
+        // Step 3: For high-confidence detections (>90%), keep the original Clarifai detection
         if (confidence > 0.9) {
             console.log('🎯 High confidence detection (' + (confidence * 100).toFixed(1) + '%) - keeping original Clarifai detection:', objectName);
             return objectName;
@@ -822,6 +832,40 @@ class NatureTalks {
         // Step 3: For lower confidence, use generic "Object" category
         console.log('📦 Low confidence detection - using generic "Object" category');
         return 'Object';
+    }
+
+    detectAustralianPython(terms, allConcepts) {
+        console.log('🔍 Analyzing for Australian python species with terms:', terms);
+        
+        // Combine all available information
+        const allInfo = [...terms, ...allConcepts].map(t => t.toLowerCase()).join(' ');
+        
+        // Look for specific Australian python indicators
+        
+        // Carpet Python - largest, often found in trees/roofs
+        if (allInfo.includes('large') || allInfo.includes('big') || allInfo.includes('tree') || 
+            allInfo.includes('diamond') || allInfo.includes('coastal') || allInfo.includes('carpet')) {
+            console.log('🎯 Indicators suggest Carpet Python (large size, tree habitat)');
+            return 'carpet-python';
+        }
+        
+        // Children's Python - small size
+        if (allInfo.includes('small') || allInfo.includes('little') || allInfo.includes('spotted') ||
+            allInfo.includes('children') || allInfo.includes('childrens')) {
+            console.log('🎯 Indicators suggest Children\'s Python (small size)');
+            return 'childrens-python';
+        }
+        
+        // Woma Python - ground dwelling, desert/arid areas
+        if (allInfo.includes('sand') || allInfo.includes('desert') || allInfo.includes('ground') ||
+            allInfo.includes('woma') || allInfo.includes('arid')) {
+            console.log('🎯 Indicators suggest Woma Python (ground dwelling, sandy environment)');
+            return 'woma-python';
+        }
+        
+        // Default to most common Australian python - Carpet Python
+        console.log('🎯 No specific indicators found, defaulting to most common: Carpet Python');
+        return 'carpet-python';
     }
 
     getObjectEmoji(objectName) {
