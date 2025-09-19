@@ -1049,7 +1049,17 @@ class NatureTalks {
             { terms: ['lake', 'freshwater lake', 'mountain lake'], category: 'lake' },
             { terms: ['pond', 'small pond', 'farm pond'], category: 'pond' },
             
-            // Specific snakes (most specific first)
+            // Australian snakes (highest priority - most specific first)
+            { terms: ['eastern brown snake', 'eastern brown', 'brown snake', 'pseudonaja textilis'], category: 'eastern-brown-snake' },
+            { terms: ['taipan', 'coastal taipan', 'inland taipan', 'fierce snake', 'oxyuranus'], category: 'taipan' },
+            { terms: ['death adder', 'common death adder', 'acanthophis', 'desert death adder'], category: 'death-adder' },
+            { terms: ['tiger snake', 'notechis scutatus', 'black tiger snake'], category: 'tiger-snake' },
+            { terms: ['red bellied black snake', 'red belly black snake', 'rbbs', 'pseudechis porphyriacus'], category: 'red-bellied-black-snake' },
+            { terms: ['carpet python', 'diamond python', 'morelia spilota', 'coastal carpet python'], category: 'carpet-python' },
+            { terms: ['childrens python', 'children python', 'antaresia childreni', 'spotted python'], category: 'childrens-python' },
+            { terms: ['woma python', 'woma', 'aspidites ramsayi', 'sand python'], category: 'woma-python' },
+            
+            // International snakes (lower priority than Australian species)
             { terms: ['python', 'ball python', 'burmese python', 'reticulated python'], category: 'python' },
             { terms: ['cobra', 'king cobra', 'spitting cobra'], category: 'cobra' },
             { terms: ['viper', 'pit viper', 'gaboon viper'], category: 'viper' },
@@ -1057,7 +1067,7 @@ class NatureTalks {
             { terms: ['boa', 'boa constrictor', 'rainbow boa'], category: 'boa' },
             { terms: ['anaconda', 'green anaconda'], category: 'anaconda' },
             { terms: ['mamba', 'black mamba', 'green mamba'], category: 'mamba' },
-            { terms: ['adder', 'puff adder', 'death adder'], category: 'adder' },
+            { terms: ['adder', 'puff adder'], category: 'adder' },
             { terms: ['copperhead'], category: 'copperhead' },
             { terms: ['cottonmouth', 'water moccasin'], category: 'cottonmouth' },
             { terms: ['kingsnake', 'king snake'], category: 'kingsnake' },
@@ -1617,6 +1627,10 @@ class NatureTalks {
             boa: '🐍', anaconda: '🐍', mamba: '🐍', adder: '🐍', copperhead: '🐍',
             cottonmouth: '🐍', kingsnake: '🐍', garter: '🐍', corn: '🐍', 
             milk: '🐍', hognose: '🐍', serpent: '🐍', reptile: '🐍',
+            // Australian snakes
+            'eastern-brown-snake': '🐍', 'taipan': '🐍', 'death-adder': '🐍', 
+            'tiger-snake': '🐍', 'red-bellied-black-snake': '🐍', 'carpet-python': '🐍',
+            'childrens-python': '🐍', 'woma-python': '🐍',
             
             // Landscapes
             mountain: '⛰️', hill: '🏔️', rock: '🪨', stone: '🪨',
@@ -5075,6 +5089,82 @@ class NatureTalks {
                 explanation: 'Snakes are fascinating reptiles that can unhinge their jaws to swallow prey larger than their head. We shed our entire skin as we grow and have incredible sensory abilities.',
                 plea: 'Please save me by protecting my habitat and learning that I am not your enemy!'
             },
+            
+            // Australian Snakes - Venomous
+            'eastern-brown-snake': {
+                emoji: '🐍',
+                keywords: ['eastern brown snake', 'eastern brown', 'brown snake', 'pseudonaja textilis'],
+                introduction: 'I am an Eastern Brown Snake',
+                message: 'I am Australia\'s second most venomous land snake and a fast, aggressive hunter that controls rodent populations across eastern Australia. ⚠️ DANGER: I am extremely venomous and potentially deadly - keep your distance and call a snake catcher immediately!',
+                explanation: 'Eastern Brown Snakes are responsible for about 60% of snakebite deaths in Australia. Despite their name, they range from pale brown to almost black. We can move at speeds up to 12 km/h and are excellent climbers.',
+                consequences: 'if I disappear: rodent populations would explode across eastern Australia, devastating crops and spreading disease.',
+                plea: 'Please save me by respecting my space, keeping your property tidy, and calling snake catchers instead of killing me!'
+            },
+            'taipan': {
+                emoji: '🐍', 
+                keywords: ['taipan', 'coastal taipan', 'inland taipan', 'fierce snake', 'oxyuranus'],
+                introduction: 'I am a Taipan',
+                message: 'I am one of the world\'s most venomous snakes, but I prefer to avoid humans and play a crucial role in controlling Australia\'s small mammal populations. ⚠️ EXTREME DANGER: I am the world\'s most venomous land snake - evacuate the area immediately and call emergency services!',
+                explanation: 'Taipans include the Inland Taipan (most venomous land snake) and Coastal Taipan. We have excellent eyesight and can strike with lightning speed. Our venom is incredibly potent but we rarely bite humans.',
+                consequences: 'if I disappear: small mammal populations would boom uncontrolled, destroying native vegetation and crops.',
+                plea: 'Please save me by protecting Australia\'s native habitats and never attempting to handle me!'
+            },
+            'death-adder': {
+                emoji: '🐍',
+                keywords: ['death adder', 'common death adder', 'acanthophis', 'desert death adder'],
+                introduction: 'I am a Death Adder',
+                message: 'I am an ambush predator with a unique hunting style - I wiggle my tail to lure prey and help control Australia\'s small animal populations. ⚠️ DANGER: I am highly venomous and won\'t flee when approached - watch where you step and call a snake catcher!',
+                explanation: 'Death Adders are unique among Australian snakes because we don\'t flee when approached. We have a triangular head, short thick body, and a distinctive tail tip that we use as a lure for prey.',
+                consequences: 'if I disappear: lizard and small mammal populations would grow unchecked across Australian bushland.',
+                plea: 'Please save me by watching where you step in the bush and preserving my native woodland habitats!'
+            },
+            'tiger-snake': {
+                emoji: '🐍',
+                keywords: ['tiger snake', 'notechis scutatus', 'black tiger snake'],
+                introduction: 'I am a Tiger Snake',
+                message: 'I am a highly venomous but generally docile snake that loves wetlands and helps control frog, fish, and small mammal populations. ⚠️ DANGER: I am venomous but usually shy - give me space and call a snake catcher!',
+                explanation: 'Tiger Snakes are semi-aquatic and excellent swimmers. We get our name from our banded pattern, though some populations are completely black. We can flatten our necks when threatened.',
+                consequences: 'if I disappear: wetland ecosystems would become unbalanced with exploding frog and fish populations.',
+                plea: 'Please save me by protecting Australia\'s wetlands, rivers, and coastal areas from pollution and development!'
+            },
+            'red-bellied-black-snake': {
+                emoji: '🐍',
+                keywords: ['red bellied black snake', 'red belly black snake', 'rbbs', 'pseudechis porphyriacus'],
+                introduction: 'I am a Red-bellied Black Snake',
+                message: 'I am a beautiful venomous snake with a glossy black back and bright red belly. I love water and help control frog, fish, and small mammal populations. ⚠️ CAUTION: I am mildly venomous but rarely bite - I prefer to flee, but still call a snake catcher!',
+                explanation: 'Red-bellied Black Snakes are generally shy and reluctant to bite. We spend much of our time near water sources and are excellent swimmers. Our striking red belly warns predators to stay away.',
+                consequences: 'if I disappear: wetland pest populations would explode, affecting water quality and native ecosystems.',
+                plea: 'Please save me by keeping waterways clean and giving me space when you see me near creeks and dams!'
+            },
+            
+            // Australian Snakes - Non-venomous
+            'carpet-python': {
+                emoji: '🐍',
+                keywords: ['carpet python', 'diamond python', 'morelia spilota', 'coastal carpet python'],
+                introduction: 'I am a Carpet Python',
+                message: 'I am Australia\'s largest non-venomous snake, a powerful constrictor that helps control possum, bird, and small mammal populations. ✅ SAFE: I am non-venomous and rarely bite humans - I can be safely relocated by professionals!',
+                explanation: 'Carpet Pythons can grow up to 4 meters long and live over 20 years. We are excellent climbers and often rest in tree hollows or roof spaces. Our beautiful patterns provide perfect camouflage.',
+                consequences: 'if I disappear: possum and rat populations would boom, causing massive damage to gardens, crops, and native bird nests.',
+                plea: 'Please save me by appreciating my pest control services and calling snake catchers to relocate me safely!'
+            },
+            'childrens-python': {
+                emoji: '🐍',
+                keywords: ['childrens python', 'children python', 'antaresia childreni', 'spotted python'],
+                introduction: 'I am a Children\'s Python',
+                message: 'I am one of Australia\'s smallest pythons, perfectly sized for controlling mice, rats, and small birds in both wild and urban areas. ✅ SAFE: I am non-venomous and very docile - perfect natural pest control that poses no danger to humans!',
+                explanation: 'Children\'s Pythons (named after zoologist John George Children) are nocturnal hunters that rarely exceed 1.5 meters. We\'re popular in the pet trade and excellent natural pest controllers.',
+                consequences: 'if I disappear: rodent populations would explode in Australian homes and farms, spreading disease and destroying stored food.',
+                plea: 'Please save me by valuing my pest control services and choosing humane relocation over killing!'
+            },
+            'woma-python': {
+                emoji: '🐍',
+                keywords: ['woma python', 'woma', 'aspidites ramsayi', 'sand python'],
+                introduction: 'I am a Woma Python',
+                message: 'I am a ground-dwelling python that specializes in hunting other snakes, including venomous species, making me nature\'s snake controller. ✅ SAFE: I am non-venomous and actually reduce dangerous snake populations - I\'m beneficial to have around!',
+                explanation: 'Woma Pythons are immune to many snake venoms and actively hunt other snakes. We live in arid regions and have a distinctive broad head and narrow neck. We\'re also excellent burrowers.',
+                consequences: 'if I disappear: venomous snake populations would increase dramatically, posing greater risks to humans and livestock.',
+                plea: 'Please save me by protecting Australia\'s arid landscapes and understanding my vital role in controlling dangerous snakes!'
+            }
             // Comprehensive Animal Database - Domestic animals
             dog: {
                 emoji: '🐕',
