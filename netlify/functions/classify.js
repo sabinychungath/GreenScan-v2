@@ -25,6 +25,105 @@ const CLARIFAI_CONFIG = {
     apiUrl: 'https://api.clarifai.com/v2/models/'
 };
 
+// Helper function to query iNaturalist API for animal species identification
+async function queryiNaturalist(concepts) {
+    try {
+        // Focus on Australian fauna, especially snakes and reptiles
+        const searchTerms = concepts.filter(concept => 
+            ['snake', 'reptile', 'python', 'viper', 'cobra', 'adder', 'taipan', 'brown', 'wildlife', 'animal'].includes(concept.toLowerCase())
+        );
+        
+        if (searchTerms.length === 0) return null;
+        
+        // Try different search combinations for Australian species
+        const searchQueries = [
+            `${searchTerms.join(' ')} australia`,
+            `australian ${searchTerms[0]}`,
+            `${searchTerms[0]} snake australia`,
+            searchTerms[0]
+        ];
+        
+        for (const query of searchQueries) {
+            console.log('🔍 Searching iNaturalist for:', query);
+            
+            const url = `https://api.inaturalist.org/v1/taxa/search?q=${encodeURIComponent(query)}&rank=species&is_active=true&place_id=6744`; // 6744 is Australia
+            const response = await fetch(url);
+            
+            if (response.ok) {
+                const data = await response.json();
+                
+                if (data.results && data.results.length > 0) {
+                    // Look for snake species first
+                    const snakeResult = data.results.find(result => 
+                        result.name && (
+                            result.name.toLowerCase().includes('snake') ||
+                            result.name.toLowerCase().includes('python') ||
+                            result.name.toLowerCase().includes('taipan') ||
+                            result.name.toLowerCase().includes('adder') ||
+                            result.ancestor_ids?.includes(26036) // Reptilia
+                        )
+                    );
+                    
+                    if (snakeResult) {
+                        // Try to map to known Australian species
+                        const commonName = snakeResult.preferred_common_name || snakeResult.name;
+                        const scientificName = snakeResult.name;
+                        
+                        console.log('🐍 Found snake species:', commonName, '(', scientificName, ')');
+                        
+                        // Map to your database categories
+                        const mappedSpecies = mapToAustralianSnake(commonName, scientificName);
+                        
+                        return {
+                            species: mappedSpecies,
+                            confidence: 0.8,
+                            source: 'iNaturalist',
+                            commonName: commonName,
+                            scientificName: scientificName
+                        };
+                    }
+                    
+                    // Fallback to first result if no specific snake found
+                    const firstResult = data.results[0];
+                    if (firstResult.preferred_common_name) {
+                        return {
+                            species: firstResult.preferred_common_name.toLowerCase(),
+                            confidence: 0.6,
+                            source: 'iNaturalist'
+                        };
+                    }
+                }
+            }
+        }
+        
+        return null;
+    } catch (error) {
+        console.log('❌ iNaturalist query error:', error.message);
+        return null;
+    }
+}
+
+// Helper function to map iNaturalist results to your Australian snake database
+function mapToAustralianSnake(commonName, scientificName) {
+    const name = (commonName + ' ' + scientificName).toLowerCase();
+    
+    // Map to your specific Australian snake categories
+    if (name.includes('eastern brown') || name.includes('pseudonaja textilis')) return 'eastern-brown-snake';
+    if (name.includes('taipan') || name.includes('oxyuranus')) return 'taipan';
+    if (name.includes('death adder') || name.includes('acanthophis')) return 'death-adder';
+    if (name.includes('tiger snake') || name.includes('notechis')) return 'tiger-snake';
+    if (name.includes('red-bellied black') || name.includes('pseudechis porphyriacus')) return 'red-bellied-black-snake';
+    if (name.includes('carpet python') || name.includes('morelia spilota')) return 'carpet-python';
+    if (name.includes('children') && name.includes('python') || name.includes('antaresia childreni')) return 'childrens-python';
+    if (name.includes('woma') || name.includes('aspidites ramsayi')) return 'woma-python';
+    
+    // Check for general python types
+    if (name.includes('python')) return 'python';
+    
+    // Default to snake if no specific match
+    return 'snake';
+}
+
 // Helper function to call specific Clarifai model
 async function callClarifaiModel(base64Image, modelKey, modelInfo) {
     const requestBody = {
@@ -167,35 +266,32 @@ exports.handler = async (event, context) => {
         const topConcepts = bestResult.concepts.slice(0, 3).map(c => c.name.toLowerCase());
         console.log('🔍 Top concepts from', bestResult.modelKey + ':', topConcepts);
 
-        // Step 2: Check for animals and use animal model for better species identification
+        // Step 2: Check for animals and use iNaturalist API for better species identification
         const animalKeywords = ['animal', 'snake', 'bird', 'dog', 'cat', 'horse', 'cow', 'pig', 'sheep', 'goat', 'chicken', 'duck', 'rabbit', 'mouse', 'rat', 'squirrel', 'deer', 'bear', 'wolf', 'fox', 'lion', 'tiger', 'elephant', 'giraffe', 'zebra', 'monkey', 'kangaroo', 'koala', 'reptile', 'mammal', 'wildlife', 'fauna'];
         const hasAnimalContent = topConcepts.some(concept => 
             animalKeywords.some(animal => concept.includes(animal) || animal.includes(concept))
         );
         
         if (hasAnimalContent) {
-            console.log('🐾 Animal content detected, trying animals model for better species identification...');
+            console.log('🐾 Animal content detected, trying iNaturalist API for better species identification...');
             try {
-                const animalInfo = CLARIFAI_CONFIG.models.animals;
-                const animalResult = await callClarifaiModel(base64Image, 'animals', animalInfo);
-                allResults.animals = animalResult;
-                
-                if (animalResult.success && animalResult.concepts.length > 0) {
-                    const topAnimalConcept = animalResult.concepts[0];
-                    const isSpecificAnimal = !['animal', 'wildlife', 'fauna', 'mammal', 'reptile'].includes(topAnimalConcept.name.toLowerCase());
-                    const isReasonablyConfident = topAnimalConcept.value > 0.3; // Lower threshold for animals
-                    
-                    if (isReasonablyConfident && isSpecificAnimal) {
-                        bestResult = animalResult;
-                        console.log('✅ Using animal model results for better species identification');
-                    } else {
-                        console.log('⚠️ Animal model result not specific enough, keeping general result');
-                    }
+                const inatResult = await queryiNaturalist(topConcepts);
+                if (inatResult && inatResult.species) {
+                    console.log('✅ iNaturalist found specific species:', inatResult.species);
+                    // Create a result object similar to Clarifai format
+                    bestResult = {
+                        modelKey: 'iNaturalist',
+                        concepts: [{
+                            name: inatResult.species,
+                            value: inatResult.confidence || 0.8
+                        }],
+                        success: true
+                    };
                 } else {
-                    console.log('⚠️ Animal model failed, keeping general result');
+                    console.log('⚠️ iNaturalist did not find specific species, keeping general result');
                 }
             } catch (error) {
-                console.log('⚠️ Animal model error:', error.message);
+                console.log('⚠️ iNaturalist API error:', error.message);
             }
         }
 
