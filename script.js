@@ -775,7 +775,21 @@ class NatureTalks {
         console.log('🧹 Filtered terms:', filteredTerms);
         
         // Step 1: Direct database lookup - check each concept against database categories
-        for (const term of filteredTerms) {
+        // Sort terms by specificity (longer/more specific terms first, generic terms last)
+        const sortedTerms = [...filteredTerms].sort((a, b) => {
+            // Prioritize specific species over generic terms
+            const genericTerms = ['snake', 'reptile', 'animal', 'wildlife', 'fauna', 'mammal'];
+            const aIsGeneric = genericTerms.includes(a.toLowerCase());
+            const bIsGeneric = genericTerms.includes(b.toLowerCase());
+            
+            if (aIsGeneric && !bIsGeneric) return 1; // b comes first
+            if (!aIsGeneric && bIsGeneric) return -1; // a comes first
+            return b.length - a.length; // longer terms first
+        });
+        
+        console.log('🔍 Checking terms by specificity order:', sortedTerms);
+        
+        for (const term of sortedTerms) {
             // Check if this exact term exists as a category in the database
             if (this.natureDatabase[term]) {
                 console.log('✅ Direct match found:', term);
